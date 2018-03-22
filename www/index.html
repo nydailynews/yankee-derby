@@ -141,11 +141,22 @@
 				<img src="img/judge-big.png" alt="a photo illustration of Aaron Judge">
 			</div>
 			
-			<div class="bottom-chart">league leader chart</div>
+			<section style="grid-column: 1/4">
+                <h2>Sluggers, by day</h2>
+                <figure>
+                    <svg id="daily"></svg>
+                    <figcaption></figcaption>
+                    <button class="active" id="homeruns">Home Runs</button>
+                    <button id="rbis">RBIs</button>
+                    <button id="avg">Batting Average</button>
+                    <button id="ops">OPS</button>
+                </figure>
+			</section>
 		</div>
 	</article>
 </main>
 
+<script onload="stats.init('2018');" src="js/app.js"></script>
 <!--<div class="ad center">
 	<div id='div-gpt-ad-1423507761396-3'>
 	<script>

@@ -88,7 +88,7 @@ var stats = {
     init: function(year) {
         if ( year == null ) year = 2018;
         // get_json takes three params: filepath, the object that's calling it, and a callback.
-        utils.get_json('output/yankee-slugger-' + year + '.json', stats, this.on_load);
+        utils.get_json('test/yankee-slugger-' + year + '.json', stats, this.on_load);
     }
 }
 
@@ -133,5 +133,6 @@ var chrt = {
     on_load: function() {
     },
     init: function(year) {
+		utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
     }
 }

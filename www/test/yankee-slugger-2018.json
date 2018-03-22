@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2018-03-29",
+    "judge-homeruns": 0,
+    "stanton-homeruns": 0,
+    "leader-homeruns": 1,
+    "judge-rbis": 1,
+    "stanton-rbis": 0,
+    "leader-rbis": 1,
+    "judge-avg": 0.25,
+    "stanton-avg": 0.301,
+    "leader-avg": 0.425,
+    "judge-ops": 0.905,
+    "stanton-ops": 0.9,
+    "leader-ops": 0.95
+  },
+  {
+    "date": "2018-03-30",
+    "judge-homeruns": 1,
+    "stanton-homeruns": 0,
+    "leader-homeruns": 3,
+    "judge-rbis": 1,
+    "stanton-rbis": 2,
+    "leader-rbis": 4,
+    "judge-avg": 0.25,
+    "stanton-avg": 0.301,
+    "leader-avg": 0.425,
+    "judge-ops": 0.905,
+    "stanton-ops": 0.9,
+    "leader-ops": 0.95
+  }
+]
