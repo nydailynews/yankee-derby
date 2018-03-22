@@ -84,7 +84,7 @@ var stats = {
         return true;
     },
     on_load: function() {
-		load_chart();
+		chrt.init();
     },
     init: function(year) {
         if ( year == null ) year = 2018;
@@ -155,7 +155,7 @@ var chrt = {
 			d.date = chrt.parse_time(d.date);
 			});
         console.log(type,data);
-		x.domain(d3.extent(data, function(d) { return chrt.parse_time(d.date); }));
+		x.domain(d3.extent(data, function(d) { return d.date; }));
 		y.domain([0, d3.max(data, function(d) {
 			  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
 
@@ -190,5 +190,6 @@ var chrt = {
     },
     init: function(year) {
 		//utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
+		this.on_load();
     }
 }
