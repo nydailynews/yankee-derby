@@ -111,10 +111,17 @@ p {
 	grid-row: 2;
 }
 
+/*--------- CHART STYLES ---------*/
 section.bottom-chart {
 	grid-column: 1 / 4;
 	grid-row: 3;
 
+}
+section svg#daily {
+    margin: auto;
+    width: 80%;
+    height: 400px;
+    border: 1px solid #ddd;
 }
 figure button.active {
     background-color: #CCF;
@@ -124,7 +131,6 @@ figure button {
     font-size: 200%;
     margin: 5px 10px;
 }
-/*--------- HANDHELD ---------*/
 /*--------- HANDHELD ---------*/
 
 @media only screen and (min-width: 250px) and (max-width: 727px) {

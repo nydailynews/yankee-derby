@@ -84,6 +84,7 @@ var stats = {
         return true;
     },
     on_load: function() {
+		load_chart();
     },
     init: function(year) {
         if ( year == null ) year = 2018;
@@ -130,9 +131,64 @@ var chrt = {
         }
         return true;
     },
+    build_chart: function(type) {
+		if ( type == null ) type = 'homeruns';
+		var margin = { 'left': 50, 'top': 10 };
+		var width = 800;
+		var height = 370;
+		var x = d3.scaleTime().range([0, width]);
+		var y = d3.scaleLinear().range([height, 0]);
+		var l0 = d3.line()
+			.x(function(d) { return x(d.date) })
+			.y(function(d) { return y(d['judge-' + type]) });
+		var l1 = d3.line()
+			.x(function(d) { return x(d.date) })
+			.y(function(d) { return y(d['stanton-' + type]) });
+		var l2 = d3.line()
+			.x(function(d) { return x(d.date) })
+			.y(function(d) { return y(d['leader-' + type]) });
+		var svg = d3.select('svg#daily')
+			.append('g')
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		var data = stats.data;
+        data.forEach(function(d) {
+			d.date = chrt.parse_time(d.date);
+			});
+        console.log(type,data);
+		x.domain(d3.extent(data, function(d) { return chrt.parse_time(d.date); }));
+		y.domain([0, d3.max(data, function(d) {
+			  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
+
+		// Add the X Axis
+		svg.append("g")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(x));
+
+		// Add the Y Axis
+		svg.append("g")
+			.call(d3.axisLeft(y));
+
+		svg.append('path')
+            .data([data])
+            .attr('class', 'line line0')
+            .attr('d', l0);
+		
+		svg.append('path')
+            .data([data])
+            .attr('class', 'line line1')
+            .attr('d', l1);
+		
+		svg.append('path')
+            .data([data])
+            .attr('class', 'line line2')
+            .attr('d', l2);
+
+	},
     on_load: function() {
+        chrt.parse_time = d3.timeParse('%Y-%m-%d');
+		chrt.build_chart();
     },
     init: function(year) {
-		utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
+		//utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
     }
 }
