@@ -123,8 +123,9 @@
 <style>
 #stats h2 ~ p {
     font-family: 'PT Serif', serif;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 48px;
+    text-align: left;
 }
 i.em span { display: none; }
 .em-comet {
@@ -134,6 +135,7 @@ i.em span { display: none; }
     background-color: #ccc;
 }
 .large { font-size: 150%; }
+.nowrap { white-space: nowrap; }
 </style>
 <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 			<section id="stats" class="center-text">
@@ -161,9 +163,11 @@ i.em span { display: none; }
                     </span>
                     <span id="avg-tied" class="hide">
                     </span>
-                    <br>
                     <span id="ops-has-leader">
-                        It’s <span id="ops-leader">Judge</span><i class="em em-arrow_left"></i><span id="ops-follower">Stanton</span>
+                        It’s
+                        <span class="nowrap">
+                            <span id="ops-leader">Judge</span><i class="em em-arrow_left"></i><span id="ops-follower">Stanton</span>
+                        </span>
                         in <abbr title="On-base percentage plus slugging">OPS</abbr><i class="em em-stadium"></i>,
                         <span id="ops-desc">but just barely,</span>
                         <span id="ops-leader-number" class="large">.9100</span> to <span id="ops-follower-number" class="large">.9050</span>.
