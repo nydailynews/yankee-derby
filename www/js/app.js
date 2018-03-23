@@ -132,7 +132,7 @@ var chrt = {
         return true;
     },
     build_chart: function(type) {
-		if ( type == null ) type = 'homeruns';
+		if ( type == null ) type = 'hrs';
 		var margin = { 'left': 50, 'top': 10 };
 		var width = 800;
 		var height = 370;
@@ -158,26 +158,34 @@ var chrt = {
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		var data = stats.data;
         data.forEach(function(d) {
-			d.date = chrt.parse_time(d.date);
+			d.date = chrt.format_time(chrt.parse_time(d.date));
 			});
         console.log(type,data);
-		x.domain(d3.extent(data, function(d) { return d.date; }));
+		//x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
+        x.domain(season_dates.map(function(d) { return chrt.format_time(chrt.parse_time(d)) }));
 		y.domain([0, d3.max(data, function(d) {
 			  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
 
 		// Add the X Axis
 		svg.append("g")
+            .attr('class', 'axis axis--x')
 			.attr("transform", "translate(0," + height + ")")
 			.call(d3.axisBottom(x));
 
 		// Add the Y Axis
 		svg.append("g")
-			.call(d3.axisLeft(y));
+			.call(d3.axisLeft(y))
+            .append('text')
+                .attr('y', 0)
+                .attr('dy', '2em')
+                .attr('fill', '#333')
+                .text(type);
 
 		svg.append('path')
             .data([data])
             .attr('class', 'line line0')
-            .attr('d', l0);
+            .attr('d', function(d) { console.log(d, d['judge-' + type]); return l0(d['judge-' + type])})
+            .style('stroke', '#F00');
 		
 		svg.append('path')
             .data([data])
@@ -192,6 +200,7 @@ var chrt = {
 	},
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
+        chrt.format_time = d3.timeFormat('%B %e');
 		chrt.build_chart();
     },
     init: function(year) {
