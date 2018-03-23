@@ -136,15 +136,21 @@ var chrt = {
 		var margin = { 'left': 50, 'top': 10 };
 		var width = 800;
 		var height = 370;
-		var x = d3.scaleTime().range([0, width]);
-		var y = d3.scaleLinear().range([height, 0]);
+		var x = d3.scaleTime().range([0, width]),
+            y = d3.scaleLinear().range([height, 0]),
+            z = d3.scaleOrdinal(d3.schemeCategory10);
+        //var line = d3.line()
+        //    .curve(d3.curveBasis)
 		var l0 = d3.line()
+            .curve(d3.curveBasis)
 			.x(function(d) { return x(d.date) })
 			.y(function(d) { return y(d['judge-' + type]) });
 		var l1 = d3.line()
+            .curve(d3.curveBasis)
 			.x(function(d) { return x(d.date) })
 			.y(function(d) { return y(d['stanton-' + type]) });
 		var l2 = d3.line()
+            .curve(d3.curveBasis)
 			.x(function(d) { return x(d.date) })
 			.y(function(d) { return y(d['leader-' + type]) });
 		var svg = d3.select('svg#daily')
