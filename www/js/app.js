@@ -149,28 +149,13 @@ var chrt = {
             //.curve(d3.curveBasis)
             .x(function(d) { console.log(d.date, x(d.date), d); return x(d.date); })
             .y(function(d) { return y(d.value); });
-		chrt.l0 = d3.line()
-            .curve(d3.curveBasis)
-			.x(function(d) { console.log(d, typeof x, x, x(d.date)); return x(d) })
-			.y(function(d) { console.log('y', d); return y(d['judge-' + chrt.type]) });
-		chrt.l1 = d3.line()
-            .curve(d3.curveBasis)
-			//.x(function(d) { return x(d.date) })
-			.x(function(d) { return x() })
-			.y(function(d) { console.info(d); return y(d['stanton-' + chrt.type]) });
-		chrt.l2 = d3.line()
-            .curve(d3.curveBasis)
-			.x(function(d) { return x(d.date) })
-			.y(function(d) { return y(d['leader-' + chrt.type]) });
-		var svg = d3.select('svg#daily')
-			.append('g')
-				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		var svg = d3.select('svg#daily'),
+             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		var data = stats.data;
         var keys = Object.keys(data[0]).slice(1);
         data.forEach(function(d) {
 			d.date = chrt.format_time(chrt.parse_time(d.date));
         });
-        console.log(type,data);
         var values = keys.map(function(id) {
             return {
                 id: id,
@@ -182,21 +167,21 @@ var chrt = {
         console.log('V', values);
 		//x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
         //x.domain(season_dates.map(function(d) { return chrt.format_time(chrt.parse_time(d)) }));
-        x.domain(d3.extent(data, function(d) { return d.date; }));
+        //x.domain(d3.extent(data, function(d) { console.log('AAAA', d.date); return d.date; }));
+		x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
         y.domain([0,
             d3.max(values, function(c) { return d3.max(c.values, function(d) { return d.value; }); })
         ]);
 		//y.domain([0, d3.max(data, function(d) { 
 		//	  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
 
-		// Add the x axis
-		svg.append("g")
+		g.append("g")
             .attr('class', 'axis axis--x')
 			.attr("transform", "translate(0," + height + ")")
 			.call(d3.axisBottom(x));
 
-		// Add the y axis
-		svg.append("g")
+		g.append("g")
+            .attr("class", "axis axis--y")
 			.call(d3.axisLeft(y))
             .append('text')
                 .attr('x', 50)
@@ -204,34 +189,15 @@ var chrt = {
                 .attr('fill', '#333')
                 .text(type_key[type]);
 
-        var lines = svg.selectAll('.lines')
+        var lines = g.selectAll('.lines')
             .data(values)
             .enter().append('g')
                 .attr('class', 'line-group');
 
         lines.append('path')
             .attr('class', 'line')
-            .attr('d', function(d) { return chrt.line(d.values); })
+            .attr('d', function(d) { console.log(d.values); return chrt.line(d.values); })
             .style('stroke', function(d) { return z(d.id); });
-
-        /*
-		svg.append('path')
-            .data([data])
-            .attr('class', 'line line0')
-            .attr('d', function(d) { console.log(d, d['judge-' + type]); return chrt.l0(d['judge-' + type])})
-            .style('stroke', '#F00');
-		
-		svg.append('path')
-            .data([data])
-            .attr('class', 'line line1')
-            .attr('d', chrt.l1);
-		
-		svg.append('path')
-            .data([data])
-            .attr('class', 'line line2')
-            .attr('d', chrt.l2);
-            */
-
 	},
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
