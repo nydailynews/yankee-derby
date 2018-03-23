@@ -120,8 +120,57 @@
 				<img src="img/stanton-big.png" alt="a photo illustration of Giancarlo Stanton">
 			</div>
 
-			<section class="center-text">
-				<h2>Slugger Stats</h2>
+<style>
+#stats h2 ~ p {
+    font-family: 'PT Serif', serif;
+    font-size: 30px;
+    line-height: 48px;
+}
+i.em span { display: none; }
+.em-comet {
+    transform: rotate(270deg) scaleX(-1);
+}
+.center-text {
+    background-color: #ccc;
+}
+.large { font-size: 150%; }
+</style>
+<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+			<section id="stats" class="center-text">
+                <h2>Slugger Stats</h2>
+                <p>
+                    <strong>
+                        It’s <span id="desc">neck-and-neck</span>
+                        <span id="desc-about">between <i class="em em-man"><span>Judge</span></i> and <i class="em em-man"><span>Stanton</span></i></span>.
+                    </strong>
+                    <span id="hr-has-leader" class="hide">
+                    </span>
+                    <span id="hr-tied">
+                        Home runs <i class="em em-comet"></i> are <span id="hr-desc">even</span> (<span id="hr-number" class="large">5-5</span>),
+                    </span>
+                    <span id="rbi-has-leader">
+                        <span id="rbi-leader">Judge</span> leads <span id="rbi-follower">Stanton in RBIs<i class="em em-baseball"></i>
+                        <span id="rbi-leader-number" class="large">5</span> to <span id="rbi-follower-number" class="large">2</span>.
+                    </span>
+                    <span id="rbi-tied" class="hide">
+                    </span>
+                    <span id="avg-has-leader">
+                        <span id="avg-leader">Judge’s</span> <span id="avg-leader-number" class="large">.302</span> batting average<i class="em em-dart"></i>
+                        is a <span id="avg-desc">meager</span> <span id="avg-number-diff">4 points above</span>
+                        <span id="avg-follower">Stanton’s</span> <span id="avg-follower-number" class="large">.298</span>.
+                    </span>
+                    <span id="avg-tied" class="hide">
+                    </span>
+                    <br>
+                    <span id="ops-has-leader">
+                        <span id="ops-leader">Judge</span><i class="em em-arrow_left"></i> leads <span id="ops-follower">Stanton</span>
+                        in <abbr title="On-base percentage plus slugging">OPS</abbr><i class="em em-stadium"></i>,
+                        <span id="ops-desc">but just barely,</span>
+                        <span id="ops-leader-number" class="large">.9100</span> to <span id="ops-follower-number" class="large">.9050</span>.
+                    </span>
+                    <span id="ops-tied" class="hide">
+                    </span>
+                </p>
 				<table class="stats">
 					<tbody>
 					<!-- <tr>Batting Average</tr>
@@ -141,8 +190,8 @@
 				<img src="img/judge-big.png" alt="a photo illustration of Aaron Judge">
 			</div>
 			
-			<section style="grid-column: 1/4">
-                <h2>Sluggers, by day</h2>
+			<section id="by-day" style="grid-column: 1/4">
+                <h2>Yankee Sluggers, by day</h2>
                 <figure>
                     <svg id="daily"></svg>
                     <figcaption></figcaption>
