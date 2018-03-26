@@ -147,6 +147,10 @@ var chrt = {
         var bits = slug.split('-');
         return this.player_key[bits[0]] + ' ' + this.type_key[bits[1]];
     },
+    clear_chart: function() {
+        // Remove the things in the chart
+         document.getElementById('daily').innerHTML = '';
+    },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
 		if ( type == null ) type = 'hrs';
