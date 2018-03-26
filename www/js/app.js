@@ -131,14 +131,26 @@ var chrt = {
         }
         return true;
     },
+    player_key : {
+        judge: 'Judge',
+        stanton: 'Stanton',
+        leader: 'Leader'
+    },
+    type_key : {
+        hrs: 'Home runs',
+        rbis: 'RBIs',
+        avg: 'Batting average',
+        ops: 'OPS'
+    },
+    slug_to_label: function(slug) {
+        // Take a slug, such as "judge-hrs", and turn that into a human-readable string, "Judge home runs"
+        var bits = slug.split('-');
+        return this.player_key[bits[0]] + ' ' + this.type_key[bits[1]];
+    },
     build_chart: function(type) {
+        // Adapted from https://bl.ocks.org/mbostock/3884955
 		if ( type == null ) type = 'hrs';
         chrt.type = type;
-        var type_key = {
-            hrs: 'Home runs',
-            rbis: 'RBIs',
-            avg: 'Batting average',
-            ops: 'OPS' };
 		var margin = { 'left': 50, 'top': 10 };
 		var width = 800;
 		var height = 370;
@@ -188,7 +200,7 @@ var chrt = {
                 .attr('x', 50)
                 .attr('dx', '.5em')
                 .attr('fill', '#333')
-                .text(type_key[type]);
+                .text(this.type_key[type]);
 
         var lines = g.selectAll('.lines')
             .data(slugger_stats)
@@ -202,6 +214,14 @@ var chrt = {
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
             .attr('d', function(d) { console.log(d.values); return line(d.values); })
             .style('stroke', function(d) { return z(d.id); });
+
+        lines.append('text')
+            .datum(function(d) { return { id: d.id, value: d.values[d.values.length - 1]}; })
+            .attr('transform', function(d) { return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')'; })
+            .attr('x', 3)
+            .attr('dy', '0.35em')
+            .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
+            .text(function(d) { return chrt.slug_to_label(d.id) });
 	},
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
