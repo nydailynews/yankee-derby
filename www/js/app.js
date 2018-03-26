@@ -199,6 +199,7 @@ var chrt = {
             .attr('class', 'line')
             .attr('stroke-width', '3px')
             .attr('fill', 'none')
+            .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
             .attr('d', function(d) { console.log(d.values); return line(d.values); })
             .style('stroke', function(d) { return z(d.id); });
 	},
