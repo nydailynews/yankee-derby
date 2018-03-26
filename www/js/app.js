@@ -154,9 +154,10 @@ var chrt = {
 		var data = stats.data;
         var keys = Object.keys(data[0]).slice(1);
         data.forEach(function(d) {
-			d.date = chrt.format_time(chrt.parse_time(d.date));
+			d.date = chrt.parse_time(d.date);
         });
-        var values = keys.map(function(id) {
+        var slugger_stats = keys.map(function(id) {
+            console.log(id);
             return {
                 id: id,
                 values: data.map(function(d) {
@@ -164,14 +165,15 @@ var chrt = {
                 })
             };
         });
-        console.log('V', values);
+        console.log('V', slugger_stats);
 		//x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
         //x.domain(season_dates.map(function(d) { return chrt.format_time(chrt.parse_time(d)) }));
         //x.domain(d3.extent(data, function(d) { console.log('AAAA', d.date); return d.date; }));
-		x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
+		x.domain(d3.extent(season_dates, function(d) { return chrt.parse_time(d); }));
         y.domain([0,
-            d3.max(values, function(c) { return d3.max(c.values, function(d) { return d.value; }); })
+            d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { return d.value; }); })
         ]);
+        z.domain(slugger_stats.map(function(c) { return c.id; }));
 		//y.domain([0, d3.max(data, function(d) { 
 		//	  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
 
@@ -190,7 +192,7 @@ var chrt = {
                 .text(type_key[type]);
 
         var lines = g.selectAll('.lines')
-            .data(values)
+            .data(slugger_stats)
             .enter().append('g')
                 .attr('class', 'line-group');
 
