@@ -134,12 +134,12 @@ var chrt = {
     player_key : {
         judge: 'Judge',
         stanton: 'Stanton',
-        leader: 'Leader'
+        leader: 'MLB leader'
     },
     type_key : {
-        hrs: 'Home runs',
+        hrs: 'home runs',
         rbis: 'RBIs',
-        avg: 'Batting average',
+        avg: 'batting average',
         ops: 'OPS'
     },
     slug_to_label: function(slug) {
@@ -169,6 +169,8 @@ var chrt = {
 			d.date = chrt.parse_time(d.date);
         });
         var slugger_stats = keys.map(function(id) {
+            // Zero out the chart values for the inactive fields
+            if ( id.indexOf(type) === -1 ) return { id: id, values: [] }; 
             console.log(id);
             return {
                 id: id,
@@ -217,7 +219,7 @@ var chrt = {
 
         lines.append('text')
             .datum(function(d) { return { id: d.id, value: d.values[d.values.length - 1]}; })
-            .attr('transform', function(d) { return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')'; })
+            .attr('transform', function(d) { if ( typeof d.value === 'undefined' ) return ''; return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')'; })
             .attr('x', 3)
             .attr('dy', '0.35em')
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
