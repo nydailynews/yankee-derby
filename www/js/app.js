@@ -147,12 +147,29 @@ var chrt = {
         var bits = slug.split('-');
         return this.player_key[bits[0]] + ' ' + this.type_key[bits[1]];
     },
+    button_click: function(btn) {
+        // The event handler for button clicking.
+        //
+        // If it's a click on an already-active button don't do anything.
+        if ( btn.getAttribute('class') == 'active' ) return false;
+
+        // Clear all the buttons 
+        var active = document.querySelectorAll('button.active');
+        Array.prototype.forEach.call(active, function(el, i) { el.setAttribute('class', ''); });
+
+        //var el = document.getElementById(btn.id);
+        utils.add_class(btn, 'active');
+        this.clear_chart();
+        this.build_chart(btn.id);
+        document.location.hash = '#stat-' + btn.id;
+    },
     clear_chart: function() {
         // Remove the things in the chart
          document.getElementById('daily').innerHTML = '';
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
+		if ( type == null ) type = 'avg';
 		if ( type == null ) type = 'hrs';
         chrt.type = type;
 		var margin = { 'left': 50, 'top': 10 };
@@ -162,30 +179,24 @@ var chrt = {
             y = d3.scaleLinear().range([height, 0]),
             z = d3.scaleOrdinal(d3.schemeCategory10);
         var line = d3.line()
-            .curve(d3.curveBasis)
+            //.curve(d3.curveBasis)
             .x(function(d) { console.log(d.date, x(d.date), d); return x(d.date); })
             .y(function(d) { return y(d.value); });
 		var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		var data = stats.data;
         var keys = Object.keys(data[0]).slice(1);
-        data.forEach(function(d) {
-			d.date = chrt.parse_time(d.date);
-        });
         var slugger_stats = keys.map(function(id) {
             // Zero out the chart values for the inactive fields
             if ( id.indexOf(type) === -1 ) return { id: id, values: [] }; 
-            console.log(id);
+
             return {
                 id: id,
                 values: data.map(function(d) {
-                    return { date: d.date, value: d[id]};
+                    return { date: chrt.parse_time(d.date), value: d[id]};
                 })
             };
         });
-		//x.domain(d3.extent(season_dates, function(d) { return chrt.format_time(chrt.parse_time(d)); }));
-        //x.domain(season_dates.map(function(d) { return chrt.format_time(chrt.parse_time(d)) }));
-        //x.domain(d3.extent(data, function(d) { console.log('AAAA', d.date); return d.date; }));
 		x.domain(d3.extent(season_dates, function(d) { return chrt.parse_time(d); }));
         y.domain([0,
             d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { return d.value; }); })
@@ -240,4 +251,4 @@ var chrt = {
     }
 }
 var season_dates = ['2018-03-29', '2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03', '2018-04-04', '2018-04-05', '2018-04-06', '2018-04-07', '2018-04-08', '2018-04-09', '2018-04-10', '2018-04-11', '2018-04-12', '2018-04-13', '2018-04-14', '2018-04-15', '2018-04-16', '2018-04-17', '2018-04-18', '2018-04-19', '2018-04-20', '2018-04-21', '2018-04-22', '2018-04-23', '2018-04-24', '2018-04-25', '2018-04-26', '2018-04-27', '2018-04-28', '2018-04-29', '2018-04-30', '2018-05-01', '2018-05-02', '2018-05-03', '2018-05-04', '2018-05-05', '2018-05-06', '2018-05-07', '2018-05-08', '2018-05-09', '2018-05-10', '2018-05-11', '2018-05-12', '2018-05-13', '2018-05-14', '2018-05-15', '2018-05-16', '2018-05-17', '2018-05-18', '2018-05-19', '2018-05-20', '2018-05-21', '2018-05-22', '2018-05-23', '2018-05-24', '2018-05-25', '2018-05-26', '2018-05-27', '2018-05-28', '2018-05-29', '2018-05-30', '2018-05-31', '2018-06-01', '2018-06-02', '2018-06-03', '2018-06-04', '2018-06-05', '2018-06-06', '2018-06-07', '2018-06-08', '2018-06-09', '2018-06-10', '2018-06-11', '2018-06-12', '2018-06-13', '2018-06-14', '2018-06-15', '2018-06-16', '2018-06-17', '2018-06-18', '2018-06-19', '2018-06-20', '2018-06-21', '2018-06-22', '2018-06-23', '2018-06-24', '2018-06-25', '2018-06-26', '2018-06-27', '2018-06-28', '2018-06-29', '2018-06-30', '2018-07-01', '2018-07-02', '2018-07-03', '2018-07-04', '2018-07-05', '2018-07-06', '2018-07-07', '2018-07-08', '2018-07-09', '2018-07-10', '2018-07-11', '2018-07-12', '2018-07-13', '2018-07-14', '2018-07-15', '2018-07-16', '2018-07-17', '2018-07-18', '2018-07-19', '2018-07-20', '2018-07-21', '2018-07-22', '2018-07-23', '2018-07-24', '2018-07-25', '2018-07-26', '2018-07-27', '2018-07-28', '2018-07-29', '2018-07-30', '2018-07-31', '2018-08-01', '2018-08-02', '2018-08-03', '2018-08-04', '2018-08-05', '2018-08-06', '2018-08-07', '2018-08-08', '2018-08-09', '2018-08-10', '2018-08-11', '2018-08-12', '2018-08-13', '2018-08-14', '2018-08-15', '2018-08-16', '2018-08-17', '2018-08-18', '2018-08-19', '2018-08-20', '2018-08-21', '2018-08-22', '2018-08-23', '2018-08-24', '2018-08-25', '2018-08-26', '2018-08-27', '2018-08-28', '2018-08-29', '2018-08-30', '2018-08-31', '2018-09-01', '2018-09-02', '2018-09-03', '2018-09-04', '2018-09-05', '2018-09-06', '2018-09-07', '2018-09-08', '2018-09-09', '2018-09-10', '2018-09-11', '2018-09-12', '2018-09-13', '2018-09-14', '2018-09-15', '2018-09-16', '2018-09-17', '2018-09-18', '2018-09-19', '2018-09-20', '2018-09-21', '2018-09-22', '2018-09-23', '2018-09-24', '2018-09-25', '2018-09-26', '2018-09-27', '2018-09-28', '2018-09-29', '2018-09-30'];
-var season_dates = ['2018-03-29', '2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03'];
+var season_dates = ['2018-03-29', '2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03', '2018-04-04', '2018-04-05', '2018-04-06', '2018-04-07'];

@@ -203,13 +203,14 @@ i.em span { display: none; }
 			
 			<section id="bottom-chart">
                 <h2>Yankee Sluggers, by day</h2>
+                <p>Day-by-day statistics comparing Giancarlo Stanton and Aaron Judge against the Major League Baseball leader in each of home runs, RBIs, batting average and OPS.</p>
                 <figure>
                     <svg id="daily"></svg>
                     <figcaption></figcaption>
-                    <button class="active" id="homeruns">Home Runs</button>
-                    <button id="rbis">RBIs</button>
-                    <button id="avg">Batting Average</button>
-                    <button id="ops">OPS</button>
+                    <button class="active" id="hrs" onClick="chrt.button_click(this);">Home Runs</button>
+                    <button id="rbis" onClick="chrt.button_click(this);">RBIs</button>
+                    <button id="avg" onClick="chrt.button_click(this);">Batting Average</button>
+                    <button id="ops" onClick="chrt.button_click(this);">OPS</button>
                 </figure>
 			</section>
 		</div>
