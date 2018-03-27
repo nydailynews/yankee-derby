@@ -22,17 +22,33 @@ var utils = {
         if ( +i < 10 ) return "0" + i;
         return i;
     },
-    parse_date: function(date ) {
+    parse_date_str: function(date) {
         // date is a datetime-looking string such as "2017-07-25"
-        // Returns a unixtime integer.
+        // Returns a date object.
         if ( typeof date !== 'string' ) return Date.now();
 
         var date_bits = date.split(' ')[0].split('-');
 
         // We do that "+date_bits[1] - 1" because months are zero-indexed.
         var d = new Date(date_bits[0], +date_bits[1] - 1, date_bits[2], 0, 0, 0);
+		return d;
+	},
+    parse_date: function(date) {
+        // date is a datetime-looking string such as "2017-07-25"
+        // Returns a unixtime integer.
+        var d = this.parse_date_str(date);
         return d.getTime();
     },
+	days_between: function(from, to) {
+		// Get the number of days between two dates. Returns an integer. If to is left blank, defaults to today.
+		// Both from and to should be strings 'YYYY-MM-DD'.
+		// Cribbed from https://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+		if ( to == null ) to = new Date();
+		else to = this.parse_date_str(to);
+		from = this.parse_date_str(from);
+		var days_diff = Math.floor((from-to)/(1000*60*60*24));
+		return days_diff;
+	},
     get_json: function(path, obj, callback) {
         // Downloads local json and returns it.
         // Cribbed from http://youmightnotneedjquery.com/
