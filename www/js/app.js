@@ -99,8 +99,23 @@ var stats = {
         }
         return true;
     },
+    update_table: function() {
+        // Update the Slugger Stats table with the latest numbers from the spreadsheet.
+        // The latest will be in stats.latest.
+        console.log('ASSSS', stats.latest);
+        var fields = ['-avg', '-hrs', '-rbis', '-ops'];
+        var players = ['judge', 'stanton'];
+        for ( var i = 0; i < fields.length; i ++ ) {
+            for ( var j = 0; j < players.length; j ++ ) {
+                field = players[j] + fields[i];
+                document.getElementById(field).textContent = stats.latest[field];
+            }
+        }
+	},
     on_load: function() {
 		chrt.init();
+        stats.latest = stats.data[stats.data.length-1];
+        stats.update_table();
     },
     init: function(year) {
         if ( year == null ) year = 2018;
