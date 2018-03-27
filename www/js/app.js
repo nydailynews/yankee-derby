@@ -22,6 +22,19 @@ var utils = {
         if ( +i < 10 ) return "0" + i;
         return i;
     },
+    add_zeros: function(i, digits) {
+        // Fill decimals with zeros to the number of digits. Returns a string.
+        var str = '' + +i;
+        var len = str.length - 2;   // The "2" is the "0." in the string.
+
+        while ( len <= digits ) {
+            str = str + '0';
+            len = str.length - 2;
+        }
+        // Axe the leading zero
+        str = str.replace('0.', '.');
+        return str;
+    },
     parse_date_str: function(date) {
         // date is a datetime-looking string such as "2017-07-25"
         // Returns a date object.
@@ -102,7 +115,6 @@ var stats = {
     update_table: function() {
         // Update the Slugger Stats table with the latest numbers from the spreadsheet.
         // The latest will be in stats.latest.
-        console.log('ASSSS', stats.latest);
         var fields = ['-avg', '-hrs', '-rbis', '-ops'];
         var players = ['judge', 'stanton'];
         for ( var i = 0; i < fields.length; i ++ ) {
@@ -116,6 +128,8 @@ var stats = {
 		chrt.init();
         stats.latest = stats.data[stats.data.length-1];
         stats.update_table();
+        pg.latest = stats.latest;
+        pg.init();
     },
     init: function(year) {
         if ( year == null ) year = 2018;
@@ -142,7 +156,7 @@ var pg = {
     },
     on_load: function() {
     },
-    init: function(year) {
+    init: function() {
     }
 }
 
