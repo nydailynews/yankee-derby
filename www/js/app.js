@@ -147,16 +147,28 @@ var chrt = {
         }
         return true;
     },
-    player_key : {
+    player_key: {
         judge: 'Judge',
         stanton: 'Stanton',
         leader: 'MLB leader'
     },
-    type_key : {
+    type_key: {
         hrs: 'home runs',
         rbis: 'RBIs',
         avg: 'batting average',
         ops: 'OPS'
+    },
+    type_key_axis: {
+        hrs: 'Home runs',
+        rbis: 'RBIs',
+        avg: 'Batting average',
+        ops: 'On-base plus slugging'
+    },
+    y_axis_key_offset: {
+        hrs: 50,
+        rbis: 25,
+        avg: 70,
+        ops: 100 
     },
     y_max: {
         avg: 1,
@@ -238,10 +250,10 @@ var chrt = {
             .attr("class", "axis axis--y")
 			.call(d3.axisLeft(y))
             .append('text')
-                .attr('x', 50)
-                .attr('dx', '.5em')
+                .attr('x', this.y_axis_key_offset[type])
+                .attr('dx', '0.5 em')
                 .attr('fill', '#333')
-                .text(this.type_key[type]);
+                .text(this.type_key_axis[type]);
 
         var lines = g.selectAll('.lines')
             .data(slugger_stats)
@@ -260,7 +272,7 @@ var chrt = {
             .datum(function(d) { return { id: d.id, value: d.values[d.values.length - 1]}; })
             .attr('transform', function(d) { if ( typeof d.value === 'undefined' ) return ''; return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')'; })
             .attr('x', 3)
-            .attr('dy', '0.35em')
+            .attr('dy', '0.35 em')
             .style("font", "14px sans-serif")
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
             .text(function(d) { return chrt.slug_to_label(d.id) });
