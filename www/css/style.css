@@ -133,8 +133,9 @@ figure button.active {
     background-color: #CCF;
 }
 figure button {
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-size: 200%;
+    font-weight: bold;
     margin: 5px 10px;
 }
 /*--------- HANDHELD ---------*/
