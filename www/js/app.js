@@ -178,6 +178,13 @@ var pg = {
             [' by a healthy margin,'],
             [' by a good amount,'],
             [' by a landslide,'],
+        ],
+        'lead': [
+            ['is ahead'],
+            ['leads'],
+            ['holds a healthy advantage'],
+            ['dominates'],
+            ['is crushing'],
         ]
     },
     measure_diff: function(stat, diff) {
@@ -204,6 +211,20 @@ var pg = {
             else if ( diff < 5 ) index = 1;
             else if ( diff < 9 ) index = 2;
             else if ( diff < 13 ) index = 3;
+            else index = 4;
+        }
+        if ( stat == 'rbis' ) {
+            if ( diff < 5 ) index = 0;
+            else if ( diff < 9 ) index = 1;
+            else if ( diff < 13 ) index = 2;
+            else if ( diff < 20 ) index = 3;
+            else index = 4;
+        }
+        if ( stat == 'diff' ) {
+            if ( diff < 3 ) index = 0;
+            else if ( diff < 6 ) index = 1;
+            else if ( diff < 9 ) index = 2;
+            else if ( diff < 12 ) index = 3;
             else index = 4;
         }
 
@@ -243,6 +264,7 @@ var pg = {
             document.getElementById(stat + '-has-leader').setAttribute('class', 'hide');
             document.getElementById(stat + '-tied').setAttribute('class', '');
             document.getElementById(stat + '-number').textContent = numbers['Stanton'];
+            this.scoreboard['tie'] += 1;
         }
         else {
             var leader = 'Stanton';
@@ -257,17 +279,49 @@ var pg = {
             document.getElementById(stat + '-follower-number').textContent = numbers[follower];
 
             // Descriptors
+            diff_measure = this.measure_diff(stat, diff);
             if ( stat == 'avg' ) {
-                var desc = this.descriptors['one-word'][this.measure_diff(stat, diff)][0];
+                var desc = this.descriptors['one-word'][diff_measure][0];
                 if ( desc !== '' ) desc = 'a ' + desc;
                 document.getElementById(stat + '-desc').textContent = desc;
             }
             else if ( stat == 'ops' || stat == 'hrs' ) {
-                var desc = this.descriptors['phrase'][this.measure_diff(stat, diff)][0];
+                var desc = this.descriptors['phrase'][diff_measure][0];
                 document.getElementById(stat + '-desc').textContent = desc;
             }
+            // Tally the winners
+            this.scoreboard[leader] += 1;
+            this.diff_scoreboard[leader] += diff_measure;
         }
         
+    },
+    scoreboard: {
+        'tie': 0,
+        'Stanton': 0,
+        'Judge': 0
+    },
+    diff_scoreboard: {
+        'Stanton': 0,
+        'Judge': 0
+    },
+    full_names: {
+        'Stanton': 'Giancarlo Stanton',
+        'Judge': 'Aaron Judge'
+    },
+    build_lead: function() {
+        // Build the first clause of the paragraph based on who's leading and by how much.
+        // 
+        // Handle a tie
+        if ( this.scoreboard['Stanton'] == this.scoreboard['Judge'] ) {
+            document.getElementById('has-leader').setAttribute('class', 'hide');
+            document.getElementById('tied').setAttribute('class', '');
+            return true;
+        }
+        var leader = 'Judge';
+        if ( this.scoreboard['Stanton'] > this.scoreboard['Judge'] ) leader = 'Stanton';
+        var diff_measure = this.measure_diff('diff', this.diff_scoreboard[leader]);
+        document.getElementById('desc').textContent = this.descriptors['lead'][diff_measure];
+        document.getElementById('leader').textContent = this.full_names[leader];
     },
     init: function() {
         this.l = stats.latest;
@@ -276,6 +330,7 @@ var pg = {
             //var sentence_type = this.get_type(this.stats[i]);
             this.build_stat(this.stats[i]);
         }
+        this.build_lead();
     }
 }
 
