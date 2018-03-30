@@ -309,6 +309,7 @@ var pg = {
         'Judge': 'Aaron Judge'
     },
     build_lead: function() {
+        // OVERALL
         // Build the first clause of the paragraph based on who's leading and by how much.
         // 
         // Handle a tie
@@ -322,6 +323,7 @@ var pg = {
         var diff_measure = this.measure_diff('diff', this.diff_scoreboard[leader]);
         document.getElementById('desc').textContent = this.descriptors['lead'][diff_measure];
         document.getElementById('leader').textContent = this.full_names[leader];
+        return true;
     },
     init: function() {
         this.l = stats.latest;
