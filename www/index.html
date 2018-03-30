@@ -222,15 +222,15 @@ i.em span { display: none; }
                 </figure>
             </section>
         </div>
-        <p class="latest-news">THE LATEST<a href="http://www.nydailynews.com/sports/baseball/yankees"></a>: <strong id="latest-news-headline"></strong></p>
-        <script onload="document.getElementById('latest-news-headline').innerHTML=hed;" src="#"></script>
+        <p class="latest-news"><a href="http://www.nydailynews.com/sports/baseball/yankees">YANKEES NEWS</a>: <strong id="latest-news-headline"></strong></p>
+        <script onload="document.getElementById('latest-news-headline').innerHTML=hed;" src="//interactive.nydailynews.com/feeds/tag-yankees-1.js"></script>
     </article>
 </main>
 
 <script>
 function load_chart() { console.log('ah'); chrt.on_load(); }
 </script>
-<script src="http://interactive.nydailynews.com/js/d3/d3.v4.min.js"></script>
+<script src="//interactive.nydailynews.com/js/d3/d3.v4.min.js"></script>
 <script onload="stats.init('2018');" src="js/app.js"></script>
 <!--
 -->
