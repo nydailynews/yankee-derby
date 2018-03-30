@@ -117,20 +117,21 @@ table.stats {
     margin: auto;
 }
 
-.stats td {
+article td, article thead th {
     padding: 5px;
     border-bottom: 1px solid white;
     font: normal 18px 'PT Serif', serif;
     vertical-align: middle;
 }
 
-.stats th {
+article tbody th {
     width: 130px;
     font: bold 17px 'Open Sans Condensed', sans-serif;
     background-color: #0C2340;
     color: #fff;
     text-transform: uppercase;
     border-bottom: solid 1px white;
+    vertical-align: middle;
 }
 
 p {

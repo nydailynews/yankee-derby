@@ -147,17 +147,18 @@
                         <span id="hrs-leader-number" class="large"></span> to <span id="hrs-follower-number" class="large"></span>.
                     </span>
                     <span id="hrs-tied" class="hide">
-                        Home runs <i class="em em-comet"></i> are <span id="hrs-desc">even</span> at <span id="hrs-number" class="large">5</span>,
+                        Home runs <i class="em em-comet"></i> are <span id="hrs-desc-tied">even</span> at <span id="hrs-number" class="large">5</span>,
                     </span>
                     <span id="rbis-has-leader">
                         <span id="rbis-leader">Judge</span> leads <span id="rbis-follower">Stanton</span> in RBIs <i class="em em-baseball"></i>
                         <span id="rbis-leader-number" class="large"></span> to <span id="rbis-follower-number" class="large"></span>.
                     </span>
                     <span id="rbis-tied" class="hide">
+                        RBIs <i class="em em-baseball"></i> are <span id="rbis-desc-tied">even</span> at <span id="rbis-number" class="large"></span>,
                     </span>
                     <span id="avg-has-leader">
                         <span id="avg-leader">Judge’s</span> <span id="avg-leader-number" class="large"></span> batting average <i class="em em-dart"></i>
-                        is <span id="avg-desc"></span> <span id="avg-number-diff"></span> points above
+                        is <span id="avg-desc"></span> <span id="avg-number-diff"></span> points more than
                         <span id="avg-follower">Stanton’s</span> <span id="avg-follower-number" class="large"></span>.
                     </span>
                     <span id="avg-tied" class="hide">
@@ -175,8 +176,10 @@
                 </p>
                 <h2>Slugger Stats</h2>
                 <table class="stats">
+                    <thead>
+                        <tr><th>Stanton</th><td><h3>2018</h3></td><th>Judge</th></tr>
+                    </thead>
                     <tbody>
-                    <tr><td>Stanton</td><td><h3>2018</h3></td><td>Judge</td></tr>
                     <tr><td id="stanton-hrs"></td><th>Home runs</th><td id="judge-hrs"></td></tr>
                     <tr><td id="stanton-rbis"></td><th>RBIs</th><td id="judge-rbis"></td></tr>
                     <tr><td id="stanton-avg"></td><th>Batting <abbr>Avg</abbr></th><td id="judge-avg"></td></tr>
