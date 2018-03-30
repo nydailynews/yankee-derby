@@ -31,7 +31,7 @@ var utils = {
             str = str + '0';
             len = str.length - 2;
         }
-        // Axe the leading zero
+        // Axe the leading zero, if there is one
         str = str.replace('0.', '.');
         return str;
     },
@@ -120,8 +120,13 @@ var stats = {
         for ( var i = 0; i < fields.length; i ++ ) {
             for ( var j = 0; j < players.length; j ++ ) {
                 field = players[j] + fields[i];
-                console.log(field);
-                document.getElementById(field).textContent = stats.latest[field];
+                if ( fields[i] == '-avg' || fields[i] == '-ops' ) {
+                    document.getElementById(field).textContent = utils.add_zeros(stats.latest[field], 2);
+                }
+                else {
+                    document.getElementById(field).textContent = stats.latest[field];
+                }
+
             }
         }
 	},
@@ -156,9 +161,65 @@ var pg = {
         }
         return true;
     },
+    stats: ['avg', 'hrs', 'rbis', 'ops'],
     on_load: function() {
     },
+    build_stat: function(stat) {
+        // Build sentence comparing the two sluggers and populate the assigned id's
+        // There are two types: A tie, and a lead.
+        var numbers = {
+            Stanton: this.l['stanton-' + stat],
+            Judge: this.l['judge-' + stat]
+        };
+
+        var diff = +numbers['Stanton'] - +numbers['Judge'];
+        if ( diff < 0 ) diff *= -1;
+
+        // We publish the difference in the average section, and to do that we need to run a calculation
+        // and turn it into a string.
+        var diff_str = '';
+        if ( stat == 'avg' ) {
+            var diff_str = '' + Math.round(1000 * diff);
+            document.getElementById('avg-number-diff').textContent = diff_str;
+        }
+
+        added_zeros = 2;
+        if ( stat == 'avg' || stat == 'ops' ) {
+            numbers['Stanton'] = utils.add_zeros(numbers['Stanton'], added_zeros);
+            numbers['Judge'] = utils.add_zeros(numbers['Judge'], added_zeros);
+        }
+        var pluralize = '' ;
+        if ( stat == 'avg' ) pluralize = '’s';
+
+        var type = 'leader';
+        if ( numbers['Stanton'] == numbers['Judge'] ) {
+            type = 'tie';
+            // Switch the hidden ones
+            document.getElementById(stat + '-has-leader').setAttribute('class', 'hide');
+            document.getElementById(stat + '-tied').setAttribute('class', '');
+            document.getElementById(stat + '-number').textContent = numbers['Stanton'];
+        }
+        else {
+            var leader = 'Stanton';
+            var follower = 'Judge';
+            if ( numbers['Judge'] > numbers['Stanton'] ) {
+                leader = 'Judge';
+                follower = 'Stanton';
+            }
+            document.getElementById(stat + '-leader').textContent = leader + pluralize;
+            document.getElementById(stat + '-leader-number').textContent = numbers[leader];
+            document.getElementById(stat + '-follower').textContent = follower + pluralize;
+            document.getElementById(stat + '-follower-number').textContent = numbers[follower];
+        }
+        
+    },
     init: function() {
+        this.l = stats.latest;
+        console.log(this.l);
+        for ( i = 0; i < 4; i++ ) {
+            //var sentence_type = this.get_type(this.stats[i]);
+            this.build_stat(this.stats[i]);
+        }
     }
 }
 

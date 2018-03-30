@@ -32,6 +32,10 @@ p.byline {
     margin-bottom: 10px;
 }
 
+.hide {
+    display: none;
+}
+
 .ad {
     margin: 10px auto;
 }
