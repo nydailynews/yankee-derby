@@ -134,7 +134,8 @@ var stats = {
     init: function(year) {
         if ( year == null ) year = 2018;
         // get_json takes three params: filepath, the object that's calling it, and a callback.
-        utils.get_json('test/yankee-slugger-' + year + '.json', stats, this.on_load);
+        //utils.get_json('test/yankee-slugger-' + year + '.json', stats, this.on_load);
+        utils.get_json('output/yankee-slugger-' + year + '.json', stats, this.on_load);
     }
 }
 
@@ -201,7 +202,7 @@ var chrt = {
     },
     y_max: {
         avg: 1,
-        ops: 1
+        ops: 2
     },
     slug_to_label: function(slug) {
         // Take a slug, such as "judge-hrs", and turn that into a human-readable string, "Judge home runs"
