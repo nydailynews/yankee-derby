@@ -74,6 +74,20 @@ article {
     max-width: 600px;
 }
 
+#stats p {
+    font-family: 'PT Serif', serif;
+    font-size: 25px;
+    line-height: 45px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+i.em span { display: none; }
+.em-comet {
+    transform: rotate(270deg) scaleX(-1);
+}
+.large { font-size: 150%; }
+.nowrap { white-space: nowrap; }
+
 .left {
     grid-column: 1;
     grid-row: 2;
@@ -249,3 +263,4 @@ figure button {
         grid-row: 4;
     }
 }
+#rh-subnav { display: none; }
