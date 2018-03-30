@@ -120,6 +120,7 @@ var stats = {
         for ( var i = 0; i < fields.length; i ++ ) {
             for ( var j = 0; j < players.length; j ++ ) {
                 field = players[j] + fields[i];
+                console.log(field);
                 document.getElementById(field).textContent = stats.latest[field];
             }
         }
