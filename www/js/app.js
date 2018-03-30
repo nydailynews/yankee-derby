@@ -164,6 +164,51 @@ var pg = {
     stats: ['avg', 'hrs', 'rbis', 'ops'],
     on_load: function() {
     },
+    descriptors: {
+        'one-word': [
+            ['narrow', 'slight', 'slim'],
+            ['smallish', 'small', ''],
+            ['healthy', 'decent', 'measurable'],
+            ['sizable', 'significant', ''],
+            ['meaty', 'monstrous', 'major'],
+            ],
+        'phrase': [
+            [', but just barely,'],
+            [' by a small margin,'],
+            [' by a healthy margin,'],
+            [' by a good amount,'],
+            [' by a landslide,'],
+        ]
+    },
+    measure_diff: function(stat, diff) {
+        // Take a stat and the difference between the two stats.
+        // Return a value between 0 and 4 depending on how large the difference is between the two numbers.
+        var index = 0;
+        diff = +diff;
+        if ( stat == 'avg' ) {
+            if ( diff < .02 ) index = 0;
+            else if ( diff < .05 ) index = 1;
+            else if ( diff < .09 ) index = 2;
+            else if ( diff < .15 ) index = 3;
+            else index = 4;
+        }
+        if ( stat == 'ops' ) {
+            if ( diff < .05 ) index = 0;
+            else if ( diff < .1 ) index = 1;
+            else if ( diff < .15 ) index = 2;
+            else if ( diff < .3 ) index = 3;
+            else index = 4;
+        }
+        if ( stat == 'hrs' ) {
+            if ( diff < 3 ) index = 0;
+            else if ( diff < 5 ) index = 1;
+            else if ( diff < 9 ) index = 2;
+            else if ( diff < 13 ) index = 3;
+            else index = 4;
+        }
+
+        return index;
+    },
     build_stat: function(stat) {
         // Build sentence comparing the two sluggers and populate the assigned id's
         // There are two types: A tie, and a lead.
@@ -210,6 +255,17 @@ var pg = {
             document.getElementById(stat + '-leader-number').textContent = numbers[leader];
             document.getElementById(stat + '-follower').textContent = follower + pluralize;
             document.getElementById(stat + '-follower-number').textContent = numbers[follower];
+
+            // Descriptors
+            if ( stat == 'avg' ) {
+                var desc = this.descriptors['one-word'][this.measure_diff(stat, diff)][0];
+                if ( desc !== '' ) desc = 'a ' + desc;
+                document.getElementById(stat + '-desc').textContent = desc;
+            }
+            else if ( stat == 'ops' || stat == 'hrs' ) {
+                var desc = this.descriptors['phrase'][this.measure_diff(stat, diff)][0];
+                document.getElementById(stat + '-desc').textContent = desc;
+            }
         }
         
     },
