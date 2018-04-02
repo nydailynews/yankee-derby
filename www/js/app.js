@@ -168,7 +168,7 @@ var pg = {
         'one-word': [
             ['narrow', 'slight', 'slim'],
             ['smallish', 'small', ''],
-            ['healthy', 'decent', 'measurable'],
+            ['respectable', 'healthy', 'decent', 'measurable'],
             ['sizable', 'significant', ''],
             ['meaty', 'monstrous', 'major'],
             ],
