@@ -11,6 +11,7 @@ article h1 {
     margin: 0 auto 15px;
 	text-align: center;
     color: #ffffff;
+    letter-spacing: -1px;
 }
 
 .intro p {
@@ -119,6 +120,7 @@ article h2 {
     text-transform: uppercase;
     margin-bottom: 30px;
     color: #0C2340;
+    letter-spacing: -1px;
 }
 
 table.stats {
@@ -158,6 +160,7 @@ p {
 
 /*--------- CHART STYLES ---------*/
 section#bottom-chart {
+    background-color: white;
     -ms-grid-column: 1 / 4;
     grid-column: 1 / 4;
     -ms-grid-row: 3;
