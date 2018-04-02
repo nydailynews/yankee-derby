@@ -113,13 +113,14 @@
 <main>
     <article>
 		<h1>A tale of two sluggers</h1>
-			<div>
-                <ul class="ra-share" id="ra-share-top" style="text-align: center;">
-                    <li class="rt-share-f"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">facebook</a> </li>
-                    <li class="ra-share-t"> <a target="_blank" href="https://twitter.com/intent/tweet?text=Who’s winning the slugger battle bewtween @Giancarlo818 and @TheJudge44:&url=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/&via=NYDNi&related=NYDNsports,NYDNi" id="twitterlink">Tweet</a></li>
-                    <li class="ra-share-e"> <a href="mailto:?subject=Yankees Sluggers Tracker&body=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">email</a> </li>
-                </ul>
-            </div>
+		<div>
+			<ul class="ra-share" id="ra-share-top" style="text-align: center;">
+				<li class="rt-share-f"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">facebook</a> </li>
+				<li class="ra-share-t"> <a target="_blank" href="https://twitter.com/intent/tweet?text=Who’s winning the slugger battle bewtween @Giancarlo818 and @TheJudge44:&url=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/&via=NYDNsports&related=NYDNsports,NYDNi" id="twitterlink">Tweet</a></li>
+				<li class="ra-share-e"> <a href="mailto:?subject=Yankees Sluggers Tracker&body=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">email</a> </li>
+			</ul>
+		</div>
+
         <div class="grid-wrapper">
 
             <div class="left">
@@ -168,6 +169,7 @@
                         <span id="avg-follower">Stanton’s</span> <span id="avg-follower-number" class="large"></span>.
                     </span>
                     <span id="avg-tied" class="hide">
+                        Batting average<i class="em em-dart"></i> is <span id="avg-desc-tied">even</span> at <span id="avg-number" class="large"></span>.
                     </span>
                     <span id="ops-has-leader">
                         It’s
@@ -178,6 +180,7 @@
                         <span id="ops-leader-number" class="large"></span> to <span id="ops-follower-number" class="large"></span>.
                     </span>
                     <span id="ops-tied" class="hide">
+                        <abbr title="On-base percentage plus slugging">OPS</abbr> <i class="em em-stadium"></i> is <span id="ops-desc-tied">even</span> at <span id="ops-number" class="large"></span>.
                     </span>
                 </p>
                 <h2>Slugger Stats</h2>
@@ -215,6 +218,8 @@
         </div>
         <p class="latest-news"><a href="http://www.nydailynews.com/sports/baseball/yankees">YANKEES NEWS</a>: <strong id="latest-news-headline"></strong></p>
         <script onload="document.getElementById('latest-news-headline').innerHTML=hed;" src="//interactive.nydailynews.com/feeds/tag-yankees-1.js"></script>
+
+		<p class="credit deemphasize">Interactive by Daily News Sports, Kelli R. Parker and Joe Murphy</p>
     </article>
 </main>
 
