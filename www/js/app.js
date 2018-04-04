@@ -141,7 +141,7 @@ var stats = {
         if ( year == null ) year = 2018;
         // get_json takes three params: filepath, the object that's calling it, and a callback.
         //utils.get_json('test/yankee-derby-' + year + '.json', stats, this.on_load);
-        utils.get_json('output/yankee-derby-' + year + '.json', stats, this.on_load);
+        utils.get_json('output/yankee-derby-' + year + '.json?' + utils.rando(), stats, this.on_load);
     }
 }
 
@@ -404,6 +404,9 @@ var chrt = {
         // Remove the things in the chart
          document.getElementById('daily').innerHTML = '';
     },
+    load_chart: function() {
+        // Load a particular chart. This is a wrapper function used when someone permalinks a chart.
+    },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
 		if ( type == null ) type = 'hrs';
@@ -486,6 +489,7 @@ var chrt = {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
 		chrt.build_chart();
+		if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart(document.location.hash.substr(1));
     },
     init: function(year) {
 		//utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
