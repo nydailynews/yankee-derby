@@ -180,11 +180,11 @@ var pg = {
             [' by a landslide,'],
         ],
         'lead': [
-            ['is ahead'],
-            ['leads'],
-            ['holds a healthy advantage'],
+            ['is winning'],
+            ['leads in'],
+            ['holds a healthy advantage in'],
             ['dominates'],
-            ['is crushing'],
+            ['is crushing in'],
         ]
     },
     measure_diff: function(stat, diff) {
@@ -409,14 +409,14 @@ var chrt = {
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
-		if ( type == null ) type = 'hrs';
+		if ( type == null ) type = 'avg';
         chrt.type = type;
 		var margin = { 'left': 50, 'top': 10 };
 		var width = 800;
 		var height = 370;
 		var x = d3.scaleTime().range([0, width]),
             y = d3.scaleLinear().range([height, 0]),
-            z = d3.scaleOrdinal(d3.schemeCategory10);
+            z = d3.scaleOrdinal(d3.schemeCategory20);
         var line = d3.line()
             //.curve(d3.curveBasis)
             .x(function(d) { console.log(d.date, x(d.date), d); return x(d.date); })
@@ -442,7 +442,7 @@ var chrt = {
         if ( typeof this.y_max[type] !== 'undefined' ) y.domain([0, this.y_max[type]]);
         else {
             y.domain([0,
-                d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { return d.value + 5; }); })
+                d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { console.log(d); return +d.value + 5; }); })
             ]);
         }
         z.domain(slugger_stats.map(function(c) { return c.id; }));

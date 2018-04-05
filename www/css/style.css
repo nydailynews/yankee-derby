@@ -113,6 +113,7 @@ i.em span { display: none; }
     box-shadow: 0px 0px 25px 5px #0C2340;
     -webkit-box-shadow: 0px 0px 25px 5px #0C2340;
     -moz-box-shadow: 0px 0px 25px 5px #0C2340;
+    margin-bottom: 20px;
 }
 
 article h2 {
@@ -126,6 +127,10 @@ article h2 {
 table.stats {
     width: 100%;
     margin: auto;
+}
+
+table.stats tr.gap {
+    border-top: 20px solid #ccc;
 }
 
 article td, article thead th {

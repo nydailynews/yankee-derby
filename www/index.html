@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Yankees sluggers tracker: Giancarlo Stanton vs. Aaron Judge</title>
+    <title>Yankees sluggers stat tracker: Giancarlo Stanton vs. Aaron Judge</title>
     <link rel="icon" type="image/png" href="http://interactive.nydailynews.com/favicons.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -11,13 +11,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
     <!-- Titles -->
-    <meta property="og:title" content='Yankees sluggers tracker: Giancarlo Stanton vs. Aaron Judge' />
-    <meta name="twitter:title" content='Yankees sluggers tracker: Giancarlo Stanton vs. Aaron Judge' />
+    <meta property="og:title" content='Yankees sluggers stat tracker: Giancarlo Stanton vs. Aaron Judge' />
+    <meta name="twitter:title" content='Yankees sluggers stat tracker: Giancarlo Stanton vs. Aaron Judge' />
 
     <!-- Descriptions -->
-    <meta name="description" content="Day-by-day analysis and chart comparing the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
-    <meta property="og:description" content="Day-by-day analysis and chart comparing the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
-    <meta name="twitter:description" content="Day-by-day analysis and chart comparing the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
+    <meta name="description" content="UPDATED DAILY. Batting statistics comparison of the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
+    <meta property="og:description" content="UPDATED DAILY. Analysis and chart comparing the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
+    <meta name="twitter:description" content="UPDATED DAILY. Analysis and chart comparing the two New York Yankees sluggers, Aaron Judge and Giancarlo Stanton" />
 
     <!-- KEYWORD -->
     <meta name="keywords" content="Aaron Judge,Giancarlo Stanton,MLB,New York Yankees,baseball statistics,updated every day" />
@@ -133,7 +133,7 @@
             <section id="stats" class="center-text">
                 <p>
                     <strong id="has-leader">
-                        <span id="leader"></span> <span id="desc"></span> in the battle of the two Yankees sluggers</span>.
+                        <span id="leader"></span> <span id="desc"></span> the battle of the two Yankees sluggers</span>.
                         <!--
                         <span id="desc-about">between <i class="em em-male-judge"><span>Judge</span></i> and <i class="em em-man"><span>Stanton</span></i></span>.
                         -->
@@ -165,7 +165,7 @@
                     </span>
                     <span id="avg-has-leader">
                         <span id="avg-leader">Judge’s</span> <span id="avg-leader-number" class="large"></span> batting average <!--<i class="em em-dart"></i>-->
-                        is <span id="avg-desc"></span> <span id="avg-number-diff"></span> points more than
+                        is <span id="avg-desc"></span> <span id="avg-number-diff"></span> points higher than
                         <span id="avg-follower">Stanton’s</span> <span id="avg-follower-number" class="large"></span>.
                     </span>
                     <span id="avg-tied" class="hide">
@@ -189,29 +189,29 @@
                         <tr><th>Stanton</th><td><h3>2018</h3></td><th>Judge</th></tr>
                     </thead>
                     <tbody>
-                    <tr><td id="stanton-hrs"></td><th>Home runs</th><td id="judge-hrs"></td></tr>
-                    <tr><td id="stanton-rbis"></td><th>RBIs</th><td id="judge-rbis"></td></tr>
-                    <tr><td id="stanton-avg"></td><th>Batting <abbr>Avg</abbr></th><td id="judge-avg"></td></tr>
-                    <tr><td id="stanton-ops"></td><th>OPS</th><td id="judge-ops"></td></tr>
+                        <tr><td id="stanton-hrs"></td><th>Home runs</th><td id="judge-hrs"></td></tr>
+                        <tr><td id="stanton-rbis"></td><th>RBIs</th><td id="judge-rbis"></td></tr>
+                        <tr><td id="stanton-avg"></td><th>Batting <abbr>Avg</abbr></th><td id="judge-avg"></td></tr>
+                        <tr><td id="stanton-ops"></td><th>OPS</th><td id="judge-ops"></td></tr>
 
-                    <tr><td>28</td><th>Age</th><td>25</td></tr>
-                    <tr><td>6-6</td><th>Height</th><td>6-7</td></tr>
-                    <tr><td>245</td><th>Weight</th><td>282</td></tr>
-                    <tr><td>479 ft</td><th>Longest hit</th><td>495 ft</td></tr>
-                    <tr><td>59</td><th>Home&nbsp;runs 2017</th><td>52</td></tr>
+                        <tr class="gap"><td>28</td><th>Age</th><td>25</td></tr>
+                        <tr><td>6-6</td><th>Height</th><td>6-7</td></tr>
+                        <tr><td>245</td><th>Weight</th><td>282</td></tr>
+                        <tr><td>479 ft</td><th>Longest hit</th><td>495 ft</td></tr>
+                        <tr><td>59</td><th>Home&nbsp;runs 2017</th><td>52</td></tr>
                     </tbody>
                 </table>
             </section>
 
             <section id="bottom-chart">
                 <h2>Yankee Sluggers, by day</h2>
-                <p>Day-by-day statistics comparing Giancarlo Stanton and Aaron Judge against the Major League Baseball leader in each of home runs, RBIs, batting average and OPS.</p>
+                <p>Statistics, updated daily, comparing Giancarlo Stanton and Aaron Judge against the Major League Baseball leader in each of home runs, RBIs, batting average and OPS.</p>
                 <figure>
                     <svg id="daily"></svg>
                     <figcaption></figcaption>
-                    <button class="active" id="hrs" onClick="chrt.button_click(this);">Home Runs</button>
+                    <button id="hrs" onClick="chrt.button_click(this);">Home Runs</button>
                     <button id="rbis" onClick="chrt.button_click(this);">RBIs</button>
-                    <button id="avg" onClick="chrt.button_click(this);">Batting Average</button>
+                    <button class="active" id="avg" onClick="chrt.button_click(this);">Batting Average</button>
                     <button id="ops" onClick="chrt.button_click(this);">OPS</button>
                 </figure>
             </section>
