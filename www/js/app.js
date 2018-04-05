@@ -136,7 +136,6 @@ var stats = {
         // Update the datestamp's time element.
         var el = document.querySelector('.datestamp time');
         el.textContent = utils.ap_date(stats.latest['date']);
-        console.log(stats.latest);
     },
     on_load: function() {
 		chrt.init();
@@ -336,7 +335,6 @@ var pg = {
     },
     init: function() {
         this.l = stats.latest;
-        console.log(this.l);
         for ( i = 0; i < 4; i++ ) {
             //var sentence_type = this.get_type(this.stats[i]);
             this.build_stat(this.stats[i]);
@@ -440,7 +438,7 @@ var chrt = {
             z = d3.scaleOrdinal(d3.schemeCategory20);
         var line = d3.line()
             //.curve(d3.curveBasis)
-            .x(function(d) { console.log(d.date, x(d.date), d); return x(d.date); })
+            .x(function(d) { /*console.log(d.date, x(d.date), d);*/ return x(d.date); })
             .y(function(d) { return y(d.value); });
 		var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -463,7 +461,7 @@ var chrt = {
         if ( typeof this.y_max[type] !== 'undefined' ) y.domain([0, this.y_max[type]]);
         else {
             y.domain([0,
-                d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { console.log(d); return +d.value + 5; }); })
+                d3.max(slugger_stats, function(c) { return d3.max(c.values, function(d) { return +d.value + 5; }); })
             ]);
         }
         z.domain(slugger_stats.map(function(c) { return c.id; }));
