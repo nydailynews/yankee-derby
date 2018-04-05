@@ -1,4 +1,4 @@
-# Yankees Sluggers Tracker
+# [Yankees Sluggers Tracker](http://interactive.nydailynews.com/project/yankees-sluggers-tracker/)
 
 ## Credits
 
