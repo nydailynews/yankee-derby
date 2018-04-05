@@ -433,9 +433,19 @@ var chrt = {
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
         var height = 370;
+
         var x = d3.scaleTime().range([0, width]),
-            y = d3.scaleLinear().range([height, 0]),
+            y = d3.scaleLinear().range([height, 0])
             z = d3.scaleOrdinal(d3.schemeCategory20);
+
+		// y-axis tick text formatting
+        var s = d3.formatSpecifier("f");
+		s.precision = d3.precisionFixed(0);
+		if ( type === 'avg' || type === 'ops' ) s.precision = d3.precisionFixed(0.001);
+        var ticks = y.ticks(10),
+            tickFormat = y.tickFormat(10, s);
+        //console.log(s, tickFormat,ticks.map(tickFormat));
+
         var line = d3.line()
             //.curve(d3.curveBasis)
             .x(function(d) { /*console.log(d.date, x(d.date), d);*/ return x(d.date); })
@@ -475,10 +485,10 @@ var chrt = {
 
         g.append("g")
             .attr("class", "axis axis--y")
-            .call(d3.axisLeft(y))
+            .call(d3.axisLeft(y).ticks(10,s))
             .append('text')
                 .attr('x', this.y_axis_key_offset[type])
-                .attr('dx', '0.5 em')
+                .attr('dx', 5)
                 .attr('fill', '#333')
                 .text(this.type_key_axis[type]);
 
