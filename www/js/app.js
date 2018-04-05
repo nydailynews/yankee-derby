@@ -388,10 +388,22 @@ var chrt = {
         avg: 1,
         ops: 2
     },
-    slug_to_label: function(slug) {
+    slug_to_label: function(slug, record) {
         // Take a slug, such as "judge-hrs", and turn that into a human-readable string, "Judge home runs"
+		// In certain situations include the latest value for that statistic.
         var bits = slug.split('-');
-        return this.player_key[bits[0]] + ' ' + this.type_key[bits[1]];
+		var player = bits[0];
+		var stat = bits[1];
+		var label = this.player_key[player] + ' ' + this.type_key[stat];
+		if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
+			// Special treatment goes here
+			var s = record['value']['value'];
+			if ( stat == 'avg' || stat == 'ops' ) {
+				s = utils.add_zeros(s, 2);
+			}
+			label += ' (' + s + ')';
+		}
+		return label;
     },
     button_click: function(btn) {
         // The event handler for button clicking.
@@ -482,7 +494,7 @@ var chrt = {
             .attr('stroke-width', '3px')
             .attr('fill', 'none')
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
-            .attr('d', function(d) { console.log(d.values); return line(d.values); })
+            .attr('d', function(d) { return line(d.values); })
             .style('stroke', function(d) { return z(d.id); });
 
         lines.append('text')
@@ -495,7 +507,7 @@ var chrt = {
             .attr('dy', 4)
             .style("font", "14px sans-serif")
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
-            .text(function(d) { return chrt.slug_to_label(d.id) });
+            .text(function(d) { return chrt.slug_to_label(d.id, d) });
 	},
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
