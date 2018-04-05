@@ -3,7 +3,7 @@ var utils = {
     ap_numerals: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
     months: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
     ap_months: ['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
-	ap_date: function(date) {
+    ap_date: function(date) {
         // Given a date such as "2018-02-03" return an AP style date.
         var this_year = new Date().getFullYear();
         var parts = date.split('-')
@@ -46,24 +46,24 @@ var utils = {
 
         // We do that "+date_bits[1] - 1" because months are zero-indexed.
         var d = new Date(date_bits[0], +date_bits[1] - 1, date_bits[2], 0, 0, 0);
-		return d;
-	},
+        return d;
+    },
     parse_date: function(date) {
         // date is a datetime-looking string such as "2017-07-25"
         // Returns a unixtime integer.
         var d = this.parse_date_str(date);
         return d.getTime();
     },
-	days_between: function(from, to) {
-		// Get the number of days between two dates. Returns an integer. If to is left blank, defaults to today.
-		// Both from and to should be strings 'YYYY-MM-DD'.
-		// Cribbed from https://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
-		if ( to == null ) to = new Date();
-		else to = this.parse_date_str(to);
-		from = this.parse_date_str(from);
-		var days_diff = Math.floor((from-to)/(1000*60*60*24));
-		return days_diff;
-	},
+    days_between: function(from, to) {
+        // Get the number of days between two dates. Returns an integer. If to is left blank, defaults to today.
+        // Both from and to should be strings 'YYYY-MM-DD'.
+        // Cribbed from https://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+        if ( to == null ) to = new Date();
+        else to = this.parse_date_str(to);
+        from = this.parse_date_str(from);
+        var days_diff = Math.floor((from-to)/(1000*60*60*24));
+        return days_diff;
+    },
     get_json: function(path, obj, callback) {
         // Downloads local json and returns it.
         // Cribbed from http://youmightnotneedjquery.com/
@@ -131,14 +131,14 @@ var stats = {
 
             }
         }
-	},
+    },
     update_datestamp: function() {
         // Update the datestamp's time element.
         var el = document.querySelector('.datestamp time');
         el.textContent = utils.ap_date(stats.latest['date']);
     },
     on_load: function() {
-		chrt.init();
+        chrt.init();
         stats.latest = stats.data[stats.data.length-1];
         stats.update_datestamp();
         stats.update_table();
@@ -388,20 +388,20 @@ var chrt = {
     },
     slug_to_label: function(slug, record) {
         // Take a slug, such as "judge-hrs", and turn that into a human-readable string, "Judge home runs"
-		// In certain situations include the latest value for that statistic.
+        // In certain situations include the latest value for that statistic.
         var bits = slug.split('-');
-		var player = bits[0];
-		var stat = bits[1];
-		var label = this.player_key[player] + ' ' + this.type_key[stat];
-		if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
-			// Special treatment goes here
-			var s = record['value']['value'];
-			if ( stat == 'avg' || stat == 'ops' ) {
-				s = utils.add_zeros(s, 2);
-			}
-			label += ' (' + s + ')';
-		}
-		return label;
+        var player = bits[0];
+        var stat = bits[1];
+        var label = this.player_key[player] + ' ' + this.type_key[stat];
+        if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
+            // Special treatment goes here
+            var s = record['value']['value'];
+            if ( stat == 'avg' || stat == 'ops' ) {
+                s = utils.add_zeros(s, 2);
+            }
+            label += ' (' + s + ')';
+        }
+        return label;
     },
     button_click: function(btn) {
         // The event handler for button clicking.
@@ -428,21 +428,21 @@ var chrt = {
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
-		if ( type == null ) type = 'avg';
+        if ( type == null ) type = 'avg';
         chrt.type = type;
-		var margin = { 'left': 50, 'top': 10 };
-		var width = 800;
-		var height = 370;
-		var x = d3.scaleTime().range([0, width]),
+        var margin = { 'left': 50, 'top': 10 };
+        var width = 800;
+        var height = 370;
+        var x = d3.scaleTime().range([0, width]),
             y = d3.scaleLinear().range([height, 0]),
             z = d3.scaleOrdinal(d3.schemeCategory20);
         var line = d3.line()
             //.curve(d3.curveBasis)
             .x(function(d) { /*console.log(d.date, x(d.date), d);*/ return x(d.date); })
             .y(function(d) { return y(d.value); });
-		var svg = d3.select('svg#daily'),
+        var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		var data = stats.data;
+        var data = stats.data;
         var keys = Object.keys(data[0]).slice(1);
         var slugger_stats = keys.map(function(id) {
             // Zero out the chart values for the inactive fields
@@ -455,7 +455,7 @@ var chrt = {
                 })
             };
         });
-		x.domain(d3.extent(this.season_dates, function(d) { return chrt.parse_time(d); }));
+        x.domain(d3.extent(this.season_dates, function(d) { return chrt.parse_time(d); }));
         
         // We set the max at 1 for batting average and OPS, and [puts on shades] this is how we do it [cue drums]
         if ( typeof this.y_max[type] !== 'undefined' ) y.domain([0, this.y_max[type]]);
@@ -465,17 +465,17 @@ var chrt = {
             ]);
         }
         z.domain(slugger_stats.map(function(c) { return c.id; }));
-		//y.domain([0, d3.max(data, function(d) { 
-		//	  return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
+        //y.domain([0, d3.max(data, function(d) { 
+        //    return Math.max(d['judge-' + type], d['stanton-' + type], d['leader-' + type]); })]);
 
-		g.append("g")
+        g.append("g")
             .attr('class', 'axis axis--x')
-			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(x));
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
 
-		g.append("g")
+        g.append("g")
             .attr("class", "axis axis--y")
-			.call(d3.axisLeft(y))
+            .call(d3.axisLeft(y))
             .append('text')
                 .attr('x', this.y_axis_key_offset[type])
                 .attr('dx', '0.5 em')
@@ -498,25 +498,25 @@ var chrt = {
         lines.append('text')
             .datum(function(d) { return { id: d.id, value: d.values[d.values.length - 1]}; })
             .attr('transform', function(d) {
-				if ( typeof d.value === 'undefined' ) return '';
-				return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')';
-				})
+                if ( typeof d.value === 'undefined' ) return '';
+                return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')';
+                })
             .attr('x', 3)
             .attr('dy', 4)
             .style("font", "14px sans-serif")
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
             .text(function(d) { return chrt.slug_to_label(d.id, d) });
-	},
+    },
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
-		chrt.build_chart();
-		if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart(document.location.hash.substr(1));
+        chrt.build_chart();
+        if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart(document.location.hash.substr(1));
     },
     init: function(year) {
-		//utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
+        //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         this.season_dates = season_dates_all.splice(0, 30);
-		this.on_load();
+        this.on_load();
     }
 }
 var season_dates_all = ['2018-03-29', '2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03', '2018-04-04', '2018-04-05', '2018-04-06', '2018-04-07', '2018-04-08', '2018-04-09', '2018-04-10', '2018-04-11', '2018-04-12', '2018-04-13', '2018-04-14', '2018-04-15', '2018-04-16', '2018-04-17', '2018-04-18', '2018-04-19', '2018-04-20', '2018-04-21', '2018-04-22', '2018-04-23', '2018-04-24', '2018-04-25', '2018-04-26', '2018-04-27', '2018-04-28', '2018-04-29', '2018-04-30', '2018-05-01', '2018-05-02', '2018-05-03', '2018-05-04', '2018-05-05', '2018-05-06', '2018-05-07', '2018-05-08', '2018-05-09', '2018-05-10', '2018-05-11', '2018-05-12', '2018-05-13', '2018-05-14', '2018-05-15', '2018-05-16', '2018-05-17', '2018-05-18', '2018-05-19', '2018-05-20', '2018-05-21', '2018-05-22', '2018-05-23', '2018-05-24', '2018-05-25', '2018-05-26', '2018-05-27', '2018-05-28', '2018-05-29', '2018-05-30', '2018-05-31', '2018-06-01', '2018-06-02', '2018-06-03', '2018-06-04', '2018-06-05', '2018-06-06', '2018-06-07', '2018-06-08', '2018-06-09', '2018-06-10', '2018-06-11', '2018-06-12', '2018-06-13', '2018-06-14', '2018-06-15', '2018-06-16', '2018-06-17', '2018-06-18', '2018-06-19', '2018-06-20', '2018-06-21', '2018-06-22', '2018-06-23', '2018-06-24', '2018-06-25', '2018-06-26', '2018-06-27', '2018-06-28', '2018-06-29', '2018-06-30', '2018-07-01', '2018-07-02', '2018-07-03', '2018-07-04', '2018-07-05', '2018-07-06', '2018-07-07', '2018-07-08', '2018-07-09', '2018-07-10', '2018-07-11', '2018-07-12', '2018-07-13', '2018-07-14', '2018-07-15', '2018-07-16', '2018-07-17', '2018-07-18', '2018-07-19', '2018-07-20', '2018-07-21', '2018-07-22', '2018-07-23', '2018-07-24', '2018-07-25', '2018-07-26', '2018-07-27', '2018-07-28', '2018-07-29', '2018-07-30', '2018-07-31', '2018-08-01', '2018-08-02', '2018-08-03', '2018-08-04', '2018-08-05', '2018-08-06', '2018-08-07', '2018-08-08', '2018-08-09', '2018-08-10', '2018-08-11', '2018-08-12', '2018-08-13', '2018-08-14', '2018-08-15', '2018-08-16', '2018-08-17', '2018-08-18', '2018-08-19', '2018-08-20', '2018-08-21', '2018-08-22', '2018-08-23', '2018-08-24', '2018-08-25', '2018-08-26', '2018-08-27', '2018-08-28', '2018-08-29', '2018-08-30', '2018-08-31', '2018-09-01', '2018-09-02', '2018-09-03', '2018-09-04', '2018-09-05', '2018-09-06', '2018-09-07', '2018-09-08', '2018-09-09', '2018-09-10', '2018-09-11', '2018-09-12', '2018-09-13', '2018-09-14', '2018-09-15', '2018-09-16', '2018-09-17', '2018-09-18', '2018-09-19', '2018-09-20', '2018-09-21', '2018-09-22', '2018-09-23', '2018-09-24', '2018-09-25', '2018-09-26', '2018-09-27', '2018-09-28', '2018-09-29', '2018-09-30'];
