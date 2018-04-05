@@ -150,10 +150,14 @@ article tbody th {
     vertical-align: middle;
 }
 
-p {
+article p {
     font: normal 18px 'PT Serif', serif;
     text-align: center;
     margin-bottom: 10px;
+}
+#stats p.datestamp, p.datestamp {
+    color: #666;
+    text-align: center;
 }
 
 .right {

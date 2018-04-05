@@ -3,11 +3,13 @@ var utils = {
     ap_numerals: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
     months: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
     ap_months: ['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
-    ap_date: function(date) {
+	ap_date: function(date) {
         // Given a date such as "2018-02-03" return an AP style date.
+        var this_year = new Date().getFullYear();
         var parts = date.split('-')
         var day = +parts[2];
         var month = this.ap_months[+parts[1] - 1];
+        if ( this_year == +parts[0] ) return month + ' ' + day;
         return month + ' ' + day + ', ' + parts[0];
     },
     rando: function() {
@@ -130,9 +132,16 @@ var stats = {
             }
         }
 	},
+    update_datestamp: function() {
+        // Update the datestamp's time element.
+        var el = document.querySelector('.datestamp time');
+        el.textContent = utils.ap_date(stats.latest['date']);
+        console.log(stats.latest);
+    },
     on_load: function() {
 		chrt.init();
         stats.latest = stats.data[stats.data.length-1];
+        stats.update_datestamp();
         stats.update_table();
         pg.latest = stats.latest;
         pg.init();
