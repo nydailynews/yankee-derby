@@ -487,9 +487,12 @@ var chrt = {
 
         lines.append('text')
             .datum(function(d) { return { id: d.id, value: d.values[d.values.length - 1]}; })
-            .attr('transform', function(d) { if ( typeof d.value === 'undefined' ) return ''; return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')'; })
+            .attr('transform', function(d) {
+				if ( typeof d.value === 'undefined' ) return '';
+				return 'translate(' + x(d.value.date) + ',' + y(d.value.value) + ')';
+				})
             .attr('x', 3)
-            .attr('dy', '0.35 em')
+            .attr('dy', 4)
             .style("font", "14px sans-serif")
             .attr('display', function(d) { if ( d.id.indexOf(type) === -1 ) return 'none'; else return ''; })
             .text(function(d) { return chrt.slug_to_label(d.id) });
