@@ -1,5 +1,6 @@
 article h1, article h2, article h3, article h4, article h5, article button {
     font-family: 'Open Sans Condensed', sans-serif;
+	font-display: optional;
     color: #333;
     text-rendering: optimizeLegibility;
 }
@@ -21,6 +22,7 @@ article h1 + h2 {
 
 .intro p {
     font: normal 20px 'PT Serif', serif;
+	font-display: optional;
     text-align: left;
     line-height: 30px;
     color: #ffffff;
@@ -28,6 +30,7 @@ article h1 + h2 {
 
 p.byline {
     font: normal 14px "Open Sans", sans-serif;
+	font-display: optional;
     width: 90%;
     margin: auto;
     text-align: center;
@@ -88,6 +91,7 @@ article {
 
 #stats p {
     font-family: 'PT Serif', serif;
+	font-display: optional;
     font-size: 25px;
     line-height: 45px;
     text-align: left;
@@ -164,6 +168,7 @@ article p {
 #stats p.datestamp, p.datestamp {
     color: #666;
     text-align: center;
+	line-height: 24px;
 }
 
 .right {
