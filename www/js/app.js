@@ -193,7 +193,17 @@ var pg = {
             ['holds a healthy advantage in'],
             ['dominates'],
             ['is crushing in'],
-        ]
+        ],
+        'yikes': [['yikes', 'ouch', 'ugh', 'oof',]]
+    },
+    rando_descriptor(field, index, seed) {
+        // Returns a random descriptor for descriptor fields that have multiple options.
+        // This is based on a seed plus the date, so the descriptor will be the same for a whole day.
+        if ( typeof seed === 'undefined' ) var seed = 0;
+        var l = this.descriptors[field][index].length;
+        var day_seed = new Date().getDate();
+
+
     },
     measure_diff: function(stat, diff) {
         // Take a stat and the difference between the two stats.
@@ -297,6 +307,13 @@ var pg = {
                 var desc = this.descriptors['phrase'][diff_measure][0];
                 document.getElementById(stat + '-desc').textContent = desc;
             }
+
+			// Sometimes if the batting average is really low we comment on that.
+			if ( stat == 'avg' ) {
+                //if ( numbers[leader] < .2 ) document.getElementById('avg-leader-yikes').textContent = 
+                //if ( numbers[follower] < .2 ) console.log('ya');
+            }
+
             // Tally the winners
             this.scoreboard[leader] += 1;
             this.diff_scoreboard[leader] += diff_measure;
