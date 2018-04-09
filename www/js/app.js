@@ -134,8 +134,15 @@ var stats = {
     },
     update_datestamp: function() {
         // Update the datestamp's time element.
+        // We add one day to the date because if the stats are current through yesterday that means it was updated today, at least.
         var el = document.querySelector('.datestamp time');
-        el.textContent = utils.ap_date(stats.latest['date']);
+        
+        // Turn the date string (YYYY-MM-DD) into a date object so we can increment it one day.
+        var d = stats.latest['date'].split('-');
+        var latest = new Date(d[0], d[1], d[2]);
+        latest.setDate(latest.getDate() + 1);
+        var date_str = latest.getFullYear() + '-' + utils.add_zero(latest.getMonth()) + '-' + utils.add_zero(latest.getDate());
+        el.textContent = utils.ap_date(date_str);
     },
     on_load: function() {
         chrt.init();

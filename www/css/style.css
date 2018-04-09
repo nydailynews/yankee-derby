@@ -166,7 +166,7 @@ article p {
     margin-bottom: 10px;
 }
 #stats p.datestamp, p.datestamp {
-    color: #666;
+    color: #aaa;
     text-align: center;
 	line-height: 24px;
 }
