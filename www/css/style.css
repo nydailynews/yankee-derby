@@ -97,7 +97,9 @@ article {
     line-height: 45px;
     text-align: left;
     margin-bottom: 30px;
+    width: 100%;
 }
+
 i.em span { display: none; }
 .em-comet {
     transform: rotate(270deg) scaleX(-1);
@@ -165,7 +167,7 @@ article p {
     text-align: center;
     margin: auto;
     margin-bottom: 10px;
-    max-width: 80%;
+    width: 80%;
 }
 #stats p.datestamp, p.datestamp {
     color: #aaa;
