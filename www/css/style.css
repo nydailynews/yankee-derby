@@ -229,6 +229,7 @@ figure button {
         letter-spacing: -4px;
     }
     article h1 + h2 {
+        color: #0C2340;
     }
 
     .left, .right {
