@@ -444,10 +444,10 @@ var chrt = {
     },
     clear_chart: function() {
         // Remove the things in the chart
-         document.getElementById('daily').innerHTML = '';
+        document.getElementById('daily').innerHTML = '';
     },
     load_chart: function(type) {
-        // The machinations to hide and load a chart.
+        // The machinations to hide and load a chart. Used by the buttons and the permalink.
         this.clear_chart();
         this.build_chart(type);
     },
@@ -559,7 +559,8 @@ var chrt = {
     },
     init: function(year) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
-        this.season_dates = season_dates_all.splice(0, 30);
+        if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 160);
+        else this.season_dates = season_dates_all.splice(0, 30);
         this.on_load();
     }
 }
