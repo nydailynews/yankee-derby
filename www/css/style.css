@@ -210,6 +210,11 @@ figure button {
 }
 /*--------- HANDHELD ---------*/
 
+@media only screen and (min-width: 250px) and (max-width: 310px) {
+    article h1 + h2 {
+        color: #0C2340;
+    }
+}
 @media only screen and (min-width: 250px) and (max-width: 727px) {
 
     .grid-wrapper{
@@ -227,9 +232,6 @@ figure button {
         color: #FFF;
         -webkit-text-stroke: 2px #c01d1f;
         letter-spacing: -4px;
-    }
-    article h1 + h2 {
-        color: #0C2340;
     }
 
     .left, .right {
