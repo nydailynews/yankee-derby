@@ -460,7 +460,7 @@ var chrt = {
 
         var x = d3.scaleTime().range([0, width]),
             y = d3.scaleLinear().range([height, 0])
-            z = d3.scaleOrdinal(d3.schemeCategory20);
+            z = d3.scaleOrdinal().domain(stats.data).range([ '#003087', '#E4002C', '#aaa']);
 
 		// y-axis tick text formatting
         var s = d3.formatSpecifier("f");
