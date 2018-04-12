@@ -439,16 +439,26 @@ var chrt = {
 
         //var el = document.getElementById(btn.id);
         utils.add_class(btn, 'active');
-        this.clear_chart();
-        this.build_chart(btn.id);
+        this.load_chart(btn.id);
         document.location.hash = '#stat-' + btn.id;
     },
     clear_chart: function() {
         // Remove the things in the chart
          document.getElementById('daily').innerHTML = '';
     },
-    load_chart: function() {
+    load_chart: function(type) {
+        // The machinations to hide and load a chart.
+        this.clear_chart();
+        this.build_chart(type);
+    },
+    load_chart_from_hash: function(hash) {
         // Load a particular chart. This is a wrapper function used when someone permalinks a chart.
+        // Options: stat-hrs / stat-rbis / stat-avg / stat-ops
+        var bits = hash.split('-');
+        this.load_chart(bits[1]);
+        document.getElementById('avg').setAttribute('class', '');
+        document.getElementById(bits[1]).setAttribute('class', 'active');
+        window.setTimeout(function() { document.getElementById('bottom-chart').scrollIntoView() }, 1000);
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
@@ -545,7 +555,7 @@ var chrt = {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
         chrt.build_chart();
-        if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart(document.location.hash.substr(1));
+        if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart_from_hash(document.location.hash.substr(1));
     },
     init: function(year) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
