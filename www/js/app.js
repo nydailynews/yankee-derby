@@ -259,11 +259,11 @@ var pg = {
         // Build sentence comparing the two sluggers and populate the assigned id's
         // There are two types: A tie, and a lead.
         var numbers = {
-            Stanton: this.l['stanton-' + stat],
-            Judge: this.l['judge-' + stat]
+            Stanton: +this.l['stanton-' + stat],
+            Judge: +this.l['judge-' + stat]
         };
 
-        var diff = +numbers['Stanton'] - +numbers['Judge'];
+        var diff = numbers['Stanton'] - numbers['Judge'];
         if ( diff < 0 ) diff *= -1;
 
         // We publish the difference in the average section, and to do that we need to run a calculation
