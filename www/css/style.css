@@ -9,10 +9,11 @@ article h1 {
     font-size: 7em;
     line-height: 1em;
     text-transform: uppercase;
-    margin: 0 auto 5px;
+    margin: 0 auto 8px;
     text-align: center;
     color: #ffffff;
     letter-spacing: -1px;
+    padding-top: 30px;
 }
 article h1 + h2 {
     color: white;
@@ -131,7 +132,6 @@ article h2 {
     text-transform: uppercase;
     margin-bottom: 30px;
     color: #0C2340;
-    letter-spacing: -1px;
 }
 
 table.stats {
@@ -163,12 +163,14 @@ article tbody th {
 article p {
     font: normal 18px 'PT Serif', serif;
     text-align: center;
+    margin: auto;
     margin-bottom: 10px;
+    max-width: 80%;
 }
 #stats p.datestamp, p.datestamp {
     color: #aaa;
     text-align: center;
-	line-height: 24px;
+	line-height: 40px;
 }
 
 .right {
