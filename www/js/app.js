@@ -114,6 +114,7 @@ var stats = {
         }
         return true;
     },
+    stats: ['avg', 'hrs', 'rbis', 'ops'],
     update_table: function() {
         // Update the Slugger Stats table with the latest numbers from the spreadsheet.
         // The latest will be in stats.latest.
@@ -176,7 +177,6 @@ var pg = {
         }
         return true;
     },
-    stats: ['avg', 'hrs', 'rbis', 'ops'],
     on_load: function() {
     },
     descriptors: {
@@ -360,8 +360,8 @@ var pg = {
     init: function() {
         this.l = stats.latest;
         for ( i = 0; i < 4; i++ ) {
-            //var sentence_type = this.get_type(this.stats[i]);
-            this.build_stat(this.stats[i]);
+            //var sentence_type = this.get_type(stats.stats[i]);
+            this.build_stat(stats.stats[i]);
         }
         this.build_lead();
     }
@@ -410,21 +410,40 @@ var chrt = {
         avg: 1,
         ops: 2
     },
+    ties: [],
+    check_for_ties: function() {
+        // Loop through the latest record and see if there are any ties.
+        // If so, add the field to the ties array.
+        chrt.ties = [];
+        var fields = Object.keys(chrt.type_key);
+        var l = fields.length;
+        var latest = stats.data[stats.data.length - 1];
+        // latest will look something like judge-hrs: "3", stanton-hrs: "3", leader-hrs: "6", judge-rbis: "8", …}
+        
+        //var players = ['judge', 'stanton'];
+        for ( var i = 0; i < l; i ++ ) {
+            var field = fields[i];
+            if ( +latest['judge-' + field] == +latest['stanton-' + field] ) chrt.ties.push(field);
+        }
+    },
     slug_to_label: function(slug, record) {
         // Take a slug, such as "judge-hrs", and turn that into a human-readable string, "Judge home runs"
         // In certain situations include the latest value for that statistic.
+        // If there's a tie between Judge and Stanton, write "TIE" instead of the label.
         var bits = slug.split('-');
         var player = bits[0];
-        var stat = bits[1];
-        var label = this.player_key[player] + ' ' + this.type_key[stat];
+        var field = bits[1];
+        var label = this.player_key[player] + ' ' + this.type_key[field];
         if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
             // Special treatment goes here
             var s = record['value']['value'];
-            if ( stat == 'avg' || stat == 'ops' ) {
+            if ( field == 'avg' || field == 'ops' ) {
                 s = utils.add_zeros(s, 2);
             }
             label += ' (' + s + ')';
         }
+        // Check for ties.
+        if ( player !== 'leader' && this.ties.indexOf(field) !== -1 ) label = 'Tie';
         return label;
     },
     button_click: function(btn) {
@@ -555,6 +574,7 @@ var chrt = {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
         chrt.build_chart();
+        chrt.check_for_ties();
         if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart_from_hash(document.location.hash.substr(1));
     },
     init: function(year) {
