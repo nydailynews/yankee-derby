@@ -8,21 +8,22 @@ import csv
 def main(args):
     """ Handle the command line.
         """
-    reader = csv.reader(open('mantle.csv', 'r'), delimiter=',')
-    rows = []
-    data = { 'HR': 0 }
-    for i, row in enumerate(reader):
-        if i == 0:
-            keys = row
-            continue
-        d = dict(zip(keys, row))
-        data['HR'] += int(d['HR'])
-        rows.append([d['Date'], data['HR']])
+    for fn in args.fns:
+        reader = csv.reader(open(fn, 'r'), delimiter=',')
+        rows = []
+        data = { 'HR': 0 }
+        for i, row in enumerate(reader):
+            if i == 0:
+                keys = row
+                continue
+            d = dict(zip(keys, row))
+            data['HR'] += int(d['HR'])
+            rows.append([d['Date'], data['HR']])
 
-    writer = csv.writer(open('new.csv', 'w'))
-    writer.writerow(['date','hrs'])
-    for row in rows:
-        writer.writerow(row)
+        writer = csv.writer(open('%s-new.csv' % fn, 'w'))
+        writer.writerow(['date','hrs'])
+        for row in rows:
+            writer.writerow(row)
 
 def build_parser(args):
     """ Handle the argparse and make it testable.
@@ -35,6 +36,7 @@ def build_parser(args):
                                         epilog='')
     parser.add_argument('-v', '--verbose', dest='verbose', default=False, action='store_true')
     parser.add_argument('-t', '--test', dest='test', default=False, action='store_true')
+    parser.add_argument(nargs='*', dest='fns', default=[])
     args = parser.parse_args(args)
     return args
 
