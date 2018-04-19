@@ -1,0 +1,872 @@
+{
+   "1961-04-11": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-12": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-13": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-14": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-15": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-16": {
+      "maris-hrs": 0,
+      "mantle-hrs": 0,
+      "maris-mantle-hrs": 0
+   },
+   "1961-04-17": {
+      "maris-hrs": 0,
+      "mantle-hrs": 1,
+      "maris-mantle-hrs": 1
+   },
+   "1961-04-18": {
+      "maris-hrs": 0,
+      "mantle-hrs": 1,
+      "maris-mantle-hrs": 1
+   },
+   "1961-04-19": {
+      "maris-hrs": 0,
+      "mantle-hrs": 1,
+      "maris-mantle-hrs": 1
+   },
+   "1961-04-20": {
+      "maris-hrs": 0,
+      "mantle-hrs": 3,
+      "maris-mantle-hrs": 3
+   },
+   "1961-04-21": {
+      "maris-hrs": 0,
+      "mantle-hrs": 4,
+      "maris-mantle-hrs": 4
+   },
+   "1961-04-22": {
+      "maris-hrs": 0,
+      "mantle-hrs": 4,
+      "maris-mantle-hrs": 4
+   },
+   "1961-04-23": {
+      "maris-hrs": 0,
+      "mantle-hrs": 5,
+      "maris-mantle-hrs": 5
+   },
+   "1961-04-24": {
+      "maris-hrs": 0,
+      "mantle-hrs": 5,
+      "maris-mantle-hrs": 5
+   },
+   "1961-04-25": {
+      "maris-hrs": 0,
+      "mantle-hrs": 5,
+      "maris-mantle-hrs": 5
+   },
+   "1961-04-26": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-04-27": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-04-28": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-04-29": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-04-30": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-05-01": {
+      "maris-hrs": 1,
+      "mantle-hrs": 7,
+      "maris-mantle-hrs": 8
+   },
+   "1961-05-02": {
+      "maris-hrs": 1,
+      "mantle-hrs": 8,
+      "maris-mantle-hrs": 9
+   },
+   "1961-05-03": {
+      "maris-hrs": 2,
+      "mantle-hrs": 8,
+      "maris-mantle-hrs": 10
+   },
+   "1961-05-04": {
+      "maris-hrs": 2,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 11
+   },
+   "1961-05-05": {
+      "maris-hrs": 2,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 11
+   },
+   "1961-05-06": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-07": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-08": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-09": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-10": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-11": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-12": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-13": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-14": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-15": {
+      "maris-hrs": 3,
+      "mantle-hrs": 9,
+      "maris-mantle-hrs": 12
+   },
+   "1961-05-16": {
+      "maris-hrs": 3,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 13
+   },
+   "1961-05-17": {
+      "maris-hrs": 4,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 14
+   },
+   "1961-05-18": {
+      "maris-hrs": 4,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 14
+   },
+   "1961-05-19": {
+      "maris-hrs": 5,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 15
+   },
+   "1961-05-20": {
+      "maris-hrs": 6,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 16
+   },
+   "1961-05-21": {
+      "maris-hrs": 7,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 17
+   },
+   "1961-05-22": {
+      "maris-hrs": 7,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 17
+   },
+   "1961-05-23": {
+      "maris-hrs": 7,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 17
+   },
+   "1961-05-24": {
+      "maris-hrs": 8,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 18
+   },
+   "1961-05-25": {
+      "maris-hrs": 8,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 18
+   },
+   "1961-05-26": {
+      "maris-hrs": 8,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 18
+   },
+   "1961-05-27": {
+      "maris-hrs": 8,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 18
+   },
+   "1961-05-28": {
+      "maris-hrs": 9,
+      "mantle-hrs": 10,
+      "maris-mantle-hrs": 19
+   },
+   "1961-05-29": {
+      "maris-hrs": 9,
+      "mantle-hrs": 11,
+      "maris-mantle-hrs": 20
+   },
+   "1961-05-30": {
+      "maris-hrs": 11,
+      "mantle-hrs": 13,
+      "maris-mantle-hrs": 24
+   },
+   "1961-05-31": {
+      "maris-hrs": 12,
+      "mantle-hrs": 14,
+      "maris-mantle-hrs": 26
+   },
+   "1961-06-01": {
+      "maris-hrs": 12,
+      "mantle-hrs": 14,
+      "maris-mantle-hrs": 26
+   },
+   "1961-06-02": {
+      "maris-hrs": 13,
+      "mantle-hrs": 14,
+      "maris-mantle-hrs": 27
+   },
+   "1961-06-03": {
+      "maris-hrs": 14,
+      "mantle-hrs": 14,
+      "maris-mantle-hrs": 28
+   },
+   "1961-06-04": {
+      "maris-hrs": 15,
+      "mantle-hrs": 14,
+      "maris-mantle-hrs": 29
+   },
+   "1961-06-05": {
+      "maris-hrs": 15,
+      "mantle-hrs": 15,
+      "maris-mantle-hrs": 30
+   },
+   "1961-06-06": {
+      "maris-hrs": 16,
+      "mantle-hrs": 15,
+      "maris-mantle-hrs": 31
+   },
+   "1961-06-07": {
+      "maris-hrs": 17,
+      "mantle-hrs": 15,
+      "maris-mantle-hrs": 32
+   },
+   "1961-06-08": {
+      "maris-hrs": 17,
+      "mantle-hrs": 15,
+      "maris-mantle-hrs": 32
+   },
+   "1961-06-09": {
+      "maris-hrs": 18,
+      "mantle-hrs": 16,
+      "maris-mantle-hrs": 34
+   },
+   "1961-06-10": {
+      "maris-hrs": 18,
+      "mantle-hrs": 17,
+      "maris-mantle-hrs": 35
+   },
+   "1961-06-11": {
+      "maris-hrs": 20,
+      "mantle-hrs": 18,
+      "maris-mantle-hrs": 38
+   },
+   "1961-06-12": {
+      "maris-hrs": 20,
+      "mantle-hrs": 18,
+      "maris-mantle-hrs": 38
+   },
+   "1961-06-13": {
+      "maris-hrs": 21,
+      "mantle-hrs": 18,
+      "maris-mantle-hrs": 39
+   },
+   "1961-06-14": {
+      "maris-hrs": 22,
+      "mantle-hrs": 18,
+      "maris-mantle-hrs": 40
+   },
+   "1961-06-15": {
+      "maris-hrs": 22,
+      "mantle-hrs": 19,
+      "maris-mantle-hrs": 41
+   },
+   "1961-06-16": {
+      "maris-hrs": 22,
+      "mantle-hrs": 19,
+      "maris-mantle-hrs": 41
+   },
+   "1961-06-17": {
+      "maris-hrs": 23,
+      "mantle-hrs": 20,
+      "maris-mantle-hrs": 43
+   },
+   "1961-06-18": {
+      "maris-hrs": 24,
+      "mantle-hrs": 20,
+      "maris-mantle-hrs": 44
+   },
+   "1961-06-19": {
+      "maris-hrs": 25,
+      "mantle-hrs": 20,
+      "maris-mantle-hrs": 45
+   },
+   "1961-06-20": {
+      "maris-hrs": 26,
+      "mantle-hrs": 20,
+      "maris-mantle-hrs": 46
+   },
+   "1961-06-21": {
+      "maris-hrs": 26,
+      "mantle-hrs": 22,
+      "maris-mantle-hrs": 48
+   },
+   "1961-06-22": {
+      "maris-hrs": 27,
+      "mantle-hrs": 22,
+      "maris-mantle-hrs": 49
+   },
+   "1961-06-23": {
+      "maris-hrs": 27,
+      "mantle-hrs": 22,
+      "maris-mantle-hrs": 49
+   },
+   "1961-06-24": {
+      "maris-hrs": 27,
+      "mantle-hrs": 22,
+      "maris-mantle-hrs": 49
+   },
+   "1961-06-25": {
+      "maris-hrs": 27,
+      "mantle-hrs": 22,
+      "maris-mantle-hrs": 49
+   },
+   "1961-06-26": {
+      "maris-hrs": 27,
+      "mantle-hrs": 23,
+      "maris-mantle-hrs": 50
+   },
+   "1961-06-27": {
+      "maris-hrs": 27,
+      "mantle-hrs": 23,
+      "maris-mantle-hrs": 50
+   },
+   "1961-06-28": {
+      "maris-hrs": 27,
+      "mantle-hrs": 24,
+      "maris-mantle-hrs": 51
+   },
+   "1961-06-29": {
+      "maris-hrs": 27,
+      "mantle-hrs": 24,
+      "maris-mantle-hrs": 51
+   },
+   "1961-06-30": {
+      "maris-hrs": 27,
+      "mantle-hrs": 25,
+      "maris-mantle-hrs": 52
+   },
+   "1961-07-01": {
+      "maris-hrs": 28,
+      "mantle-hrs": 27,
+      "maris-mantle-hrs": 55
+   },
+   "1961-07-02": {
+      "maris-hrs": 30,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 58
+   },
+   "1961-07-03": {
+      "maris-hrs": 30,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 58
+   },
+   "1961-07-04": {
+      "maris-hrs": 31,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 59
+   },
+   "1961-07-05": {
+      "maris-hrs": 32,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 60
+   },
+   "1961-07-06": {
+      "maris-hrs": 32,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 60
+   },
+   "1961-07-07": {
+      "maris-hrs": 32,
+      "mantle-hrs": 28,
+      "maris-mantle-hrs": 60
+   },
+   "1961-07-08": {
+      "maris-hrs": 32,
+      "mantle-hrs": 29,
+      "maris-mantle-hrs": 61
+   },
+   "1961-07-09": {
+      "maris-hrs": 33,
+      "mantle-hrs": 29,
+      "maris-mantle-hrs": 62
+   },
+   "1961-07-10": {
+      "maris-hrs": 33,
+      "mantle-hrs": 29,
+      "maris-mantle-hrs": 62
+   },
+   "1961-07-11": {
+      "maris-hrs": 33,
+      "mantle-hrs": 29,
+      "maris-mantle-hrs": 62
+   },
+   "1961-07-12": {
+      "maris-hrs": 33,
+      "mantle-hrs": 29,
+      "maris-mantle-hrs": 62
+   },
+   "1961-07-13": {
+      "maris-hrs": 34,
+      "mantle-hrs": 30,
+      "maris-mantle-hrs": 64
+   },
+   "1961-07-14": {
+      "maris-hrs": 34,
+      "mantle-hrs": 31,
+      "maris-mantle-hrs": 65
+   },
+   "1961-07-15": {
+      "maris-hrs": 35,
+      "mantle-hrs": 31,
+      "maris-mantle-hrs": 66
+   },
+   "1961-07-16": {
+      "maris-hrs": 35,
+      "mantle-hrs": 32,
+      "maris-mantle-hrs": 67
+   },
+   "1961-07-17": {
+      "maris-hrs": 35,
+      "mantle-hrs": 33,
+      "maris-mantle-hrs": 68
+   },
+   "1961-07-18": {
+      "maris-hrs": 35,
+      "mantle-hrs": 35,
+      "maris-mantle-hrs": 70
+   },
+   "1961-07-19": {
+      "maris-hrs": 35,
+      "mantle-hrs": 36,
+      "maris-mantle-hrs": 71
+   },
+   "1961-07-20": {
+      "maris-hrs": 35,
+      "mantle-hrs": 36,
+      "maris-mantle-hrs": 71
+   },
+   "1961-07-21": {
+      "maris-hrs": 36,
+      "mantle-hrs": 37,
+      "maris-mantle-hrs": 73
+   },
+   "1961-07-22": {
+      "maris-hrs": 36,
+      "mantle-hrs": 37,
+      "maris-mantle-hrs": 73
+   },
+   "1961-07-23": {
+      "maris-hrs": 36,
+      "mantle-hrs": 37,
+      "maris-mantle-hrs": 73
+   },
+   "1961-07-24": {
+      "maris-hrs": 36,
+      "mantle-hrs": 37,
+      "maris-mantle-hrs": 73
+   },
+   "1961-07-25": {
+      "maris-hrs": 40,
+      "mantle-hrs": 38,
+      "maris-mantle-hrs": 78
+   },
+   "1961-07-26": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-07-27": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-07-28": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-07-29": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-07-30": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-07-31": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-08-01": {
+      "maris-hrs": 40,
+      "mantle-hrs": 39,
+      "maris-mantle-hrs": 79
+   },
+   "1961-08-02": {
+      "maris-hrs": 40,
+      "mantle-hrs": 40,
+      "maris-mantle-hrs": 80
+   },
+   "1961-08-03": {
+      "maris-hrs": 40,
+      "mantle-hrs": 40,
+      "maris-mantle-hrs": 80
+   },
+   "1961-08-04": {
+      "maris-hrs": 41,
+      "mantle-hrs": 40,
+      "maris-mantle-hrs": 81
+   },
+   "1961-08-05": {
+      "maris-hrs": 41,
+      "mantle-hrs": 40,
+      "maris-mantle-hrs": 81
+   },
+   "1961-08-06": {
+      "maris-hrs": 41,
+      "mantle-hrs": 43,
+      "maris-mantle-hrs": 84
+   },
+   "1961-08-07": {
+      "maris-hrs": 41,
+      "mantle-hrs": 43,
+      "maris-mantle-hrs": 84
+   },
+   "1961-08-08": {
+      "maris-hrs": 41,
+      "mantle-hrs": 43,
+      "maris-mantle-hrs": 84
+   },
+   "1961-08-09": {
+      "maris-hrs": 41,
+      "mantle-hrs": 43,
+      "maris-mantle-hrs": 84
+   },
+   "1961-08-10": {
+      "maris-hrs": 41,
+      "mantle-hrs": 43,
+      "maris-mantle-hrs": 84
+   },
+   "1961-08-11": {
+      "maris-hrs": 42,
+      "mantle-hrs": 44,
+      "maris-mantle-hrs": 86
+   },
+   "1961-08-12": {
+      "maris-hrs": 43,
+      "mantle-hrs": 44,
+      "maris-mantle-hrs": 87
+   },
+   "1961-08-13": {
+      "maris-hrs": 45,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 90
+   },
+   "1961-08-14": {
+      "maris-hrs": 45,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 90
+   },
+   "1961-08-15": {
+      "maris-hrs": 46,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 91
+   },
+   "1961-08-16": {
+      "maris-hrs": 48,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 93
+   },
+   "1961-08-17": {
+      "maris-hrs": 48,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 93
+   },
+   "1961-08-18": {
+      "maris-hrs": 48,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 93
+   },
+   "1961-08-19": {
+      "maris-hrs": 48,
+      "mantle-hrs": 45,
+      "maris-mantle-hrs": 93
+   },
+   "1961-08-20": {
+      "maris-hrs": 49,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 95
+   },
+   "1961-08-21": {
+      "maris-hrs": 49,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 95
+   },
+   "1961-08-22": {
+      "maris-hrs": 50,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 96
+   },
+   "1961-08-23": {
+      "maris-hrs": 50,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 96
+   },
+   "1961-08-24": {
+      "maris-hrs": 50,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 96
+   },
+   "1961-08-25": {
+      "maris-hrs": 50,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 96
+   },
+   "1961-08-26": {
+      "maris-hrs": 51,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 97
+   },
+   "1961-08-27": {
+      "maris-hrs": 51,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 97
+   },
+   "1961-08-28": {
+      "maris-hrs": 51,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 97
+   },
+   "1961-08-29": {
+      "maris-hrs": 51,
+      "mantle-hrs": 46,
+      "maris-mantle-hrs": 97
+   },
+   "1961-08-30": {
+      "maris-hrs": 51,
+      "mantle-hrs": 47,
+      "maris-mantle-hrs": 98
+   },
+   "1961-08-31": {
+      "maris-hrs": 51,
+      "mantle-hrs": 48,
+      "maris-mantle-hrs": 99
+   },
+   "1961-09-01": {
+      "maris-hrs": 51,
+      "mantle-hrs": 48,
+      "maris-mantle-hrs": 99
+   },
+   "1961-09-02": {
+      "maris-hrs": 53,
+      "mantle-hrs": 48,
+      "maris-mantle-hrs": 101
+   },
+   "1961-09-03": {
+      "maris-hrs": 53,
+      "mantle-hrs": 50,
+      "maris-mantle-hrs": 103
+   },
+   "1961-09-04": {
+      "maris-hrs": 53,
+      "mantle-hrs": 50,
+      "maris-mantle-hrs": 103
+   },
+   "1961-09-05": {
+      "maris-hrs": 53,
+      "mantle-hrs": 51,
+      "maris-mantle-hrs": 104
+   },
+   "1961-09-06": {
+      "maris-hrs": 54,
+      "mantle-hrs": 51,
+      "maris-mantle-hrs": 105
+   },
+   "1961-09-07": {
+      "maris-hrs": 55,
+      "mantle-hrs": 51,
+      "maris-mantle-hrs": 106
+   },
+   "1961-09-08": {
+      "maris-hrs": 55,
+      "mantle-hrs": 52,
+      "maris-mantle-hrs": 107
+   },
+   "1961-09-09": {
+      "maris-hrs": 56,
+      "mantle-hrs": 52,
+      "maris-mantle-hrs": 108
+   },
+   "1961-09-10": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-11": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-12": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-13": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-14": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-15": {
+      "maris-hrs": 56,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 109
+   },
+   "1961-09-16": {
+      "maris-hrs": 57,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 110
+   },
+   "1961-09-17": {
+      "maris-hrs": 58,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 111
+   },
+   "1961-09-18": {
+      "maris-hrs": 58,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 111
+   },
+   "1961-09-19": {
+      "maris-hrs": 58,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 111
+   },
+   "1961-09-20": {
+      "maris-hrs": 59,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 112
+   },
+   "1961-09-21": {
+      "maris-hrs": 59,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 112
+   },
+   "1961-09-22": {
+      "maris-hrs": 59,
+      "mantle-hrs": 53,
+      "maris-mantle-hrs": 112
+   },
+   "1961-09-23": {
+      "maris-hrs": 59,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 113
+   },
+   "1961-09-24": {
+      "maris-hrs": 59,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 113
+   },
+   "1961-09-25": {
+      "maris-hrs": 59,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 113
+   },
+   "1961-09-26": {
+      "maris-hrs": 60,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 114
+   },
+   "1961-09-27": {
+      "maris-hrs": 60,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 114
+   },
+   "1961-09-28": {
+      "maris-hrs": 60,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 114
+   },
+   "1961-09-29": {
+      "maris-hrs": 60,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 114
+   },
+   "1961-09-30": {
+      "maris-hrs": 60,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 114
+   },
+   "1961-10-01": {
+      "maris-hrs": 61,
+      "mantle-hrs": 54,
+      "maris-mantle-hrs": 115
+   }
+}

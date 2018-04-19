@@ -476,13 +476,48 @@ var chrt = {
         // Load a particular chart. This is a wrapper function used when someone permalinks a chart.
         // Options: stat-hrs / stat-rbis / stat-avg / stat-ops
         var bits = hash.split('-');
-        this.load_chart(bits[1]);
+        var type = bits[1];
+        if ( bits.length > 2 ) type = bits.slice(1).join('-');
+        console.log("TYPE", type);
+        this.load_chart(type);
         document.getElementById('avg').setAttribute('class', '');
-        document.getElementById(bits[1]).setAttribute('class', 'active');
+        document.getElementById(type).setAttribute('class', 'active');
         window.setTimeout(function() { document.getElementById('bottom-chart').scrollIntoView() }, 1000);
+    },
+    build_maris_mantle_comparison: function() {
+        // Put together the home run data from the two sluggers we need to compare
+        // against the Maris / Mantle home run totals.
+        // Also, adjust the Maris / Mantle dates to be comparable against Stanton / Judge.
+        //
+        // The maris-mantle data is in chrt.data, and is keyed to the dates.
+        // The slugger data is in stats.data.
+        // We want to return a new array.
+        var data = [];
+        var a1 = chrt.data;
+        var a2 = stats.data;
+        var l = a2.length;
+        var stanton_judge = 0;
+        var maris_mantle = 0;
+        for ( var i = 0; i < l; i ++ ) {
+            // Yes, if the array is undefined we take whatever was the previous value and use that.
+            if ( typeof a2[i] !== 'undefined' ) {
+                stanton_judge = +a2[i]['stanton-hrs'] + +a2[i]['judge-hrs'];
+                date_1961 = a2[i]['date'].replace('2018', '1961');
+            }
+            console.log(date_1961);
+            if ( date_1961 in a1 ) maris_mantle = a1[date_1961]['maris-mantle-hrs'];
+            var record = {
+                date: a2[i]['date'],
+				'stanton_judge-hrs': stanton_judge,
+				'maris_mantle-hrs': maris_mantle
+            };
+            data.push(record);
+        }
+        return data;
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
+        if ( type == null ) type = 'maris-mantle';
         if ( type == null ) type = 'avg';
         chrt.type = type;
         var margin = { 'left': 50, 'top': 10 };
@@ -491,7 +526,7 @@ var chrt = {
 
         var x = d3.scaleTime().range([0, width]),
             y = d3.scaleLinear().range([height, 0])
-            z = d3.scaleOrdinal().domain(stats.data).range([ '#003087', '#E4002C', '#aaa']);
+            z = d3.scaleOrdinal().domain(stats.data).range(['#003087', '#E4002C', '#aaa']);
 
 		// y-axis tick text formatting
         var s = d3.formatSpecifier("f");
@@ -499,7 +534,6 @@ var chrt = {
 		if ( type === 'avg' || type === 'ops' ) s.precision = d3.precisionFixed(0.001);
         var ticks = y.ticks(10),
             tickFormat = y.tickFormat(10, s);
-        //console.log(s, tickFormat,ticks.map(tickFormat));
 
         var line = d3.line()
             //.curve(d3.curveBasis)
@@ -508,6 +542,7 @@ var chrt = {
         var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         var data = stats.data;
+        if ( type == 'maris-mantle' ) data = this.build_maris_mantle_comparison();
         var keys = Object.keys(data[0]).slice(1);
         var slugger_stats = keys.map(function(id) {
             // Zero out the chart values for the inactive fields
@@ -583,7 +618,7 @@ var chrt = {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 160);
         else this.season_dates = season_dates_all.splice(0, 30);
-        utils.get_json('static/maris-mantle-1961.json', chrt, this.on_load);
+        utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
 }
 var season_dates_all = ['2018-03-29', '2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03', '2018-04-04', '2018-04-05', '2018-04-06', '2018-04-07', '2018-04-08', '2018-04-09', '2018-04-10', '2018-04-11', '2018-04-12', '2018-04-13', '2018-04-14', '2018-04-15', '2018-04-16', '2018-04-17', '2018-04-18', '2018-04-19', '2018-04-20', '2018-04-21', '2018-04-22', '2018-04-23', '2018-04-24', '2018-04-25', '2018-04-26', '2018-04-27', '2018-04-28', '2018-04-29', '2018-04-30', '2018-05-01', '2018-05-02', '2018-05-03', '2018-05-04', '2018-05-05', '2018-05-06', '2018-05-07', '2018-05-08', '2018-05-09', '2018-05-10', '2018-05-11', '2018-05-12', '2018-05-13', '2018-05-14', '2018-05-15', '2018-05-16', '2018-05-17', '2018-05-18', '2018-05-19', '2018-05-20', '2018-05-21', '2018-05-22', '2018-05-23', '2018-05-24', '2018-05-25', '2018-05-26', '2018-05-27', '2018-05-28', '2018-05-29', '2018-05-30', '2018-05-31', '2018-06-01', '2018-06-02', '2018-06-03', '2018-06-04', '2018-06-05', '2018-06-06', '2018-06-07', '2018-06-08', '2018-06-09', '2018-06-10', '2018-06-11', '2018-06-12', '2018-06-13', '2018-06-14', '2018-06-15', '2018-06-16', '2018-06-17', '2018-06-18', '2018-06-19', '2018-06-20', '2018-06-21', '2018-06-22', '2018-06-23', '2018-06-24', '2018-06-25', '2018-06-26', '2018-06-27', '2018-06-28', '2018-06-29', '2018-06-30', '2018-07-01', '2018-07-02', '2018-07-03', '2018-07-04', '2018-07-05', '2018-07-06', '2018-07-07', '2018-07-08', '2018-07-09', '2018-07-10', '2018-07-11', '2018-07-12', '2018-07-13', '2018-07-14', '2018-07-15', '2018-07-16', '2018-07-17', '2018-07-18', '2018-07-19', '2018-07-20', '2018-07-21', '2018-07-22', '2018-07-23', '2018-07-24', '2018-07-25', '2018-07-26', '2018-07-27', '2018-07-28', '2018-07-29', '2018-07-30', '2018-07-31', '2018-08-01', '2018-08-02', '2018-08-03', '2018-08-04', '2018-08-05', '2018-08-06', '2018-08-07', '2018-08-08', '2018-08-09', '2018-08-10', '2018-08-11', '2018-08-12', '2018-08-13', '2018-08-14', '2018-08-15', '2018-08-16', '2018-08-17', '2018-08-18', '2018-08-19', '2018-08-20', '2018-08-21', '2018-08-22', '2018-08-23', '2018-08-24', '2018-08-25', '2018-08-26', '2018-08-27', '2018-08-28', '2018-08-29', '2018-08-30', '2018-08-31', '2018-09-01', '2018-09-02', '2018-09-03', '2018-09-04', '2018-09-05', '2018-09-06', '2018-09-07', '2018-09-08', '2018-09-09', '2018-09-10', '2018-09-11', '2018-09-12', '2018-09-13', '2018-09-14', '2018-09-15', '2018-09-16', '2018-09-17', '2018-09-18', '2018-09-19', '2018-09-20', '2018-09-21', '2018-09-22', '2018-09-23', '2018-09-24', '2018-09-25', '2018-09-26', '2018-09-27', '2018-09-28', '2018-09-29', '2018-09-30'];
