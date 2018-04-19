@@ -387,26 +387,29 @@ var chrt = {
         judge: 'Judge',
         stanton: 'Stanton',
         leader: 'MLB leader',
-        'judge-stanton': 'Judge & Stanton',
-        'maris-mantle': 'Maris & Mantle'
+        'stanton_judge': 'Judge & Stanton',
+        'maris_mantle': 'Maris & Mantle'
     },
     type_key: {
         hrs: 'home runs',
         rbis: 'RBIs',
         avg: 'batting average',
-        ops: 'OPS'
+        ops: 'OPS',
+        'maris-mantle': 'home runs'
     },
     type_key_axis: {
         hrs: 'Home runs',
         rbis: 'RBIs',
         avg: 'Batting average',
-        ops: 'On-base plus slugging'
+        ops: 'On-base plus slugging',
+        'maris-mantle': 'Home runs'
     },
     y_axis_key_offset: {
         hrs: 50,
         rbis: 25,
         avg: 70,
-        ops: 100 
+        ops: 100,
+        'maris-mantle': 50
     },
     y_max: {
         avg: 1,
@@ -435,6 +438,8 @@ var chrt = {
         var bits = slug.split('-');
         var player = bits[0];
         var field = bits[1];
+        if ( bits.length > 2 ) field = bits.slice(1).join('-'); // This is for fields that have dashes in them, we've got one of those it's just the way it worked out.
+        console.log(player, field);
         var label = this.player_key[player] + ' ' + this.type_key[field];
         if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
             // Special treatment goes here
@@ -484,6 +489,11 @@ var chrt = {
         document.getElementById(type).setAttribute('class', 'active');
         window.setTimeout(function() { document.getElementById('bottom-chart').scrollIntoView() }, 1000);
     },
+    build_maris_mantle_caption: function() {
+        // Write a custom caption for the Maris & Mantle chart
+        var el = document.querySelector('#bottom-chart p');
+        el.textContent = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14) against the Stanton & Judge home run totals for this season.';
+    },
     build_maris_mantle_comparison: function() {
         // Put together the home run data from the two sluggers we need to compare
         // against the Maris / Mantle home run totals.
@@ -492,6 +502,7 @@ var chrt = {
         // The maris-mantle data is in chrt.data, and is keyed to the dates.
         // The slugger data is in stats.data.
         // We want to return a new array.
+        this.build_maris_mantle_caption();
         var data = [];
         var a1 = chrt.data;
         var a2 = stats.data;
@@ -504,12 +515,11 @@ var chrt = {
                 stanton_judge = +a2[i]['stanton-hrs'] + +a2[i]['judge-hrs'];
                 date_1961 = a2[i]['date'].replace('2018', '1961');
             }
-            console.log(date_1961);
             if ( date_1961 in a1 ) maris_mantle = a1[date_1961]['maris-mantle-hrs'];
             var record = {
                 date: a2[i]['date'],
-				'stanton_judge-hrs': stanton_judge,
-				'maris_mantle-hrs': maris_mantle
+				'stanton_judge-maris-mantle': stanton_judge,
+				'maris_mantle-maris-mantle': maris_mantle
             };
             data.push(record);
         }
@@ -542,7 +552,7 @@ var chrt = {
         var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         var data = stats.data;
-        if ( type == 'maris-mantle' ) data = this.build_maris_mantle_comparison();
+        if ( type === 'maris-mantle' ) data = this.build_maris_mantle_comparison();
         var keys = Object.keys(data[0]).slice(1);
         var slugger_stats = keys.map(function(id) {
             // Zero out the chart values for the inactive fields

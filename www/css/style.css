@@ -164,7 +164,7 @@ article tbody th {
 
 article p {
     font: normal 18px 'PT Serif', serif;
-    text-align: center;
+    text-align: left;
     margin: auto;
     margin-bottom: 10px;
     width: 80%;
