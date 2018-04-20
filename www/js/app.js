@@ -25,6 +25,13 @@ var utils = {
         var d = new Date().getDate();
         return d % +max;
     },
+    get_rando_by_day: function(arr) {
+        // Given an array, return a random item from it based on today's date.
+        var l = arr.length;
+        var index = this.rando_by_day(l);
+        console.log(arr[index], index, arr);
+        return arr[index];
+    },
     add_zero: function(i) {
         // For values less than 10, return a zero-prefixed version of that value.
         if ( +i < 10 ) return "0" + i;
@@ -312,12 +319,12 @@ var pg = {
             // Descriptors
             diff_measure = this.measure_diff(stat, diff);
             if ( stat == 'avg' ) {
-                var desc = this.descriptors['one-word'][diff_measure][0];
+                var desc = utils.get_rando_by_day(this.descriptors['one-word'][diff_measure]);
                 if ( desc !== '' ) desc = 'a ' + desc;
                 document.getElementById(stat + '-desc').textContent = desc;
             }
             else if ( stat == 'ops' || stat == 'hrs' ) {
-                var desc = this.descriptors['phrase'][diff_measure][0];
+                var desc = utils.get_rando_by_day(this.descriptors['phrase'][diff_measure]);
                 document.getElementById(stat + '-desc').textContent = desc;
             }
 
@@ -445,7 +452,6 @@ var chrt = {
         var player = bits[0];
         var field = bits[1];
         if ( bits.length > 2 ) field = bits.slice(1).join('-'); // This is for fields that have dashes in them, we've got one of those it's just the way it worked out.
-        console.log(player, field);
         var label = this.player_key[player] + ' ' + this.type_key[field];
         if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
             // Special treatment goes here
@@ -489,7 +495,6 @@ var chrt = {
         var bits = hash.split('-');
         var type = bits[1];
         if ( bits.length > 2 ) type = bits.slice(1).join('-');
-        console.log("TYPE", type);
         this.load_chart(type);
         document.getElementById('avg').setAttribute('class', '');
         document.getElementById(type).setAttribute('class', 'active');
@@ -533,7 +538,6 @@ var chrt = {
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
-        if ( type == null ) type = 'maris-mantle';
         if ( type == null ) type = 'avg';
         chrt.type = type;
         var margin = { 'left': 50, 'top': 10 };
