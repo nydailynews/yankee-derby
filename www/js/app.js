@@ -29,7 +29,6 @@ var utils = {
         // Given an array, return a random item from it based on today's date.
         var l = arr.length;
         var index = this.rando_by_day(l);
-        console.log(arr[index], index, arr);
         return arr[index];
     },
     add_zero: function(i) {
@@ -215,15 +214,6 @@ var pg = {
             ['is crushing in'],
         ],
         'yikes': [['yikes', 'ouch', 'ugh', 'oof',]]
-    },
-    rando_descriptor(field, index, seed) {
-        // Returns a random descriptor for descriptor fields that have multiple options.
-        // This is based on a seed plus the date, so the descriptor will be the same for a whole day.
-        if ( typeof seed === 'undefined' ) var seed = 0;
-        var l = this.descriptors[field][index].length;
-        var day_seed = new Date().getDate();
-
-
     },
     measure_diff: function(stat, diff) {
         // Take a stat and the difference between the two stats.
