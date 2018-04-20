@@ -19,6 +19,12 @@ var utils = {
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
     },
+    rando_by_day: function(max) {
+        // Generate a semi-random integer from zero to the max argument,
+        // based on what the date is.
+        var d = new Date().getDate();
+        return d % +max;
+    },
     add_zero: function(i) {
         // For values less than 10, return a zero-prefixed version of that value.
         if ( +i < 10 ) return "0" + i;
