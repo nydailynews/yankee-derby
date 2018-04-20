@@ -197,9 +197,9 @@ var pg = {
             ['narrow', 'slight', 'slim'],
             ['smallish', 'small', ''],
             ['respectable', 'healthy', 'decent', 'measurable'],
-            ['sizable', 'significant', ''],
-            ['meaty', 'monstrous', 'major'],
-            ],
+            ['sizable', 'significant', 'whopping', 'monster', 'meaty', ''],
+            ['gigantic', 'monstrous', 'gargantuan'],
+        ],
         'phrase': [
             [', but just barely,'],
             [' by a small margin,'],
@@ -209,8 +209,8 @@ var pg = {
         ],
         'lead': [
             ['is winning'],
-            ['leads in'],
-            ['holds a healthy advantage in'],
+            ['leads in', 'is ahead in'],
+            ['holds a healthy advantage in', 'is definitely winning', 'has a strong lead in'],
             ['dominates'],
             ['is crushing in'],
         ],
@@ -366,7 +366,7 @@ var pg = {
         var leader = 'Judge';
         if ( this.scoreboard['Stanton'] > this.scoreboard['Judge'] ) leader = 'Stanton';
         var diff_measure = this.measure_diff('diff', this.diff_scoreboard[leader]);
-        document.getElementById('desc').textContent = this.descriptors['lead'][diff_measure];
+        document.getElementById('desc').textContent = utils.get_rando_by_day(this.descriptors['lead'][diff_measure]);
         document.getElementById('leader').textContent = this.full_names[leader];
         return true;
     },
