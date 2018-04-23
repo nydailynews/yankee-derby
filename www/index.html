@@ -211,9 +211,9 @@
                 <figure>
                     <svg id="daily"></svg>
                     <figcaption></figcaption>
-                    <button id="hrs" onClick="chrt.button_click(this);">Home Runs</button>
+                    <button class="active" id="hrs" onClick="chrt.button_click(this);">Home Runs</button>
                     <button id="rbis" onClick="chrt.button_click(this);">RBIs</button>
-                    <button class="active" id="avg" onClick="chrt.button_click(this);">Batting Average</button>
+                    <button id="avg" onClick="chrt.button_click(this);">Batting Average</button>
                     <button id="ops" onClick="chrt.button_click(this);">OPS</button>
                     <!--
                     <button id="maris-mantle" onClick="chrt.button_click(this);">Maris &amp; Mantle</button>
@@ -223,6 +223,7 @@
         </div>
         <p class="latest-news"><a href="http://www.nydailynews.com/sports/baseball/yankees">YANKEES NEWS</a>: <strong id="latest-news-headline"></strong></p>
         <script onload="document.getElementById('latest-news-headline').innerHTML=hed;" src="//interactive.nydailynews.com/feeds/tag-yankees-1.js"></script>
+        <p class="latest-news">MORE: <a href="http://www.nydailynews.com/sports/baseball/yankees/yankees-injury-tracker-2018-article-1.3926317">Yankees injury tracker 2018</a></p>
 
         <p class="byline deemphasize">Interactive by <a href="http://www.nydailynews.com/sports">Daily News Sports</a>, Kelli R. Parker, Joe Murphy and Steve Smirti</p>
     </article>

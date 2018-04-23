@@ -528,7 +528,7 @@ var chrt = {
     },
     build_chart: function(type) {
         // Adapted from https://bl.ocks.org/mbostock/3884955
-        if ( type == null ) type = 'avg';
+        if ( type == null ) type = 'hrs';
         chrt.type = type;
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
@@ -627,7 +627,7 @@ var chrt = {
     init: function(year) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 160);
-        else this.season_dates = season_dates_all.splice(0, 30);
+        else this.season_dates = season_dates_all.splice(0, 60);
         utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
 }
