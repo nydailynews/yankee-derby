@@ -90,7 +90,7 @@ article {
     max-width: 600px;
 }
 
-#stats p {
+#stats p, figcaption {
     font-family: 'PT Serif', serif;
 	font-display: optional;
     font-size: 25px;
@@ -100,6 +100,11 @@ article {
     width: 100%;
 }
 
+figcaption {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
 i.em span { display: none; }
 .em-comet {
     transform: rotate(270deg) scaleX(-1);
