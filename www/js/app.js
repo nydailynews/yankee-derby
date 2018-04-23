@@ -486,9 +486,26 @@ var chrt = {
         var type = bits[1];
         if ( bits.length > 2 ) type = bits.slice(1).join('-');
         this.load_chart(type);
-        document.getElementById('avg').setAttribute('class', '');
+        document.getElementById('hrs').setAttribute('class', '');
         document.getElementById(type).setAttribute('class', 'active');
         window.setTimeout(function() { document.getElementById('bottom-chart').scrollIntoView() }, 1000);
+    },
+    figcaption: {
+        hrs: '',
+        rbis: '',
+        avg: '',
+        ops: '',
+        'maris-mantle': ''
+    },
+    build_figcaption: function() {
+        // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
+        var el = document.querySelector('figure figcaption');
+        // ** TODO: Make sure the current field isn't a tie.
+        var markup_raw = document.getElementById(this.type + '-has-leader').innerHTML;
+        markup = markup_raw.replace('Stanton', 'Giancarlo Stanton');
+        markup = markup.replace('Judge', 'Aaron Judge');
+        el.innerHTML = markup;
+        // ** TODO: Write a blurb about how far they are off of the MLB leader.
     },
     build_maris_mantle_caption: function() {
         // Write a custom caption for the Maris & Mantle chart
@@ -530,6 +547,7 @@ var chrt = {
         // Adapted from https://bl.ocks.org/mbostock/3884955
         if ( type == null ) type = 'hrs';
         chrt.type = type;
+        //this.build_figcaption();
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
         var height = 370;
