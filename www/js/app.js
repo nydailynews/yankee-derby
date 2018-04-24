@@ -501,9 +501,11 @@ var chrt = {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
         var el = document.querySelector('figure figcaption');
         // ** TODO: Make sure the current field isn't a tie.
-        var markup_raw = document.getElementById(this.type + '-has-leader').innerHTML;
+        var markup_raw = document.getElementById(this.type + '-has-leader').textContent;
         markup = markup_raw.replace('Stanton', 'Giancarlo Stanton');
         markup = markup.replace('Judge', 'Aaron Judge');
+        markup = markup.replace(', and', '.');
+        markup = markup.replace('in OPS', 'In OPS');
         el.innerHTML = markup;
         // ** TODO: Write a blurb about how far they are off of the MLB leader.
     },
@@ -547,7 +549,7 @@ var chrt = {
         // Adapted from https://bl.ocks.org/mbostock/3884955
         if ( type == null ) type = 'hrs';
         chrt.type = type;
-        //this.build_figcaption();
+        this.build_figcaption();
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
         var height = 370;
