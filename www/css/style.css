@@ -104,6 +104,7 @@ figcaption {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 30px;
 }
 i.em span { display: none; }
 .em-comet {
@@ -222,6 +223,12 @@ figure button {
 }
 @media only screen and (min-width: 250px) and (max-width: 727px) {
 
+    article p {
+        width: 100%;
+    }
+    #bottom-chart p, figcaption {
+        margin: 10px;
+    }
     .grid-wrapper{
         display: block;
     }
