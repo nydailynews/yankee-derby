@@ -318,8 +318,8 @@ var pg = {
                 document.getElementById(stat + '-desc').textContent = desc;
             }
 
-			// Sometimes if the batting average is really low we comment on that.
-			if ( stat == 'avg' ) {
+            // Sometimes if the batting average is really low we comment on that.
+            if ( stat == 'avg' ) {
                 //if ( numbers[leader] < .2 ) document.getElementById('avg-leader-yikes').textContent = 
                 //if ( numbers[follower] < .2 ) console.log('ya');
             }
@@ -503,8 +503,8 @@ var chrt = {
         var tt = tweet_text.trim().slice(0, -1).replace(/ +(?= )/g, '');
         tt = tt.replace('Giancarlo Stanton', '@Giancarlo818');
         tt = tt.replace('Aaron Judge', '@TheJudge44');
-		tt = tt.replace(/(\r\n\t|\n|\r\t)/gm, '');
-		tt = tt.replace(/  +/gm, ' ');
+        tt = tt.replace(/(\r\n\t|\n|\r\t)/gm, '');
+        tt = tt.replace(/  +/gm, ' ');
         tt = 'YANKEES SLUGGER TRACKER: ' + tt;
         tt = escape(tt);
         var url = document.location.href;
@@ -552,8 +552,8 @@ var chrt = {
             if ( date_1961 in a1 ) maris_mantle = a1[date_1961]['maris-mantle-hrs'];
             var record = {
                 date: a2[i]['date'],
-				'stanton_judge-maris-mantle': stanton_judge,
-				'maris_mantle-maris-mantle': maris_mantle
+                'stanton_judge-maris-mantle': stanton_judge,
+                'maris_mantle-maris-mantle': maris_mantle
             };
             data.push(record);
         }
@@ -572,10 +572,10 @@ var chrt = {
             y = d3.scaleLinear().range([height, 0])
             z = d3.scaleOrdinal().domain(stats.data).range(['#003087', '#E4002C', '#aaa']);
 
-		// y-axis tick text formatting
+        // y-axis tick text formatting
         var s = d3.formatSpecifier("f");
-		s.precision = d3.precisionFixed(0);
-		if ( type === 'avg' || type === 'ops' ) s.precision = d3.precisionFixed(0.001);
+        s.precision = d3.precisionFixed(0);
+        if ( type === 'avg' || type === 'ops' ) s.precision = d3.precisionFixed(0.001);
         var ticks = y.ticks(10),
             tickFormat = y.tickFormat(10, s);
 
