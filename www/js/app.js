@@ -501,12 +501,14 @@ var chrt = {
         // Return markup suitable for a "TWEET THIS" link.
         // Markup will generally look like: <a target="_blank" href="https://twitter.com/intent/tweet?text=Here's something cool&url=http://interactive.nydailynews.com/&via=NYDNi&related=nydailynews,NYDNi">Tweet</a>
         var tt = tweet_text.trim().slice(0, -1).replace(/ +(?= )/g, '');
-		tt = tt.replace(/(\r\n\t|\n|\r\t)/gm,"");
+        tt = tt.replace('Giancarlo Stanton', '@Giancarlo818');
+        tt = tt.replace('Aaron Judge', '@TheJudge44');
+		tt = tt.replace(/(\r\n\t|\n|\r\t)/gm, '');
+		tt = tt.replace(/  +/gm, ' ');
         tt = 'YANKEES SLUGGER TRACKER: ' + tt;
-        tt = tt.replace(/ /g, '%20');
-        tt = tt.replace('%20%20', '%20');
-        tt = encodeURI(tt);
+        tt = escape(tt);
         var url = document.location.href;
+        //url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
         return '<a target="_blank" href="https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '&via=NYDNi&related=NYDNSports,NYDNi">' + link_text + '</a>';
     },
     build_figcaption: function() {
