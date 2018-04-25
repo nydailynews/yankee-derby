@@ -506,10 +506,13 @@ var chrt = {
         tt = tt.replace(/(\r\n\t|\n|\r\t)/gm, '');
         tt = tt.replace(/  +/gm, ' ');
         tt = 'YANKEES SLUGGER TRACKER: ' + tt;
-        tt = escape(tt);
+        tt = encodeURI(tt);
         var url = document.location.href;
         //url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
-        return '<a target="_blank" href="https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '&via=NYDNi&related=NYDNSports,NYDNi">' + link_text + '</a>';
+        var href = 'https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '&via=NYDNi&related=NYDNSports,NYDNi';
+        //var href = 'https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '';
+
+        return '<a target="_blank" href="' + href + '">' + link_text + '</a>';
     },
     build_figcaption: function() {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
