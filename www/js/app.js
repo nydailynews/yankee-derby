@@ -497,6 +497,18 @@ var chrt = {
         ops: '',
         'maris-mantle': ''
     },
+    build_tweet: function(link_text, tweet_text) {
+        // Return markup suitable for a "TWEET THIS" link.
+        // Markup will generally look like: <a target="_blank" href="https://twitter.com/intent/tweet?text=Here's something cool&url=http://interactive.nydailynews.com/&via=NYDNi&related=nydailynews,NYDNi">Tweet</a>
+        var tt = tweet_text.trim().slice(0, -1).replace(/ +(?= )/g, '');
+		tt = tt.replace(/(\r\n\t|\n|\r\t)/gm,"");
+        tt = 'YANKEES SLUGGER TRACKER: ' + tt;
+        tt = tt.replace(/ /g, '%20');
+        tt = tt.replace('%20%20', '%20');
+        tt = encodeURI(tt);
+        var url = document.location.href;
+        return '<a target="_blank" href="https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '&via=NYDNi&related=NYDNSports,NYDNi">' + link_text + '</a>';
+    },
     build_figcaption: function() {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
         var el = document.querySelector('figure figcaption');
@@ -506,7 +518,7 @@ var chrt = {
         markup = markup.replace('Judge', 'Aaron Judge');
         markup = markup.replace(', and', '.');
         markup = markup.replace('in OPS', 'In OPS');
-        el.innerHTML = markup;
+        el.innerHTML = markup + this.build_tweet('⬅️ <em>tweet this</em>', markup);
         // ** TODO: Write a blurb about how far they are off of the MLB leader.
     },
     build_maris_mantle_caption: function() {
