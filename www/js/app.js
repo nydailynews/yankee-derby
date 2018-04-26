@@ -507,7 +507,7 @@ var chrt = {
         tt = tt.replace(/  +/gm, ' ');
         tt = 'YANKEES SLUGGER TRACKER: ' + tt;
         tt = encodeURI(tt);
-        var url = document.location.href;
+        var url = document.location.origin + document.location.pathname;
         //url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
         var href = 'https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '&via=NYDNi&related=NYDNSports,NYDNi';
         //var href = 'https://twitter.com/intent/tweet?text=' + tt + '&url=' + url + '';
