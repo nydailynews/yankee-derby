@@ -518,6 +518,7 @@ var chrt = {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
         var el = document.querySelector('figure figcaption');
         // ** TODO: Make sure the current field isn't a tie.
+        if ( this.type.indexOf('mantle') !== -1 ) return this.build_maris_mantle_caption();
         var markup_raw = document.getElementById(this.type + '-has-leader').textContent;
         markup = markup_raw.replace('Stanton', 'Giancarlo Stanton');
         markup = markup.replace('Judge', 'Aaron Judge');
@@ -529,7 +530,10 @@ var chrt = {
     build_maris_mantle_caption: function() {
         // Write a custom caption for the Maris & Mantle chart
         var el = document.querySelector('#bottom-chart p');
-        el.textContent = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14) against the Stanton & Judge home run totals for this season.';
+        var caption = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14) against the Stanton & Judge home run totals for this season.';
+        el.textContent = caption;
+        var el = document.querySelector('figure figcaption');
+        el.textContent = caption;
     },
     build_maris_mantle_comparison: function() {
         // Put together the home run data from the two sluggers we need to compare
