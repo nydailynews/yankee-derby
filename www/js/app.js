@@ -200,11 +200,11 @@ var pg = {
             ['gigantic', 'monstrous', 'gargantuan'],
         ],
         'phrase': [
-            [', but just barely,'],
-            [' by a small margin,'],
-            [' by a healthy margin,'],
-            [' by a good amount,'],
-            [' by a landslide,'],
+            [', but just barely,', '', ', by a little,',],
+            [' by a small margin,', ''],
+            [' by a healthy margin,', ''],
+            [' by a good amount,', ''],
+            [' by a landslide,', ''],
         ],
         'lead': [
             ['is winning'],
