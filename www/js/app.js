@@ -151,10 +151,11 @@ var stats = {
         var el = document.querySelector('.datestamp time');
         
         // Turn the date string (YYYY-MM-DD) into a date object so we can increment it one day.
+        // Must account for the month handling of javascript's Date object -- "04" is May, "03" is April.
         var d = stats.latest['date'].split('-');
-        var latest = new Date(d[0], d[1], d[2]);
+        var latest = new Date(d[0], +d[1] - 1, d[2]);
         latest.setDate(latest.getDate() + 1);
-        var date_str = latest.getFullYear() + '-' + utils.add_zero(latest.getMonth()) + '-' + utils.add_zero(latest.getDate());
+        var date_str = latest.getFullYear() + '-' + utils.add_zero(latest.getMonth() + 1) + '-' + utils.add_zero(latest.getDate());
         el.textContent = utils.ap_date(date_str);
     },
     on_load: function() {
