@@ -174,8 +174,28 @@ var stats = {
     }
 }
 
+// LATEST GRAF
+// This object handles the graf that tells us the latest game info
+var lt = {
+    config: {
+    },
+    update_config: function(config) {
+        // Take an external config object and update this config object.
+        for ( var key in config )
+        {
+            if ( config.hasOwnProperty(key) )
+            {
+                this.config[key] = config[key];
+            }
+        }
+    },
+    init: function() {
+        //utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
+    }
+}
+
 // PARAGRAPH
-// This object handles the text
+// This object handles the comparison text
 var pg = {
     config: {
     },
