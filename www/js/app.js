@@ -190,7 +190,7 @@ var lt = {
         }
     },
     init: function() {
-        //utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
+        utils.get_json('../../feeds/json/.json', chrt, this.on_load);
     }
 }
 
@@ -682,8 +682,8 @@ var chrt = {
     on_load: function() {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
-        chrt.build_chart();
         chrt.check_for_ties();
+        chrt.build_chart();
         if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart_from_hash(document.location.hash.substr(1));
     },
     init: function(year) {
