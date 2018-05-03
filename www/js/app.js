@@ -537,10 +537,12 @@ var chrt = {
     },
     build_figcaption: function() {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
-        var el = document.querySelector('figure figcaption');
-        // ** TODO: Make sure the current field isn't a tie.
         if ( this.type.indexOf('mantle') !== -1 ) return this.build_maris_mantle_caption();
-        var markup_raw = document.getElementById(this.type + '-has-leader').textContent;
+
+        var el = document.querySelector('figure figcaption');
+        var markup_raw = document.getElementById(this.type + '-tied').textContent;
+        if ( chrt.ties.indexOf(this.type) === -1 ) markup_raw = document.getElementById(this.type + '-has-leader').textContent; 
+
         markup = markup_raw.replace('Stanton', 'Giancarlo Stanton');
         markup = markup.replace('Judge', 'Aaron Judge');
         markup = markup.replace(', and', '.');
