@@ -463,8 +463,9 @@ var chrt = {
         var player = bits[0];
         var field = bits[1];
         if ( bits.length > 2 ) field = bits.slice(1).join('-'); // This is for fields that have dashes in them, we've got one of those it's just the way it worked out.
-        var label = this.player_key[player] + ' ' + this.type_key[field];
-        if ( player === 'leader' && typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
+        var label = this.player_key[player];
+        if ( player === 'leader' ) label = this.player_key[player] + ' ' + this.type_key[field];
+        if ( typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
             // Special treatment goes here
             var s = record['value']['value'];
             if ( field == 'avg' || field == 'ops' ) {
@@ -691,7 +692,7 @@ var chrt = {
     init: function(year) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 160);
-        else this.season_dates = season_dates_all.splice(0, 60);
+        else this.season_dates = season_dates_all.splice(0, 90);
         utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
 }
