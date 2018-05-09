@@ -421,6 +421,13 @@ var chrt = {
         ops: 'OPS',
         'maris-mantle': 'home runs'
     },
+    type_key_abbr: {
+        hrs: 'HRs',
+        rbis: 'RBIs',
+        avg: 'AVG',
+        ops: 'OPS',
+        'maris-mantle': 'HRs'
+    },
     type_key_axis: {
         hrs: 'Home runs',
         rbis: 'RBIs',
@@ -464,7 +471,7 @@ var chrt = {
         var field = bits[1];
         if ( bits.length > 2 ) field = bits.slice(1).join('-'); // This is for fields that have dashes in them, we've got one of those it's just the way it worked out.
         var label = this.player_key[player];
-        if ( player === 'leader' ) label = this.player_key[player] + ' ' + this.type_key[field];
+        if ( player === 'leader' ) label = this.player_key[player] + ' ' + this.type_key_abbr[field];
         if ( typeof record !== 'undefined' && typeof record['value'] !== 'undefined' ) {
             // Special treatment goes here
             var s = record['value']['value'];
@@ -691,7 +698,7 @@ var chrt = {
     },
     init: function(year) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
-        if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 160);
+        if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 280);
         else this.season_dates = season_dates_all.splice(0, 90);
         utils.get_json('static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
