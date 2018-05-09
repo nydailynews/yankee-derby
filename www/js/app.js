@@ -159,15 +159,19 @@ var stats = {
         el.textContent = utils.ap_date(date_str);
     },
     on_load: function() {
-        chrt.init();
+        // ** TODO: Rewrite this function so all the other objects aren't triggered here.
+        // Triggering the inits of the other objects here also makes this app impossible to configure for any other year than 2018.
+        chrt.init(stats.year);
         stats.latest = stats.data[stats.data.length-1];
         stats.update_datestamp();
         stats.update_table();
         pg.latest = stats.latest;
-        pg.init();
+        pg.init(stats.year);
+        lt.init(stats.year);
     },
     init: function(year) {
         if ( year == null ) year = 2018;
+        this.year = 2018;
         // get_json takes three params: filepath, the object that's calling it, and a callback.
         //utils.get_json('test/yankee-derby-' + year + '.json', stats, this.on_load);
         utils.get_json('output/yankee-derby-' + year + '.json?' + utils.rando(), stats, this.on_load);
