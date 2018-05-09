@@ -189,8 +189,37 @@ var lt = {
             }
         }
     },
-    init: function() {
-        utils.get_json('../../feeds/json/.json', chrt, this.on_load);
+    publish_latest: function(rec) {
+        // Take a game record object and put it on the page.
+        // An object looks something like this:
+        // date: "2018-05-08"
+        // gamer-headline: "Yankees move into tie atop AL East with 3-2 win over Red Sox"
+        // gamer-url: "http://www.nydailynews.com/sports/baseball/yankees/yankees-move-tie-atop-al-east-3-2-win-red-sox-article-1.3979129"
+        // games-back-division: ""
+        // home-game: "1"
+        // in-division: "1"
+        // opponent-score: "2"
+        // record-last-ten: ""
+        // streak: "7"
+        // total-losses: "10"
+        // total-wins: "25"
+        // win: "1"
+        // yankees-score: "3"
+    },
+    on_load: function() {
+        // See if we have a record for today's or yesterday's game, and if we do, add it to the interactive.
+        var yesterday = stats.latest['date'];
+        var l = lt.data.length;
+        var latest;
+        for ( var i = 0; i < l; i ++ ) {
+            if ( yesterday == lt.data[i]['date'] ) record = lt.data[i];
+        }
+        console.log(record);
+        if ( record['opponent-score'] != '' ) lt.publish_latest(record);
+    },
+    init: function(year) {
+        if ( year == null ) year = 2018;
+        utils.get_json('../../feeds/json/yankees-games-' + year + '.json', lt, lt.on_load);
     }
 }
 
