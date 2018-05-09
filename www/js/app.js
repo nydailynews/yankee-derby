@@ -191,6 +191,15 @@ var lt = {
     },
     publish_latest: function(rec) {
         // Take a game record object and put it on the page.
+        var parent = document.getElementById('slugger-stats');
+        var el = document.createElement('section');
+        el.id = 'gamer';
+        var blurb = lt.write_blurb(rec);
+        el.innerHTML = '<h2>Yesterday’s Game</h2>\n <p>' + blurb + '</p>';
+        parent.insertBefore(el, parent.firstChild);
+    },
+    write_blurb: function(rec) {
+        // Turn a game record object into a paragraph.
         // An object looks something like this:
         // date: "2018-05-08"
         // gamer-headline: "Yankees move into tie atop AL East with 3-2 win over Red Sox"
@@ -205,6 +214,10 @@ var lt = {
         // total-wins: "25"
         // win: "1"
         // yankees-score: "3"
+        var html = 'Yankees fall ' + rec['opponent-score'] + '-' + rec['yankees-score'] + '.';
+        if ( +rec['yankees-score'] > +rec['opponent-score'] ) html = 'Yankees win ' + rec['yankees-score'] + '-' + rec['opponent-score'] + '.';
+        if ( rec['gamer-url'] != '' ) html += ' Game story: <a href="' + rec['gamer-url'] + '">' + rec['gamer-headline'] + '</a>.'; 
+        return html;
     },
     on_load: function() {
         // See if we have a record for today's or yesterday's game, and if we do, add it to the interactive.
