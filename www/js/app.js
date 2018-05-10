@@ -126,16 +126,17 @@ var stats = {
         }
         return true;
     },
-    stats: ['avg', 'hrs', 'rbis', 'ops'],
+    fields: ['avg', 'hrs', 'rbis', 'ops'],
+    players: ['judge', 'stanton', 'leader'],
     update_table: function() {
         // Update the Slugger Stats table with the latest numbers from the spreadsheet.
         // The latest will be in stats.latest.
-        var fields = ['-avg', '-hrs', '-rbis', '-ops'];
+        var fields = stats.fields;
         var players = ['judge', 'stanton'];
         for ( var i = 0; i < fields.length; i ++ ) {
             for ( var j = 0; j < players.length; j ++ ) {
-                field = players[j] + fields[i];
-                if ( fields[i] == '-avg' || fields[i] == '-ops' ) {
+                field = players[j] + '-' + fields[i];
+                if ( fields[i] == 'avg' || fields[i] == 'ops' ) {
                     document.getElementById(field).textContent = utils.add_zeros(stats.latest[field], 2);
                 }
                 else {
@@ -220,6 +221,7 @@ var lt = {
         // win: "1"
         // yankees-score: "3"
         var html = 'Yankees fall ' + rec['opponent-score'] + '-' + rec['yankees-score'] + '.';
+        var stats_blurb = this.write_stats_blurb(1);
         if ( +rec['yankees-score'] > +rec['opponent-score'] ) html = 'Yankees win ' + rec['yankees-score'] + '-' + rec['opponent-score'] + '.';
         if ( rec['gamer-url'] != '' ) html += ' Game story: <a href="' + rec['gamer-url'] + '">' + rec['gamer-headline'] + '</a>.'; 
         return html;
@@ -227,13 +229,42 @@ var lt = {
     write_stats_blurb: function(days_back) {
         // Returns a blurb describing how each of the sluggers have done in the last X days, where X is days_back and defaults to 1.
         if ( days_back == null ) days_back = 1;
+        r = this.compare_stats(days_back);
+        console.log(r);
     },
     compare_stats: function(days_back) {
         // Given a number of days back (defaults to 1), compare the sluggers stats against the latest full day of their stats.
-        // Returns a record-like object similar to the one described in .
+        // Returns a record-like object similar to this:
+        // judge-avg: "0.295"
+        // judge-hrs: "8"
+        // judge-ops: "0.968"
+        // judge-rbis: "24"
+        // leader-avg: "0.36"
+        // leader-hrs: "13"
+        // leader-ops: "1.261"
+        // leader-rbis: "32"
+        // stanton-avg: "0.237"
+        // stanton-hrs: "9"
+        // stanton-ops: "0.828"
+        // stanton-rbis: "21"
         if ( days_back == null ) days_back = 1;
         var from = stats.data[stats.latest_index - +days_back];
         var to = stats.latest;
+
+        var r = {};
+
+        var fields = stats.fields;
+        var players = stats.players;
+        for ( var i = 0; i < fields.length; i ++ ) {
+            for ( var j = 0; j < players.length; j ++ ) {
+                field = players[j] + '-' + fields[i];
+                r[field] = +to[field] - +from[field];
+                
+                // Sometimes when you subtract floats in javascript you get janky results such as -0.014000000000000012
+                if ( -1 < r[field] && r[field] < 1 ) r[field] = Math.round(r[field] * 1000) / 1000;
+            }
+        }
+        return r;
     },
     on_load: function() {
         // See if we have a record for today's or yesterday's game, and if we do, add it to the interactive.
@@ -442,8 +473,8 @@ var pg = {
     init: function() {
         this.l = stats.latest;
         for ( i = 0; i < 4; i++ ) {
-            //var sentence_type = this.get_type(stats.stats[i]);
-            this.build_stat(stats.stats[i]);
+            //var sentence_type = this.get_type(stats.fields[i]);
+            this.build_stat(stats.fields[i]);
         }
         this.build_lead();
     }
