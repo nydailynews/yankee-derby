@@ -162,7 +162,8 @@ var stats = {
         // ** TODO: Rewrite this function so all the other objects aren't triggered here.
         // Triggering the inits of the other objects here also makes this app impossible to configure for any other year than 2018.
         chrt.init(stats.year);
-        stats.latest = stats.data[stats.data.length-1];
+        stats.latest_index = stats.data.length-1;
+        stats.latest = stats.data[stats.latest_index];
         stats.update_datestamp();
         stats.update_table();
         pg.latest = stats.latest;
@@ -222,6 +223,17 @@ var lt = {
         if ( +rec['yankees-score'] > +rec['opponent-score'] ) html = 'Yankees win ' + rec['yankees-score'] + '-' + rec['opponent-score'] + '.';
         if ( rec['gamer-url'] != '' ) html += ' Game story: <a href="' + rec['gamer-url'] + '">' + rec['gamer-headline'] + '</a>.'; 
         return html;
+    },
+    write_stats_blurb: function(days_back) {
+        // Returns a blurb describing how each of the sluggers have done in the last X days, where X is days_back and defaults to 1.
+        if ( days_back == null ) days_back = 1;
+    },
+    compare_stats: function(days_back) {
+        // Given a number of days back (defaults to 1), compare the sluggers stats against the latest full day of their stats.
+        // Returns a record-like object similar to the one described in .
+        if ( days_back == null ) days_back = 1;
+        var from = stats.data[stats.latest_index - +days_back];
+        var to = stats.latest;
     },
     on_load: function() {
         // See if we have a record for today's or yesterday's game, and if we do, add it to the interactive.
