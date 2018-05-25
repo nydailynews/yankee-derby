@@ -137,13 +137,14 @@ var stats = {
         for ( var i = 0; i < fields.length; i ++ ) {
             for ( var j = 0; j < players.length; j ++ ) {
                 field = players[j] + '-' + fields[i];
-                if ( fields[i] == 'avg' || fields[i] == 'ops' ) {
-                    document.getElementById(field).textContent = utils.add_zeros(stats.latest[field], 2);
+                if ( document.getElementById(field) !== null ) {
+                    if ( fields[i] == 'avg' || fields[i] == 'ops' ) {
+                        document.getElementById(field).textContent = utils.add_zeros(stats.latest[field], 2);
+                    }
+                    else {
+                        document.getElementById(field).textContent = stats.latest[field];
+                    }
                 }
-                else {
-                    document.getElementById(field).textContent = stats.latest[field];
-                }
-
             }
         }
     },
@@ -545,7 +546,8 @@ var chrt = {
         chrt.ties = [];
         var fields = Object.keys(chrt.type_key);
         var l = fields.length;
-        var latest = stats.data[stats.data.length - 1];
+        var latest = [];
+        if ( typeof stats.data !== 'undefined' ) { console.log(stats.data); latest = stats.data[stats.data.length - 1]; }
         // latest will look something like judge-hrs: "3", stanton-hrs: "3", leader-hrs: "6", judge-rbis: "8", …}
         
         //var players = ['judge', 'stanton'];
@@ -785,13 +787,18 @@ var chrt = {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
         chrt.check_for_ties();
-        chrt.build_chart();
+        chrt.build_chart(chrt.type);
         if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart_from_hash(document.location.hash.substr(1));
     },
-    init: function(year) {
+    init: function(year, config) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
+        console.log('hi', config);
+        if ( config !== null ) this.update_config(config);
         if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 280);
         else this.season_dates = season_dates_all.splice(0, 90);
+        if ( typeof stats.data !== 'object' ) {
+            utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), stats, function do_nothing(){});
+        }
         utils.get_json(this.config.pathing + 'static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
 }

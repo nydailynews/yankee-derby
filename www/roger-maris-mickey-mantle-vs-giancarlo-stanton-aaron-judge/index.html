@@ -126,18 +126,18 @@ article h1, article h1 + h2, #stats p.datestamp, p.datestamp  {
             </ul>
         </div>
 
-            <section id="bottom-chart">
-                <p>
-                    Statistics, updated daily, comparing Giancarlo Stanton and Aaron Judge against the Major League Baseball leader in
-                    home runs, RBIs, batting average and OPS.
-                </p>
-                <figure>
-                    <svg id="daily"></svg>
-                    <figcaption id="daily-blurb"></figcaption>
-                    <button id="maris-mantle" onClick="chrt.button_click(this);">Maris &amp; Mantle</button>
-                    <script></script>
-                </figure>
-            </section>
+        <section id="bottom-chart">
+            <p>
+                Statistics, updated daily, comparing Giancarlo Stanton and Aaron Judge against the Major League Baseball leader in
+                home runs, RBIs, batting average and OPS.
+            </p>
+            <figure>
+                <svg id="daily"></svg>
+                <figcaption id="daily-blurb"></figcaption>
+                <button id="maris-mantle" onClick="chrt.button_click(this);">Maris &amp; Mantle</button>
+                <script></script>
+            </figure>
+        </section>
 
         <p class="latest-news"><a href="http://www.nydailynews.com/sports/baseball/yankees">YANKEES NEWS</a>: <strong id="latest-news-headline"></strong></p>
         <script onload="document.getElementById('latest-news-headline').innerHTML=hed;" src="//interactive.nydailynews.com/feeds/tag-yankees-1.js"></script>
@@ -160,7 +160,7 @@ article h1, article h1 + h2, #stats p.datestamp, p.datestamp  {
 function load_chart() { chrt.on_load(); }
 </script>
 <script src="//interactive.nydailynews.com/js/d3/d3.v4.min.js"></script>
-<script onload="stats.init('2018');" src="../js/app.js?v20180509c"></script>
+<script onload="chrt.type='maris-mantle'; chrt.init('2018', { pathing: '../' });" src="../js/app.js?v20180509c"></script>
 
 <!-- CONTENT-END -->
 
