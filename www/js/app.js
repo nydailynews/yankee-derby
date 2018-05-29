@@ -148,14 +148,16 @@ var stats = {
             }
         }
     },
-    update_datestamp: function() {
+    update_datestamp: function(record) {
         // Update the datestamp's time element.
         // We add one day to the date because if the stats are current through yesterday that means it was updated today, at least.
         var el = document.querySelector('.datestamp time');
         
         // Turn the date string (YYYY-MM-DD) into a date object so we can increment it one day.
         // Must account for the month handling of javascript's Date object -- "04" is May, "03" is April.
-        var d = stats.latest['date'].split('-');
+        if ( record == null ) var d = stats.latest['date'].split('-');
+        else var d = record['date'].split('-');
+
         var latest = new Date(d[0], +d[1] - 1, d[2]);
         latest.setDate(latest.getDate() + 1);
         var date_str = latest.getFullYear() + '-' + utils.add_zero(latest.getMonth() + 1) + '-' + utils.add_zero(latest.getDate());
@@ -792,12 +794,15 @@ var chrt = {
     },
     init: function(year, config) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
-        console.log('hi', config);
         if ( config !== null ) this.update_config(config);
         if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 280);
         else this.season_dates = season_dates_all.splice(0, 90);
+        
+        // This fires on the Maris-Mantle standalone
         if ( typeof stats.data !== 'object' ) {
-            utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), stats, function do_nothing(){});
+            utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), stats, 
+                    function () { stats.update_datestamp(stats.data[stats.data.length - 1])}
+                    );
         }
         utils.get_json(this.config.pathing + 'static/maris-mantle-keyed-1961.json', chrt, this.on_load);
     }
