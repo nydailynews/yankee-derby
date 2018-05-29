@@ -656,11 +656,25 @@ var chrt = {
     },
     build_maris_mantle_caption: function() {
         // Write a custom caption for the Maris & Mantle chart
-        var el = document.querySelector('#bottom-chart p');
-        var caption = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14) against the Stanton & Judge home run totals for this season.';
-        el.textContent = caption;
-        var el = document.querySelector('figure figcaption');
-        el.textContent = caption;
+        var caption = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14, 16 days after the 2018 Yankees season start date) against the Stanton & Judge home run totals for this season.';
+        if ( document.getElementById('bottom-chart') ) {
+            var el = document.querySelector('#bottom-chart p');
+            el.textContent = caption;
+            var el = document.querySelector('figure figcaption');
+            el.textContent = caption;
+        }
+        else if ( document.getElementById('standalone-chart') ) {
+            var el = document.querySelector('#standalone-chart p');
+            el.textContent = caption;
+            this.build_maris_mantle_caption_detail();
+        }
+    },
+    build_maris_mantle_caption_detail: function() {
+        // This function is called on the standalone maris/mantle chart
+        data = this.build_maris_mantle_comparison();
+        console.log(data);
+
+        
     },
     build_maris_mantle_comparison: function() {
         // Put together the home run data from the two sluggers we need to compare
@@ -670,7 +684,6 @@ var chrt = {
         // The maris-mantle data is in chrt.data, and is keyed to the dates.
         // The slugger data is in stats.data.
         // We want to return a new array.
-        this.build_maris_mantle_caption();
         var data = [];
         var a1 = chrt.data;
         var a2 = stats.data;
@@ -720,7 +733,11 @@ var chrt = {
         var svg = d3.select('svg#daily'),
              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         var data = stats.data;
-        if ( type === 'maris-mantle' ) data = this.build_maris_mantle_comparison();
+        if ( type === 'maris-mantle' ) {
+            this.build_maris_mantle_caption();
+            data = this.build_maris_mantle_comparison();
+            this.data_mantle = data;
+        }
         var keys = Object.keys(data[0]).slice(1);
         var slugger_stats = keys.map(function(id) {
             // Zero out the chart values for the inactive fields
