@@ -671,6 +671,7 @@ var chrt = {
     },
     build_maris_mantle_caption_detail: function() {
         // This function is called on the standalone maris/mantle chart
+        if ( typeof stats.data === 'undefined' ) return false;
         data = this.build_maris_mantle_comparison();
         console.log(data);
 
@@ -806,7 +807,7 @@ var chrt = {
         chrt.parse_time = d3.timeParse('%Y-%m-%d');
         chrt.format_time = d3.timeFormat('%B %e');
         chrt.check_for_ties();
-        chrt.build_chart(chrt.type);
+        window.setTimeout(function() { chrt.build_chart(chrt.type) }, 1000);
         if ( document.location.hash.indexOf('#stat') !== -1 ) chrt.load_chart_from_hash(document.location.hash.substr(1));
     },
     init: function(year, config) {
@@ -817,7 +818,8 @@ var chrt = {
         
         // This fires on the Maris-Mantle standalone
         if ( typeof stats.data !== 'object' ) {
-            utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), stats, 
+            var url = this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando();
+            utils.get_json(url, stats, 
                     function () { stats.update_datestamp(stats.data[stats.data.length - 1])}
                     );
         }
