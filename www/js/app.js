@@ -729,6 +729,7 @@ var chrt = {
         this.build_figcaption();
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
+        if ( is_mobile ) width = 600;
         var height = 370;
 
         var x = d3.scaleTime().range([0, width]),
