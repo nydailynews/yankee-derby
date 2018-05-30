@@ -1,6 +1,10 @@
 // UTILS
 var utils = {
     ap_numerals: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+    get_ap_numeral: function(i) {
+        if ( +i < 11 ) return this.ap_numerals[+i];
+        return i;
+    },
     months: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
     ap_months: ['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'],
     ap_date: function(date) {
@@ -671,9 +675,21 @@ var chrt = {
     },
     build_maris_mantle_caption_detail: function() {
         // This function is called on the standalone maris/mantle chart
-        if ( typeof stats.data === 'undefined' ) return false;
+        //if ( typeof stats.data === 'undefined' ) return false;
         data = this.build_maris_mantle_comparison();
         console.log(data);
+        var el = document.querySelector('figure figcaption');
+        var caption = '';
+        latest = data[data.length - 1];
+        diff = +latest['stanton_judge-maris-mantle'] - +latest['maris_mantle-maris-mantle'];
+        if ( diff === 0 ) caption = 'Stanton and Judge are tied with Roger Maris and Mickey Mantle’s 1961 home run total ';
+        else {
+            if ( diff > 0 ) caption = 'Stanton and Judge lead Roger Maris and Mickey Mantle by ' + utils.get_ap_numeral(diff) + ' home runs ';
+            else caption = 'Roger Maris and Mickey Mantle lead Stanton and Judge by ' + utils.get_ap_numeral(diff) + ' home runs ';
+        }
+        caption += 'as of ' + utils.ap_date(latest['date']) + '.';
+            
+        el.textContent = caption;
 
         
     },
