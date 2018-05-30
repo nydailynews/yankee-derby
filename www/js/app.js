@@ -679,19 +679,16 @@ var chrt = {
         data = this.build_maris_mantle_comparison();
         console.log(data);
         var el = document.querySelector('figure figcaption');
-        var caption = '';
-        latest = data[data.length - 1];
+        var latest = data[data.length - 1];
+        var caption = 'As of ' + utils.ap_date(latest['date']) + ', ';
         diff = +latest['stanton_judge-maris-mantle'] - +latest['maris_mantle-maris-mantle'];
-        if ( diff === 0 ) caption = 'Stanton and Judge are tied with Roger Maris and Mickey Mantle’s 1961 home run total ';
+        if ( diff === 0 ) caption += 'Stanton and Judge are tied with Roger Maris and Mickey Mantle’s 1961 home run total.';
         else {
-            if ( diff > 0 ) caption = 'Stanton and Judge lead Roger Maris and Mickey Mantle by ' + utils.get_ap_numeral(diff) + ' home runs ';
-            else caption = 'Roger Maris and Mickey Mantle lead Stanton and Judge by ' + utils.get_ap_numeral(diff) + ' home runs ';
+            if ( diff > 0 ) caption += 'Stanton and Judge are ' + utils.get_ap_numeral(diff) + ' home runs ahead of Roger Maris and Mickey Mantle’s home run total in their historic 1961 season.';
+            else caption += 'Roger Maris and Mickey Mantle lead Stanton and Judge by ' + utils.get_ap_numeral(diff) + ' home runs ';
         }
-        caption += 'as of ' + utils.ap_date(latest['date']) + '.';
             
-        el.textContent = caption;
-
-        
+        el.innerHTML = caption + this.build_tweet(' <em>tweet this</em>', caption);
     },
     build_maris_mantle_comparison: function() {
         // Put together the home run data from the two sluggers we need to compare
