@@ -658,6 +658,7 @@ var chrt = {
         el.innerHTML = markup + this.build_tweet('⬅️ <em>tweet this</em>', markup);
         // ** TODO: Write a blurb about how far they are off of the MLB leader.
     },
+    original_caption: document.querySelector('#bottom-chart p').textContent,
     build_maris_mantle_caption: function() {
         // Write a custom caption for the Maris & Mantle chart
         var caption = 'Compare the M&M Boys’ historic 1961 home run totals (the Yankees season that year started April 14, 16 days after the 2018 Yankees season start date) against the Stanton & Judge home run totals for this season.';
@@ -726,6 +727,7 @@ var chrt = {
         // Adapted from https://bl.ocks.org/mbostock/3884955
         if ( type == null ) type = 'hrs';
         chrt.type = type;
+        if ( type !== 'maris-mantle') document.querySelector('#bottom-chart p').textContent = this.original_caption;
         this.build_figcaption();
         var margin = { 'left': 50, 'top': 10 };
         var width = 800;
