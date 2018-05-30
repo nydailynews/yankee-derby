@@ -111,6 +111,15 @@ article {
 }
 article h1, article h1 + h2, #stats p.datestamp, p.datestamp  {
     color: #0C2340;
+    -webkit-text-stroke: 0;
+}
+@media only screen and (min-width: 250px) and (max-width: 727px) {
+
+    article p {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 </style>
 <main>
@@ -125,11 +134,17 @@ article h1, article h1 + h2, #stats p.datestamp, p.datestamp  {
                 <li class="ra-share-e"> <a href="mailto:?subject=Mantle and Maris vs. Stanton and Judge&body=http://interactive.nydailynews.com/project/yankees-sluggers-tracker/roger-maris-mickey-mantle-vs-giancarlo-stanton-aaron-judge/">email</a> </li>
             </ul>
         </div>
+        <figure>
+            <img src="../img/roger-maris-and-mickey-mantle.jpg" alt="A photo of Roger Maris and Mickey Mantle at Yankee Stadium in 1963">
+            <figcaption>Roger Maris (left) and Mickey Mantle in 1963, the day before the first game of the Yankees’ disastrous World Series against the Los Angeles Dodgers. <span>(Walter Kelleher/New York Daily News)</span></figcaption>
+        </figure>
 
         <p>
             <strong>Which Yankees duo has combined for more home runs:</strong>
             Giancarlo Stanton and Aaron Judge in 2018, or Mickey Mantle and Roger Maris in 1961?
-            Mantle and Maris ended the 1961 season with a combined 115 home runs.
+        </p>
+        <p>
+            Mantle and Maris ended the 1961 season with a combined 115 home runs, still the Major League Baseball single-season record for home runs by two teammates.
         </p>
         <section id="standalone-chart">
             <p>
@@ -160,7 +175,7 @@ article h1, article h1 + h2, #stats p.datestamp, p.datestamp  {
 </main>
 
 <script src="//interactive.nydailynews.com/js/d3/d3.v4.min.js"></script>
-<script onload="chrt.type='maris-mantle'; chrt.init('2018', { pathing: '../' });" src="../js/app.js?v20180509c"></script>
+<script onload="chrt.type='maris-mantle'; chrt.init('2018', { pathing: '../' });" src="../js/app.js?v20180530"></script>
 
 <!-- CONTENT-END -->
 

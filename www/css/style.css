@@ -229,6 +229,9 @@ figure button {
     article h1 + h2 {
         color: #0C2340;
     }
+    #stats p.datestamp, p.datestamp {
+        color: #333;
+    }
 }
 @media only screen and (min-width: 250px) and (max-width: 727px) {
 
@@ -236,7 +239,7 @@ figure button {
         width: 100%;
     }
     #bottom-chart p, figcaption {
-        margin: 10px;
+        margin: 10px auto;
     }
     .grid-wrapper{
         display: block;
@@ -335,3 +338,13 @@ figure button {
     }
 }
 #rh-subnav { display: none; }
+
+article > figure img {
+    width: 90%;
+    margin: 0 auto;
+}
+article > figure figcaption {
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 5px;
+}

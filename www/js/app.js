@@ -647,7 +647,7 @@ var chrt = {
         // Write the sentence and start on the tweet link that go into the figure element’s figcaption element.
         if ( this.type.indexOf('mantle') !== -1 ) return this.build_maris_mantle_caption();
 
-        var el = document.querySelector('figure figcaption');
+        var el = document.querySelector('figure figcaption#daily-blurb');
         var markup_raw = document.getElementById(this.type + '-tied').textContent;
         if ( chrt.ties.indexOf(this.type) === -1 ) markup_raw = document.getElementById(this.type + '-has-leader').textContent; 
 
@@ -664,7 +664,7 @@ var chrt = {
         if ( document.getElementById('bottom-chart') ) {
             var el = document.querySelector('#bottom-chart p');
             el.textContent = caption;
-            var el = document.querySelector('figure figcaption');
+            var el = document.querySelector('figure figcaption#daily-blurb');
             el.textContent = caption;
         }
         else if ( document.getElementById('standalone-chart') ) {
@@ -676,16 +676,18 @@ var chrt = {
     build_maris_mantle_caption_detail: function() {
         // This function is called on the standalone maris/mantle chart
         //if ( typeof stats.data === 'undefined' ) return false;
-        data = this.build_maris_mantle_comparison();
-        console.log(data);
-        var el = document.querySelector('figure figcaption');
+        var data = this.build_maris_mantle_comparison();
+        var el = document.querySelector('figure figcaption#daily-blurb');
         var latest = data[data.length - 1];
         var caption = 'As of ' + utils.ap_date(latest['date']) + ', ';
-        diff = +latest['stanton_judge-maris-mantle'] - +latest['maris_mantle-maris-mantle'];
+        var diff = +latest['stanton_judge-maris-mantle'] - +latest['maris_mantle-maris-mantle'];
+        var s = 's';
+        if ( diff === 1 ) s = '';
+
         if ( diff === 0 ) caption += 'Stanton and Judge are tied with Roger Maris and Mickey Mantle’s 1961 home run total.';
         else {
-            if ( diff > 0 ) caption += 'Stanton and Judge are ' + utils.get_ap_numeral(diff) + ' home runs ahead of Roger Maris and Mickey Mantle’s home run total in their historic 1961 season.';
-            else caption += 'Roger Maris and Mickey Mantle lead Stanton and Judge by ' + utils.get_ap_numeral(diff) + ' home runs ';
+            if ( diff > 0 ) caption += 'Stanton and Judge are ' + utils.get_ap_numeral(diff) + ' home run' + s + ' ahead of Roger Maris and Mickey Mantle’s home run total in their historic 1961 season.';
+            else caption += 'Roger Maris and Mickey Mantle lead Stanton and Judge by ' + utils.get_ap_numeral(diff) + ' home run' + s + ' ';
         }
             
         el.innerHTML = caption + this.build_tweet(' <em>tweet this</em>', caption);
@@ -826,7 +828,7 @@ var chrt = {
     init: function(year, config) {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         if ( config !== null ) this.update_config(config);
-        if ( is_mobile ) this.season_dates = season_dates_all.splice(0, 280);
+        if ( is_mobile ) this.season_dates = season_dates_all;
         else this.season_dates = season_dates_all.splice(0, 90);
         
         // This fires on the Maris-Mantle standalone
