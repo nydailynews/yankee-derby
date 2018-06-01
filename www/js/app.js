@@ -581,7 +581,10 @@ var chrt = {
             label += ' (' + s + ')';
         }
         // Check for ties.
-        if ( player !== 'leader' && this.ties.indexOf(field) !== -1 ) label = 'Tie';
+        if ( player !== 'leader' && this.ties.indexOf(field) !== -1 ) {
+            label = 'Tie';
+            if ( field == 'maris-mantle' ) label += ' (' + s + ')';
+        }
         return label;
     },
     button_click: function(btn) {
@@ -719,6 +722,12 @@ var chrt = {
                 'maris_mantle-maris-mantle': maris_mantle
             };
             data.push(record);
+        }
+        
+        // Check for ties, make sure we haven't already checked before.
+        if ( this.ties.indexOf('maris-mantle') === -1 ) {
+            var l = data[data.length - 1];
+            if ( l['maris_mantle-maris-mantle'] === l['stanton_judge-maris-mantle'] ) this.ties.push('maris-mantle');
         }
         return data;
     },
