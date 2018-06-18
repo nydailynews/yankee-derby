@@ -97,6 +97,10 @@ h2 img {
 <!-- CONTENT-END -->
 <script>
 var config = {};
+var hash = document.location.hash;
+if ( hash != '' ) {
+    config.player = hash.substring(1);
+}
 </script>
 <script onload="sentence.init(2018, config);" src="js/app.js"></script>
 </body>
