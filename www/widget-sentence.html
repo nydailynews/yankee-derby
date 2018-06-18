@@ -60,6 +60,9 @@ h2 img {
     height: 20px;
     padding-right: 5px;
 }
+    article section {
+        border-bottom: 1px solid #aaa;
+    }
 @media only screen and (min-width: 250px) and (max-width:450px) {
     article h2 {
         font-size: 20px;
@@ -79,13 +82,22 @@ h2 img {
 
 <main>
     <article>
-        <section id="stat-tracker">
-            <h2><a target="_top" href="http://interactive.nydailynews.com/project/yankees-sluggers-tracker/"><img src="http://www.nydailynews.com/pb/resources/gdist/af6ebf36f336e8c53816/images/logo-nyd-mark-144x144-nydred.svg" alt="">YANKEES SLUGGERS STAT TRACKER</a></h2>
+        <section id="stat-tracker-sentence">
+            <h2>
+                <a target="_top" href="http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">
+                    <img src="http://interactive.nydailynews.com/nydn/img/static/logo-nyd-mark-144x144-nydred.svg" alt="">
+                    <span>YANKEES SLUGGERS</span> STAT TRACKER
+                </a>
+            </h2>
+            <p></p>
         </section>
     </article>
 </main>
 
 <!-- CONTENT-END -->
-<script onload="sentence.init();" src="js/app.js"></script>
+<script>
+var config = {};
+</script>
+<script onload="sentence.init(2018, config);" src="js/app.js"></script>
 </body>
 </html>

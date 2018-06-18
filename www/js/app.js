@@ -193,7 +193,10 @@ var stats = {
 // We're going to use the sentences in the widget.
 var sentence = {
     config: {
-        pathing: '../../'
+        pathing: '../../',
+        pathing: '',
+        player: '',
+        field: ''
     },
     update_config: function(config) {
         // Take an external config object and update this config object.
@@ -216,13 +219,32 @@ var sentence = {
         if ( player === null ) player = this.players[this.random(this.players.length - 1)];
         if ( field === null ) field = this.fields[this.random(this.fields.length - 1)];
         console.log(player, field);
+        return 'hi joe';
+    },
+    update_sentence: function() {
+        // Write the sentence to the place where the sentence goes.
+        var player = null, field = null;
+        if ( this.config.player !== '' ) {
+            player = this.config.player;
+            utils.add_class(document.getElementById('stat-tracker-sentence'), player);
+        }
+        if ( this.config.field !== '' ) field = this.config.field;
+
+        var sentence = this.write_sentence(player, field);
+        var el = document.querySelector('#stat-tracker-sentence p');
+        el.textContent = sentence;
     },
     on_load: function() {
         sentence.latest_index = sentence.data.length-1;
         sentence.latest = sentence.data[sentence.latest_index];
+        
+        sentence.update_sentence();
     },
-    init: function(year) {
+    init: function(year, config) {
+		if ( year == null ) year = 2018;
+        if ( config !== null ) this.update_config(config);
         if ( typeof stats.data === 'undefined' ) utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), sentence, this.on_load);
+        else this.update_sentence();
     }
 }
 
