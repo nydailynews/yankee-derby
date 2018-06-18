@@ -181,7 +181,7 @@ var stats = {
     },
     init: function(year) {
         if ( year == null ) year = 2018;
-        this.year = 2018;
+        this.year = year;
         // get_json takes three params: filepath, the object that's calling it, and a callback.
         //utils.get_json('test/yankee-derby-' + year + '.json', stats, this.on_load);
         utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), stats, this.on_load);
@@ -190,7 +190,8 @@ var stats = {
 
 // SENTENCES
 // This object handles writing sentences about the stats.
-var sent = {
+// We're going to use the sentences in the widget.
+var sentence = {
     config: {
         pathing: '../../'
     },
@@ -204,7 +205,24 @@ var sent = {
             }
         }
     },
+    random: function(max) {
+        return Math.floor(Math.random() * max);
+    },
+    fields: stats.fields, //['avg', 'hrs', 'rbis', 'ops'],
+    players: stats.players, //['judge', 'stanton', 'leader'],
+    write_sentence: function(player, field) {
+        // Write a sentence about one of the players’ stats.
+        // Pass it zero arguments for it to generate a random sentence.
+        if ( player === null ) player = this.players[this.random(this.players.length - 1)];
+        if ( field === null ) field = this.fields[this.random(this.fields.length - 1)];
+        console.log(player, field);
+    },
+    on_load: function() {
+        sentence.latest_index = sentence.data.length-1;
+        sentence.latest = sentence.data[sentence.latest_index];
+    },
     init: function(year) {
+        if ( typeof stats.data === 'undefined' ) utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), sentence, this.on_load);
     }
 }
 
