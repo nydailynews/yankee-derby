@@ -188,6 +188,26 @@ var stats = {
     }
 }
 
+// SENTENCES
+// This object handles writing sentences about the stats.
+var sent = {
+    config: {
+        pathing: '../../'
+    },
+    update_config: function(config) {
+        // Take an external config object and update this config object.
+        for ( var key in config )
+        {
+            if ( config.hasOwnProperty(key) )
+            {
+                this.config[key] = config[key];
+            }
+        }
+    },
+    init: function(year) {
+    }
+}
+
 // LATEST GRAF
 // This object handles the graf that tells us the latest game info
 var lt = {
