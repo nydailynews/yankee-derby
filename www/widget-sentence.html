@@ -85,8 +85,7 @@ h2 img {
         <section id="stat-tracker-sentence">
             <h2>
                 <a target="_top" href="http://interactive.nydailynews.com/project/yankees-sluggers-tracker/">
-                    <img src="http://interactive.nydailynews.com/nydn/img/static/logo-nyd-mark-144x144-nydred.svg" alt="">
-                    <span>YANKEES SLUGGERS</span> STAT TRACKER
+                    <img src="http://interactive.nydailynews.com/nydn/img/static/logo-nyd-mark-144x144-nydred.svg" alt=""><span>YANKEES SLUGGERS</span> STAT TRACKER
                 </a>
             </h2>
             <p></p>
@@ -97,9 +96,14 @@ h2 img {
 <!-- CONTENT-END -->
 <script>
 var config = {};
-var hash = document.location.hash;
-if ( hash != '' ) {
-    config.player = hash.substring(1);
+if ( document.location.hash != '' ) {
+    var hash = document.location.hash.substring(1)
+    config.player = hash;
+    if ( ['stanton', 'judge'].indexOf(hash) !== -1 ) {
+        var el = document.querySelector('#stat-tracker-sentence h2 span');
+        if ( hash === 'stanton' ) el.textContent = 'Giancarlo Stanton';
+        else if ( hash === 'judge' ) el.textContent = 'Aaron Judge';
+    }
 }
 </script>
 <script onload="sentence.init(2018, config);" src="js/app.js"></script>

@@ -219,7 +219,7 @@ var sentence = {
         if ( player === null ) player = this.players[this.random(this.players.length - 1)];
         if ( field === null ) field = this.fields[this.random(this.fields.length - 1)];
         console.log(player, field);
-        return 'hi joe';
+        return '';
     },
     update_sentence: function() {
         // Write the sentence to the place where the sentence goes.
