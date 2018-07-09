@@ -190,7 +190,7 @@ var stats = {
 
 // SENTENCES
 // This object handles writing sentences about the stats.
-// We're going to use the sentences in the widget.
+// We're going to use the sentences in widget-sentence.html.
 var sentence = {
     config: {
         pathing: '../../',
@@ -213,20 +213,61 @@ var sentence = {
     },
     fields: stats.fields, //['avg', 'hrs', 'rbis', 'ops'],
     players: stats.players, //['judge', 'stanton', 'leader'],
+    sentence_types: ['since_last', 'to_leader', 'to_other', 'to_self'],
+    sentence_types: ['since_last', 'to_self'],
     since_last: function(player, field) {
         // Calculate how many days it has been since something happened.
+        console.log(this.data);
+        var last, current;
+        var days = 0;
+        var key = player + '-' + field;
+        var now = this.data[this.data.length - 1][key];
+        for ( var i = this.data.length - 1; i --; i >= 0 ) {
+            days ++;
+            current = this.data[i][key];
+            console.log(now, current, days);
+            if ( now !== current ) break;
+        }
+        return days;
     },
     write_sentence: function(player, field) {
         // Write a sentence about one of the players’ stats.
         // Pass it zero arguments for it to generate a random sentence.
-        if ( player === null ) player = this.players[this.random(this.players.length - 1)];
-        if ( field === null ) field = this.fields[this.random(this.fields.length - 1)];
-        console.log(player, field);
+        // There are a few types of sentences it can generate: Days since last home run / RBI, or stat comparison (to self, to opponent, to MLB leader)
+        if ( player === null ) {
+            player = this.players[this.random(this.players.length)];
+            if ( player === 'leader' ) {
+                while ( player === 'leader' ) {
+                    player = this.players[this.random(this.players.length)];
+                }
+            }
+        }
+        if ( field === null ) field = this.fields[this.random(this.fields.length)];
 
         var since_last = '';
         if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) since_last = this.since_last(player, field);
 
-        return '';
+        var type = this.sentence_types[this.random(this.sentence_types.length)];
+        if ( since_last === '' && type === 'since_last' ) {
+            while ( type === 'since_last' ) {
+                type = this.sentence_types[this.random(this.sentence_types.length)];
+            }
+        }
+
+        console.log(player, field, type);
+        var name_full = pg.full_names[player];
+        var field_full = chrt.type_key_axis[field].slice(0, -1);
+        if ( ['Home run'].indexOf(field_full) !== -1 ) field_full = field_full.charAt(0).toLowerCase() + field_full.substr(1);
+        var sentence = '';
+
+        if ( type === 'since_last' ) {
+            sentence = 'It has been ' + utils.get_ap_numeral(since_last) + ' days since ' + name_full + '’s last ' + field_full + '.';
+        }
+        else if ( type === 'to_self' ) {
+        }
+
+        //if ( 
+        return "SLUGGER STAT: " + sentence;
     },
     update_sentence: function() {
         // Write the sentence to the place where the sentence goes.
@@ -239,7 +280,7 @@ var sentence = {
 
         var sentence = this.write_sentence(player, field);
         var el = document.querySelector('#stat-tracker-sentence p');
-        el.textContent = sentence;
+        el.innerHTML = sentence;
     },
     on_load: function() {
         sentence.latest_index = sentence.data.length-1;
@@ -527,7 +568,9 @@ var pg = {
     },
     full_names: {
         'Stanton': 'Giancarlo Stanton',
-        'Judge': 'Aaron Judge'
+        'Judge': 'Aaron Judge',
+        'stanton': 'Giancarlo Stanton',
+        'judge': 'Aaron Judge'
     },
     build_lead: function() {
         // OVERALL

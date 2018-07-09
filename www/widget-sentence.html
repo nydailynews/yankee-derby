@@ -97,7 +97,7 @@ h2 img {
 <script>
 var config = {};
 if ( document.location.hash != '' ) {
-    var hash = document.location.hash.substring(1)
+    var hash = document.location.hash.toLowerCase().substring(1)
     config.player = hash;
     if ( ['stanton', 'judge'].indexOf(hash) !== -1 ) {
         var el = document.querySelector('#stat-tracker-sentence h2 span');
