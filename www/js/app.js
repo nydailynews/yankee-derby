@@ -243,6 +243,7 @@ var sentence = {
             }
         }
         if ( field === null ) field = this.fields[this.random(this.fields.length)];
+        var url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
 
         var since_last = '';
         if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) since_last = this.since_last(player, field);
@@ -256,8 +257,9 @@ var sentence = {
 
         console.log(player, field, type);
         var name_full = pg.full_names[player];
-        var field_full = chrt.type_key_axis[field].slice(0, -1);
-        if ( ['Home run'].indexOf(field_full) !== -1 ) field_full = field_full.charAt(0).toLowerCase() + field_full.substr(1);
+        var field_full = chrt.type_key_axis[field];
+        if ( ['RBIs', 'Home runs'].indexOf(field_full) !== -1 ) var field_full = chrt.type_key_axis[field].slice(0, -1);
+        if ( ['Batting average', 'Home run'].indexOf(field_full) !== -1 ) field_full = field_full.charAt(0).toLowerCase() + field_full.substr(1);
         var sentence = '';
 
         if ( type === 'since_last' ) {
@@ -265,8 +267,9 @@ var sentence = {
         }
         else if ( type === 'to_self' ) {
         }
+        sentence = sentence.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
+        sentence = sentence.replace('Giancarlo Stanton', '<a href="' + url + '" target="_top">Giancarlo Stanton</a>');
 
-        //if ( 
         return "SLUGGER STAT: " + sentence;
     },
     update_sentence: function() {
