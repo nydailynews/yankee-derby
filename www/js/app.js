@@ -242,9 +242,10 @@ var sentence = {
             }
         }
         if ( field === null ) field = this.fields[this.random(this.fields.length)];
-        var days = 30;
+        var days = 29;
         var url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
         var key = player + '-' + field;
+        var leader_key = 'leader-' + field;
         var current = this.data[this.data.length - 1];
 
         var since_last = '';
@@ -288,7 +289,19 @@ var sentence = {
             }
         }
         else if ( type === 'to_leader' ) {
-
+            compare = this.compare_two(player, 'leader', field, days);
+            var leads = 'leads';
+            if ( compare['lead'] === 'two' ) leads = 'trails';
+            else if ( compare['lead'] === 'tied' ) leads = 'is tied with';
+            s = name_full + ' ' + leads + ' the MLB leader';
+            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' by ' + utils.get_ap_numeral(Math.abs(compare['diff'])) + ' ' + field_full;
+            else {
+                var points = Math.floor(Math.abs(compare['diff'] * 1000));
+                var ess = 's';
+                if ( points === 1 ) ess = '';
+                s += ' in ' + field_full + ' by ' + utils.get_ap_numeral(points) + ' point' + ess;
+            }
+            s += ', ' + compare['one'] + ' to ' + compare['two'] + '.';
         }
 
         s = s.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
@@ -296,16 +309,30 @@ var sentence = {
 
         return "SLUGGER STAT: " + s;
     },
+    compare_two: function(player_one, player_two, field, days, offset) {
+        // Given two players and a field (days and offset are set for later), return who's ahead and by how much.
+        if ( offset === undefined ) offset = 1;
+        var key_one = player_one + '-' + field;
+        var key_two = player_two + '-' + field;
+        var one = this.latest[key_one];
+        var two = this.latest[key_two];
+        var diff = one - two;
+        var lead = 'one';
+        if ( two > one ) lead = 'two';
+        else if ( two === one ) lead = 'tied';
+        var d = { lead: lead, diff: diff, one: one, two: two }
+        console.log(d);
+        return d;
+    },
     compare_stat: function(player, field, days, offset) {
         // Given a player, a field and the number of days, return how a stat has changed, as well as the two records being compared.
         if ( offset === undefined ) offset = 1;
         var key = player + '-' + field;
-        console.log(sentence, offset);
         var from_index = sentence.data_l - ( offset + days );
         var to_index = sentence.data_l - offset;
         var from = sentence.data[from_index];
         var to = sentence.data[to_index];
-        console.log(from, to, from_index, to_index);
+
         var diff = to[key] - from[key];
         var dates = [from['date'], to['date']];
         return { 'from': from, 'to': to, 'diff': diff, 'dates': dates };
