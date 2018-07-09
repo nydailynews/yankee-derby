@@ -217,8 +217,7 @@ var sentence = {
     sentence_types: ['since_last', 'to_self'],
     since_last: function(player, field) {
         // Calculate how many days it has been since something happened.
-        console.log(this.data);
-        var last, current;
+        var current;
         var days = 0;
         var key = player + '-' + field;
         var now = this.data[this.data.length - 1][key];
@@ -244,6 +243,8 @@ var sentence = {
         }
         if ( field === null ) field = this.fields[this.random(this.fields.length)];
         var url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
+        var key = player + '-' + field;
+        var current = this.data[this.data.length - 1];
 
         var since_last = '';
         if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) since_last = this.since_last(player, field);
@@ -257,20 +258,52 @@ var sentence = {
 
         console.log(player, field, type);
         var name_full = pg.full_names[player];
+        var field_full_singular = chrt.type_key_axis[field];
         var field_full = chrt.type_key_axis[field];
-        if ( ['RBIs', 'Home runs'].indexOf(field_full) !== -1 ) var field_full = chrt.type_key_axis[field].slice(0, -1);
-        if ( ['Batting average', 'Home run'].indexOf(field_full) !== -1 ) field_full = field_full.charAt(0).toLowerCase() + field_full.substr(1);
-        var sentence = '';
+        if ( ['RBIs', 'Home runs'].indexOf(field_full) !== -1 ) var field_full_singular = field_full.slice(0, -1);
+        if ( ['On-base plus slugging', 'Batting average', 'Home run'].indexOf(field_full_singular) !== -1 ) {
+            field_full = field_full.charAt(0).toLowerCase() + field_full.substr(1);
+            field_full_singular = field_full.charAt(0).toLowerCase() + field_full_singular.substr(1);
+        }
+        var s = '';
 
         if ( type === 'since_last' ) {
-            sentence = 'It has been ' + utils.get_ap_numeral(since_last) + ' days since ' + name_full + '’s last ' + field_full + '.';
+            s = 'It has been ' + utils.get_ap_numeral(since_last) + ' days since ' + name_full + '’s last ' + field_full_singular + '.';
         }
         else if ( type === 'to_self' ) {
-        }
-        sentence = sentence.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
-        sentence = sentence.replace('Giancarlo Stanton', '<a href="' + url + '" target="_top">Giancarlo Stanton</a>');
+            // We comparing performance to self, there are multiple types here: Previous month and specific month.
+            // We're building previous month first.
+            compare = this.compare_stat(player, field, 30);
+            s = name_full + ' hit ';
+            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous 30 days.';
+            else {
+                var points = Math.floor(compare['diff'] * 1000);
+                var updown = 'improved ' + utils.get_ap_numeral(points) + ' points to ' + current[key];
+                if ( compare['diff'] > current[key] ) updown = 'dropped ' + points + ' points to ' + current[key];
+                else if ( compare['diff'] === current[key] ) updown = 'stayed the same';
 
-        return "SLUGGER STAT: " + sentence;
+
+                s += ' ' + compare['from'][key] + ' in ' + field_full + ' 30 days ago, and ' + updown + ' as of the most-recent numbers.';
+            }
+        }
+        s = s.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
+        s = s.replace('Giancarlo Stanton', '<a href="' + url + '" target="_top">Giancarlo Stanton</a>');
+
+        return "SLUGGER STAT: " + s;
+    },
+    compare_stat: function(player, field, days, offset) {
+        // Given a player, a field and the number of days, return how a stat has changed, as well as the two records being compared.
+        if ( offset === undefined ) offset = 1;
+        var key = player + '-' + field;
+        console.log(sentence, offset);
+        var from_index = sentence.data_l - ( offset + days );
+        var to_index = sentence.data_l - offset;
+        var from = sentence.data[from_index];
+        var to = sentence.data[to_index];
+        console.log(from, to, from_index, to_index);
+        var diff = to[key] - from[key];
+        var dates = [from['date'], to['date']];
+        return { 'from': from, 'to': to, 'diff': diff, 'dates': dates };
     },
     update_sentence: function() {
         // Write the sentence to the place where the sentence goes.
@@ -286,7 +319,8 @@ var sentence = {
         el.innerHTML = sentence;
     },
     on_load: function() {
-        sentence.latest_index = sentence.data.length-1;
+        sentence.data_l = sentence.data.length;
+        sentence.latest_index = sentence.data.length - 1;
         sentence.latest = sentence.data[sentence.latest_index];
         
         sentence.update_sentence();
@@ -295,7 +329,10 @@ var sentence = {
 		if ( year == null ) year = 2018;
         if ( config !== null ) this.update_config(config);
         if ( typeof stats.data === 'undefined' ) utils.get_json(this.config.pathing + 'output/yankee-derby-' + year + '.json?' + utils.rando(), sentence, this.on_load);
-        else this.update_sentence();
+        else {
+            this.data = stats.data;
+            this.on_load();
+        }
     }
 }
 
