@@ -214,7 +214,7 @@ var sentence = {
     fields: stats.fields, //['avg', 'hrs', 'rbis', 'ops'],
     players: stats.players, //['judge', 'stanton', 'leader'],
     sentence_types: ['since_last', 'to_leader', 'to_other', 'to_self'],
-    sentence_types: ['since_last', 'to_self'],
+    sentence_types: ['since_last', 'to_self', 'to_leader'],
     since_last: function(player, field) {
         // Calculate how many days it has been since something happened.
         var current;
@@ -242,6 +242,7 @@ var sentence = {
             }
         }
         if ( field === null ) field = this.fields[this.random(this.fields.length)];
+        var days = 30;
         var url = 'http://interactive.nydailynews.com/project/yankees-sluggers-tracker/';
         var key = player + '-' + field;
         var current = this.data[this.data.length - 1];
@@ -273,18 +274,23 @@ var sentence = {
         else if ( type === 'to_self' ) {
             // We comparing performance to self, there are multiple types here: Previous month and specific month.
             // We're building previous month first.
-            compare = this.compare_stat(player, field, 30);
+            compare = this.compare_stat(player, field, days);
             s = name_full;
-            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' hit ' + utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous 30 days.';
+            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' hit ' + utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous ' + ( days + 1 ) + ' days.';
             else {
                 var points = Math.floor(compare['diff'] * 1000);
-                var updown = 'is up ' + utils.get_ap_numeral(points) + ' points in the last 30 days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
-                if ( compare['diff'] > current[key] ) updown = 'is down ' + utils.get_ap_numeral(points) + ' points in the last 30 days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
-                else if ( compare['diff'] === current[key] ) updown = 'stayed the same in the last 30 days.';
+                var clause = ' points in the last ' + ( days + 1 ) + ' days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
+                var updown = 'is up ' + utils.get_ap_numeral(points) + clause;
+                if ( compare['diff'] > current[key] ) updown = 'is down ' + utils.get_ap_numeral(points) + clause;
+                else if ( compare['diff'] === current[key] ) updown = 'stayed the same in the last ' + ( days + 1 ) + ' days.';
 
                 s += '’s ' + field_full + ' ' + updown;
             }
         }
+        else if ( type === 'to_leader' ) {
+
+        }
+
         s = s.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
         s = s.replace('Giancarlo Stanton', '<a href="' + url + '" target="_top">Giancarlo Stanton</a>');
 
