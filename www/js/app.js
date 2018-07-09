@@ -213,12 +213,19 @@ var sentence = {
     },
     fields: stats.fields, //['avg', 'hrs', 'rbis', 'ops'],
     players: stats.players, //['judge', 'stanton', 'leader'],
+    since_last: function(player, field) {
+        // Calculate how many days it has been since something happened.
+    },
     write_sentence: function(player, field) {
         // Write a sentence about one of the players’ stats.
         // Pass it zero arguments for it to generate a random sentence.
         if ( player === null ) player = this.players[this.random(this.players.length - 1)];
         if ( field === null ) field = this.fields[this.random(this.fields.length - 1)];
         console.log(player, field);
+
+        var since_last = '';
+        if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) since_last = this.since_last(player, field);
+
         return '';
     },
     update_sentence: function() {
@@ -901,7 +908,7 @@ var chrt = {
         //utils.add_js('http://interactive.nydailynews.com/js/d3/d3.v4.min.js', chrt.on_load);
         if ( config !== null ) this.update_config(config);
         if ( is_mobile ) this.season_dates = season_dates_all;
-        else this.season_dates = season_dates_all.splice(0, 90);
+        else this.season_dates = season_dates_all.splice(0, 150);
         
         if ( document.getElementById('bottom-chart') ) this.original_caption = document.querySelector('#bottom-chart p').textContent;
 
