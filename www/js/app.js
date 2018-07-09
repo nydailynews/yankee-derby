@@ -274,16 +274,15 @@ var sentence = {
             // We comparing performance to self, there are multiple types here: Previous month and specific month.
             // We're building previous month first.
             compare = this.compare_stat(player, field, 30);
-            s = name_full + ' hit ';
-            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous 30 days.';
+            s = name_full;
+            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' hit ' + utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous 30 days.';
             else {
                 var points = Math.floor(compare['diff'] * 1000);
-                var updown = 'improved ' + utils.get_ap_numeral(points) + ' points to ' + current[key];
-                if ( compare['diff'] > current[key] ) updown = 'dropped ' + points + ' points to ' + current[key];
-                else if ( compare['diff'] === current[key] ) updown = 'stayed the same';
+                var updown = 'is up ' + utils.get_ap_numeral(points) + ' points in the last 30 days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
+                if ( compare['diff'] > current[key] ) updown = 'is down ' + utils.get_ap_numeral(points) + ' points in the last 30 days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
+                else if ( compare['diff'] === current[key] ) updown = 'stayed the same in the last 30 days.';
 
-
-                s += ' ' + compare['from'][key] + ' in ' + field_full + ' 30 days ago, and ' + updown + ' as of the most-recent numbers.';
+                s += '’s ' + field_full + ' ' + updown;
             }
         }
         s = s.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
