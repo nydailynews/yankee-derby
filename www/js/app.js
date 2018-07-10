@@ -45,9 +45,11 @@ var utils = {
         var str = '' + +i;
         var len = str.length - 2;   // The "2" is the "0." in the string.
 
-        while ( len <= digits ) {
-            str = str + '0';
-            len = str.length - 2;
+        if ( len < digits ) {
+            while ( len <= digits ) {
+                str = str + '0';
+                len = str.length - 2;
+            }
         }
         // Axe the leading zero, if there is one
         str = str.replace('0.', '.');
@@ -277,10 +279,10 @@ var sentence = {
             // We're building previous month first.
             compare = this.compare_stat(player, field, days);
             s = name_full;
-            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' hit ' + utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous ' + ( days + 1 ) + ' days.';
+            if ( ['hrs', 'rbis'].indexOf(field) !== -1 ) s += ' has ' + utils.get_ap_numeral(compare['diff']) + ' ' + field_full + ' in the previous ' + ( days + 1 ) + ' days.';
             else {
                 var points = Math.floor(compare['diff'] * 1000);
-                var clause = ' points in the last ' + ( days + 1 ) + ' days, from ' + compare['from'][key] + ' to ' + current[key] + '.';
+                var clause = ' points in the last ' + ( days + 1 ) + ' days, from ' + utils.add_zeros(compare['from'][key], 3) + ' to ' + utils.add_zeros(current[key], 3) + '.';
                 var updown = 'is up ' + utils.get_ap_numeral(points) + clause;
                 if ( compare['diff'] > current[key] ) updown = 'is down ' + utils.get_ap_numeral(points) + clause;
                 else if ( compare['diff'] === current[key] ) updown = 'stayed the same in the last ' + ( days + 1 ) + ' days.';
@@ -300,12 +302,16 @@ var sentence = {
                 var ess = 's';
                 if ( points === 1 ) ess = '';
                 s += ' in ' + field_full + ' by ' + utils.get_ap_numeral(points) + ' point' + ess;
+                compare['one'] = utils.add_zeros(compare['one'], 3);
+                compare['two'] = utils.add_zeros(compare['two'], 3);
             }
             s += ', ' + compare['one'] + ' to ' + compare['two'] + '.';
         }
 
         s = s.replace('Aaron Judge', '<a href="' + url + '" target="_top">Aaron Judge</a>');
         s = s.replace('Giancarlo Stanton', '<a href="' + url + '" target="_top">Giancarlo Stanton</a>');
+        // Clean up batting average / OPS leading-zeroes
+        s = s.replace(/0\./g, '.');
 
         return "SLUGGER STAT: " + s;
     },
