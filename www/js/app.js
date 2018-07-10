@@ -272,7 +272,9 @@ var sentence = {
         var s = '';
 
         if ( type === 'since_last' ) {
-            s = 'It has been ' + utils.get_ap_numeral(since_last) + ' days since ' + name_full + '’s last ' + field_full_singular + '.';
+            var ess = 's';
+            if ( since_last === 1 ) ess = '';
+            s = 'It has been ' + utils.get_ap_numeral(since_last) + ' day' + s + ' since ' + name_full + '’s last ' + field_full_singular + '.';
         }
         else if ( type === 'to_self' ) {
             // We comparing performance to self, there are multiple types here: Previous month and specific month.
