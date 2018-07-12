@@ -13,7 +13,8 @@ Here's the new workflow for adding a Yankees Sluggers widget to an article:
 4. In SNAP, edit the article you want to add the widget to. Then:
     1. Create a new HTML embed.
     2. Paste the contents of your clipboard into the field.
-    3. It should look something like this:```
+    3. It should look something like this:
+```
 <iframe id="sluggers-all" scrolling="no" style="width: 100%; height: 180px; border: 0;" src="http://interactive.nydailynews.com/project/yankees-sluggers-tracker/widget-sentence.html"></iframe>
 
 <iframe id="sluggers-stanton" scrolling="no" style="width: 100%; height: 180px; border: 0;" src="http://interactive.nydailynews.com/project/yankees-sluggers-tracker/widget-sentence.html#stanton"></iframe>
